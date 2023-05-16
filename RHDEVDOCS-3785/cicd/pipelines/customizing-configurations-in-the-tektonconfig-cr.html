@@ -2717,12 +2717,9 @@
 <li><a href="#op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr">Configuring the pipeline resolvers</a></li>
 </ul>
 </li>
-<li><a href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr">Disabling cluster tasks and pipeline templates</a>
-<ul class="sectlevel2">
+<li><a href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr">Disabling cluster tasks and pipeline templates</a></li>
 <li><a href="#op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr">Disabling the integration of Tekton Hub</a></li>
 <li><a href="#op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr">Disabling the automatic creation of RBAC resources</a></li>
-</ul>
-</li>
 <li><a href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr">Automatic pruning of task run and pipeline run</a>
 <ul class="sectlevel2">
 <li><a href="#default-pruner-configuration_customizing-configurations-in-the-tektonconfig-cr">Default pruner configuration</a></li>
@@ -3074,7 +3071,9 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 </div>
 </div>
 </div>
-<h1 id="op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr" class="sect0"><a class="anchor" href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling cluster tasks and pipeline templates</h1>
+<div class="sect1">
+<h2 id="op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling cluster tasks and pipeline templates</h2>
+<div class="sectionbody">
 <div class="paragraph _abstract">
 <p>By default, the <code>TektonAddon</code> CR installs <code>clusterTasks</code> and <code>pipelineTemplates</code> resources along with OpenShift Pipelines on the cluster.</p>
 </div>
@@ -3110,8 +3109,11 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the integration of Tekton Hub</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the integration of Tekton Hub</h2>
+<div class="sectionbody">
 <div class="paragraph _abstract">
 <p>You can disable the integration of Tekton Hub with the <strong>Developer</strong> perspective by setting the <code>enable-devconsole-integration</code> field in <code>TektonConfig</code> CR to <code>false</code>.</p>
 </div>
@@ -3130,8 +3132,10 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the automatic creation of RBAC resources</h3>
+</div>
+<div class="sect1">
+<h2 id="op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the automatic creation of RBAC resources</h2>
+<div class="sectionbody">
 <div class="paragraph _abstract">
 <p>The default installation of the Red Hat OpenShift Pipelines Operator creates multiple role-based access control (RBAC) resources for all namespaces in the cluster, except the namespaces matching the <code>^(openshift|kube)-*</code> regular expression pattern. Among these RBAC resources, the <code>pipelines-scc-rolebinding</code> security context constraint (SCC) role binding resource is a potential security issue, because the associated <code>pipelines-scc</code> SCC has the <code>RunAsAny</code> privilege.</p>
 </div>
@@ -3175,7 +3179,10 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 </table>
 </div>
 </div>
-<h1 id="op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr" class="sect0"><a class="anchor" href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"></a>Automatic pruning of task run and pipeline run</h1>
+</div>
+<div class="sect1">
+<h2 id="op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"></a>Automatic pruning of task run and pipeline run</h2>
+<div class="sectionbody">
 <div class="paragraph _abstract">
 <p>Stale <code>TaskRun</code> and <code>PipelineRun</code> objects and their executed instances occupy physical resources that can be used for the active runs. To prevent this waste, Red Hat OpenShift Pipelines provides annotations that cluster administrators can use to automatically prune the unused objects and their instances in various namespaces.</p>
 </div>
@@ -3286,6 +3293,8 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 <p>For information on manual pruning of various objects, see <a href="../../applications/pruning-objects.html#pruning-objects">Pruning objects to reclaim resources</a>.</p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 </div>
       </div>
