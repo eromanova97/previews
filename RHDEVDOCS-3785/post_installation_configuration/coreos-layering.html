@@ -2809,8 +2809,8 @@
 <div class="title">Example Containerfile to apply the libreswan utility</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="c1"># Get RHCOS base image of target cluster `oc adm release info --image-for rhel-coreos`</span>
-<span class="c1"># This example uses rhel-coreos image from 4.13.0-rc.2</span>
-<span class="s">FROM quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d98795f7932441b30bb8bcfbbf05912875383fad1f2b3be08a22ec148d68607e</span>
+<span class="c1"># hadolint ignore=DL3006</span>
+<span class="s">FROM quay.io/openshift-release/ocp-release@sha256...</span>
 
 <span class="c1"># Install our config file</span>
 <span class="s">COPY my-host-to-host.conf /etc/ipsec.d/</span>
@@ -2851,9 +2851,10 @@
 <div class="listingblock">
 <div class="title">Example Containerfile to apply a third-party package from EPEL</div>
 <div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="c1">#Start from your base image(more info at https://docs.openshift.com/container-platform/4.13/post_installation_configuration/coreos-layering.html#coreos-layering)</span>
-<span class="c1">#This example uses a RHEL 9.2 image from a 4.13 nightly.</span>
-<span class="s">FROM registry.ci.openshift.org/ocp/4.13-2023-03-19-110337@sha256:42e45dd0ba1be3d2681972d6d38c42008c70ddb8c5a96f1f770a11f9bbfb048f</span>
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="c1"># Get RHCOS base image of target cluster `oc adm release info --image-for rhel-coreos`</span>
+<span class="c1"># hadolint ignore=DL3006</span>
+<span class="s">FROM quay.io/openshift-release/ocp-release@sha256...</span>
+
 <span class="c1">#Enable EPEL (more info at https://docs.fedoraproject.org/en-US/epel/ ) and install htop</span>
 <span class="s">RUN rpm-ostree install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &amp;&amp; \</span>
     <span class="s">rpm-ostree install htop &amp;&amp; \</span>
@@ -2864,8 +2865,8 @@
 <div class="title">Example Containerfile to apply a third-party package that has RHEL dependencies</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="c1"># Get RHCOS base image of target cluster `oc adm release info --image-for rhel-coreos`</span>
-<span class="c1"># This example uses rhel-coreos image from 4.13.0-rc.2</span>
-<span class="s">FROM quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d98795f7932441b30bb8bcfbbf05912875383fad1f2b3be08a22ec148d68607e</span>
+<span class="c1"># hadolint ignore=DL3006</span>
+<span class="s">FROM quay.io/openshift-release/ocp-release@sha256...</span>
 
 <span class="c1"># RHEL entitled host is needed here to access RHEL packages</span>
 <span class="c1"># Install fish as third party package from EPEL</span>

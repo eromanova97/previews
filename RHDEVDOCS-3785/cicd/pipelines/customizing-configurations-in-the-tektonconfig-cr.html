@@ -2755,7 +2755,7 @@
 <p>Disabling the automatic creation of RBAC resources</p>
 </li>
 <li>
-<p>Pruning of task run and pipeline run</p>
+<p>Pruning of task runs and pipeline runs</p>
 </li>
 </ul>
 </div>
@@ -2817,7 +2817,6 @@
     <span class="na">send-cloudevents-for-runs</span><span class="pi">:</span> <span class="no">false</span>
     <span class="s">metrics.taskrun.level</span><span class="pi">:</span> <span class="s">task</span>
     <span class="s">metrics.pipelinerun.level</span><span class="pi">:</span> <span class="s">pipeline</span>
-    <span class="na">embedded-status</span><span class="pi">:</span> <span class="s">both</span>
     <span class="na">enable-api-fields</span><span class="pi">:</span> <span class="s">stable</span>
     <span class="na">enable-provenance-in-status</span><span class="pi">:</span> <span class="no">false</span>
     <span class="na">enable-custom-tasks</span><span class="pi">:</span> <span class="no">true</span>
@@ -2880,36 +2879,6 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 </li>
 <li>
 <p><code>send-cloudevents-for-runs</code> (default: <code>false</code>): Setting this option to <code>true</code> enables <code>CloudEvents</code> for runs and custom runs, if the <code>CloudEvents</code> sink is configured in the <code>config-defaults</code> configuration map.</p>
-</li>
-<li>
-<p><code>embedded-status</code> (default: <code>both</code>): This option has three acceptable values:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>full</code>: Enables full embedding of <code>Run</code> and <code>TaskRun</code> statuses in the <code>PipelineRun</code> status.</p>
-</li>
-<li>
-<p><code>minimal</code>: Populates the <code>ChildReferences</code> field in the pipeline run status with name, kind, and API version information for each run and task run.</p>
-</li>
-<li>
-<p><code>both</code>: Applies both, <code>full</code> and <code>minimal</code> value.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The <code>embedded-status</code> flag is deprecated and will be removed in a future release. In addition, the pipeline default embedded status will be changed to <code>minimal</code>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ul>
-</div>
 </li>
 <li>
 <p><code>enable-api-fields</code> (default: <code>stable</code>): Setting this option determines which gated features are enabled. Acceptable values are <code>stable</code>, <code>beta</code>, or <code>alpha</code>.</p>
@@ -3078,7 +3047,7 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 <p>By default, the <code>TektonAddon</code> CR installs <code>clusterTasks</code> and <code>pipelineTemplates</code> resources along with OpenShift Pipelines on the cluster.</p>
 </div>
 <div class="paragraph">
-<p>You can disable the installation of the <code>clusterTasks</code> and <code>pipelineTemplates</code> resources by changing the values under <code>.spec.addon.params</code> to <code>false</code>. In addition, you can disable <code>communityClusterTasks</code> after disabling <code>clusterTasks</code>.</p>
+<p>You can disable the installation of the <code>clusterTasks</code> and <code>pipelineTemplates</code> resources by changing the values under <code>.spec.addon.params</code> to <code>false</code>. In addition, you can disable <code>communityClusterTasks</code>.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example:</div>
@@ -3153,14 +3122,6 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
   <span class="na">params</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">createRbacResource</span>
     <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
-  <span class="na">profile</span><span class="pi">:</span> <span class="s">all</span>
-  <span class="na">targetNamespace</span><span class="pi">:</span> <span class="s">openshift-pipelines</span>
-  <span class="na">addon</span><span class="pi">:</span>
-    <span class="na">params</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">clusterTasks</span>
-      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pipelineTemplates</span>
-      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
 <span class="nn">...</span></code></pre>
 </div>
 </div>
@@ -3193,15 +3154,8 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Starting with Red Hat OpenShift Pipelines 1.6, auto-pruning is enabled by default.</p>
-</li>
-<li>
+<div class="paragraph">
 <p>Configuring automatic pruning by specifying annotations affects the entire namespace. You cannot selectively auto-prune individual task runs and pipeline runs in a namespace.</p>
-</li>
-</ul>
 </div>
 </td>
 </tr>
