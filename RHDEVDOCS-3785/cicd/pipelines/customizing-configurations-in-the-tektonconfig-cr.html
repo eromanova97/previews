@@ -2814,7 +2814,6 @@
     <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipeline</span>
     <span class="na">require-git-ssh-secret-known-hosts</span><span class="pi">:</span> <span class="no">false</span>
     <span class="na">enable-tekton-oci-bundles</span><span class="pi">:</span> <span class="no">false</span>
-    <span class="na">send-cloudevents-for-runs</span><span class="pi">:</span> <span class="no">false</span>
     <span class="s">metrics.taskrun.level</span><span class="pi">:</span> <span class="s">task</span>
     <span class="s">metrics.pipelinerun.level</span><span class="pi">:</span> <span class="s">pipeline</span>
     <span class="na">enable-api-fields</span><span class="pi">:</span> <span class="s">stable</span>
@@ -2878,10 +2877,21 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 <p><code>enable-tekton-oci-bundles</code> (default: <code>false</code>): Set this option to <code>true</code> to enable the use of an experimental alpha feature, Tekton OCI bundle.</p>
 </li>
 <li>
-<p><code>send-cloudevents-for-runs</code> (default: <code>false</code>): Setting this option to <code>true</code> enables <code>CloudEvents</code> for runs and custom runs, if the <code>CloudEvents</code> sink is configured in the <code>config-defaults</code> configuration map.</p>
-</li>
-<li>
 <p><code>enable-api-fields</code> (default: <code>stable</code>): Setting this option determines which gated features are enabled. Acceptable values are <code>stable</code>, <code>beta</code>, or <code>alpha</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>alpha</code> option is not supported.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p><code>enable-provenance-in-status</code> (default: <code>false</code>): Set this option to <code>true</code> to enable populating the <code>provenance</code> field in <code>TaskRun</code> and <code>PipelineRun</code> statuses. The <code>provenance</code> field contains metadata about resources used in the task run and pipeline run, such as the source from where a remote task and pipeline definition was fetched.</p>
