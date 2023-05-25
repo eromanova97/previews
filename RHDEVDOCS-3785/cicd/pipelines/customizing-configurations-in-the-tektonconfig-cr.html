@@ -2708,28 +2708,30 @@
 <div id="toc" class="toc">
 <div id="toctitle" class="title"></div>
 <ul class="sectlevel1">
+<li><a href="#prerequisites_customizing-configurations-in-the-tektonconfig-cr">Prerequisites</a></li>
 <li><a href="#op-configuring-pipelines-control-plane_customizing-configurations-in-the-tektonconfig-cr">Configuring the Red Hat OpenShift Pipelines control plane</a>
 <ul class="sectlevel2">
-<li><a href="#op-configuration-options-with-default-values_customizing-configurations-in-the-tektonconfig-cr">Configuration options with default values</a></li>
-<li><a href="#op-optional-configuration-options_customizing-configurations-in-the-tektonconfig-cr">Optional configuration options</a></li>
-<li><a href="#op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr">Changing the default service account</a></li>
-<li><a href="#op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr">Disabling the service monitor</a></li>
-<li><a href="#op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr">Configuring the pipeline resolvers</a></li>
+<li><a href="#op-configuration-fields-with-default-values_customizing-configurations-in-the-tektonconfig-cr">Configuration fields with default values</a></li>
+<li><a href="#op-optional-configuration-fields_customizing-configurations-in-the-tektonconfig-cr">Optional configuration fields</a></li>
 </ul>
 </li>
+<li><a href="#op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr">Changing the default service account</a></li>
+<li><a href="#op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr">Disabling the service monitor</a></li>
+<li><a href="#op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr">Configuring pipeline resolvers</a></li>
 <li><a href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr">Disabling cluster tasks and pipeline templates</a></li>
 <li><a href="#op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr">Disabling the integration of Tekton Hub</a></li>
 <li><a href="#op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr">Disabling the automatic creation of RBAC resources</a></li>
-<li><a href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr">Automatic pruning of task run and pipeline run</a>
+<li><a href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr">Automatic pruning of task runs and pipeline runs</a>
 <ul class="sectlevel2">
 <li><a href="#default-pruner-configuration_customizing-configurations-in-the-tektonconfig-cr">Default pruner configuration</a></li>
 <li><a href="#annotations-for-automatic-pruning-taskruns-pipelineruns_customizing-configurations-in-the-tektonconfig-cr">Annotations for automatically pruning task runs and pipeline runs</a></li>
 </ul>
 </li>
+<li><a href="#additional-resources_customizing-configurations-in-the-tektonconfig-cr">Additional resources</a></li>
 </ul>
 </div>
-<div class="paragraph _abstract">
-<p>You can customize the following Red Hat OpenShift Pipelines behaviors by using the <code>TektonConfig</code> custom resource (CR):</p>
+<div class="paragraph">
+<p>In Red Hat OpenShift Pipelines, you can customize the following configurations by using the <code>TektonConfig</code> custom resource (CR):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2743,7 +2745,7 @@
 <p>Disabling the service monitor</p>
 </li>
 <li>
-<p>Configuring the pipeline resolvers</p>
+<p>Configuring pipeline resolvers</p>
 </li>
 <li>
 <p>Disabling cluster tasks and pipeline templates</p>
@@ -2759,7 +2761,11 @@
 </li>
 </ul>
 </div>
-<h2 id="prerequisites" class="discrete">Prerequisites</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisites_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#prerequisites_customizing-configurations-in-the-tektonconfig-cr"></a>Prerequisites</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -2772,8 +2778,8 @@
 <div class="sect1">
 <h2 id="op-configuring-pipelines-control-plane_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-configuring-pipelines-control-plane_customizing-configurations-in-the-tektonconfig-cr"></a>Configuring the Red Hat OpenShift Pipelines control plane</h2>
 <div class="sectionbody">
-<div class="paragraph _abstract">
-<p>You can customize the OpenShift Pipelines control plane by setting the configuration fields in the <code>TektonConfig</code> custom resource (CR). Red Hat OpenShift Pipelines Operator automatically adds the fields with default values, if you do not set them in the <code>TektonConfig</code> CR.</p>
+<div class="paragraph">
+<p>You can customize the OpenShift Pipelines control plane by editing the configuration fields in the <code>TektonConfig</code> custom resource (CR). The Red Hat OpenShift Pipelines Operator automatically adds the configuration fields with their default values so that you can use the OpenShift Pipelines control plane.</p>
 </div>
 <div class="olist arabic">
 <div class="title">Procedure</div>
@@ -2782,21 +2788,24 @@
 <p>In the <strong>Administrator</strong> perspective of the web console, navigate to <strong>Administration</strong> → <strong>CustomResourceDefinitions</strong>.</p>
 </li>
 <li>
-<p>Use the <strong>Search by name</strong> box to search for <code>tektonconfigs.operator.tekton.dev</code> custom resource definition (CRD). Click <strong>TektonConfig</strong> to see the CRD details page.</p>
+<p>Use the <strong>Search by name</strong> box to search for the <code>tektonconfigs.operator.tekton.dev</code> custom resource definition (CRD). Click <strong>TektonConfig</strong> to see the CRD details page.</p>
 </li>
 <li>
-<p>Click the <strong>Instances</strong> tab and select <strong>config</strong> to see <code>TektonConfig</code> CR details.</p>
+<p>Click the <strong>Instances</strong> tab.</p>
 </li>
 <li>
-<p>Navigate to <strong>YAML</strong> tab.</p>
+<p>Click the <strong>config</strong> instance to see the <code>TektonConfig</code> CR details.</p>
 </li>
 <li>
-<p>Edit the <code>TektonConfig</code> YAML file under the <code>.spec.pipeline</code> parameter.</p>
+<p>Click the <strong>YAML</strong> tab.</p>
+</li>
+<li>
+<p>Edit the <code>TektonConfig</code> YAML file based on your requirements.</p>
 </li>
 </ol>
 </div>
 <div class="listingblock">
-<div class="title">Example <code>TektonConfig</code> CR with default values:</div>
+<div class="title">Example: <code>TektonConfig</code> CR with default values</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
@@ -2825,14 +2834,14 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="op-configuration-options-with-default-values_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-configuration-options-with-default-values_customizing-configurations-in-the-tektonconfig-cr"></a>Configuration options with default values</h3>
-<div class="paragraph _abstract">
-<p>The following is a list of modifiable fields with default values in the <code>TektonConfig</code> CR.</p>
+<h3 id="op-configuration-fields-with-default-values_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-configuration-fields-with-default-values_customizing-configurations-in-the-tektonconfig-cr"></a>Configuration fields with default values</h3>
+<div class="paragraph">
+<p>The following list includes all modifiable fields with their default values in the <code>TektonConfig</code> CR:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>running-in-environment-with-injected-sidecars</code> (default: <code>true</code>): Set this option to <code>false</code> if pipelines are running in a cluster that do not use injected sidecars, such as Istio. Setting it to <code>false</code> decreases the time it takes for a task run to start.</p>
+<p><code>running-in-environment-with-injected-sidecars</code> (default: <code>true</code>): Set this field to <code>false</code> if pipelines run in a cluster that does not use injected sidecars, such as Istio. Setting it to <code>false</code> decreases the time a pipeline takes for a task run to start.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2840,14 +2849,16 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For clusters that use injected sidecars, setting this option to <code>false</code> can lead to unexpected behavior.
+<div class="paragraph">
+<p>For clusters that use injected sidecars, setting this field to <code>false</code> can lead to unexpected behavior.</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p><code>await-sidecar-readiness</code> (default: <code>true</code>): Set this option to <code>false</code> to stop OpenShift Pipelines from waiting for <code>TaskRun</code> sidecar containers to be running before it begins to operate. This allows tasks to be run in environments that do not support the <code>downwardAPI</code> volume type.</p>
+<p><code>await-sidecar-readiness</code> (default: <code>true</code>): Set this field to <code>false</code> to stop OpenShift Pipelines from waiting for <code>TaskRun</code> sidecar containers to run before it begins to operate. This allows tasks to be run in environments that do not support the <code>downwardAPI</code> volume type.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2855,40 +2866,62 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For clusters that use injected sidecars, setting this option to <code>false</code> can lead to unexpected behavior.
+<div class="paragraph">
+<p>For clusters that use injected sidecars, setting this field to <code>false</code> can lead to an unexpected behavior.</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p><code>default-service-account</code> (default: <code>pipeline</code>): This option contains the default service account name to use for <code>TaskRun</code> and <code>PipelineRun</code>, if none is specified.</p>
+<p><code>default-service-account</code> (default: <code>pipeline</code>): This field contains the default service account name to use for the <code>TaskRun</code> and <code>PipelineRun</code> resources, if none is specified.</p>
 </li>
 <li>
-<p><code>require-git-ssh-secret-known-hosts</code> (default: <code>false</code>): Setting this option to <code>true</code> requires that any Git SSH secret must include the <code>known_hosts</code> field.</p>
+<p><code>require-git-ssh-secret-known-hosts</code> (default: <code>false</code>): Setting this field to <code>true</code> requires that any Git SSH secret must include the <code>known_hosts</code> field.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>See <em>Configuring SSH authentication for Git</em> in the <em>Additional resources</em> section for more information about Git SSH secrets.</p>
+<p>For more information about configuring Git SSH secrets, see  <em>Configuring SSH authentication for Git</em> in the <em>Additional resources</em> section.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><code>enable-tekton-oci-bundles</code> (default: <code>false</code>): Set this option to <code>true</code> to enable the use of an experimental alpha feature, Tekton OCI bundle.</p>
+<p><code>enable-tekton-oci-bundles</code> (default: <code>false</code>): Set this field to <code>true</code> to enable the use of an experimental alpha feature named Tekton OCI bundle.</p>
 </li>
 <li>
-<p><code>embedded-status</code> (default: <code>both</code>): This option has three acceptable values:</p>
+<p><code>embedded-status</code> (default: <code>both</code>): This field has three acceptable values: <code>full</code>, <code>minimal</code>, and <code>both</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>embedded-status</code> field is deprecated and will be removed in a future release. In addition, the pipeline default embedded status will be changed to <code>minimal</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>full</code>: Enables full embedding of <code>Run</code> and <code>TaskRun</code> statuses in the <code>PipelineRun</code> status.</p>
 </li>
 <li>
-<p><code>minimal</code>: Populates the <code>ChildReferences</code> field in the pipeline run status with name, kind, and API version information for each run and task run.</p>
+<p><code>minimal</code>: Populates the <code>ChildReferences</code> field with information, such as name, kind, and API version for each run and task run in the`PipelineRun` status.</p>
 </li>
 <li>
-<p><code>both</code>: Applies both, <code>full</code> and <code>minimal</code> value.</p>
+<p><code>both</code>: Applies both, <code>full</code> and <code>minimal</code> values.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>enable-api-fields</code> (default: <code>stable</code>): Setting this field determines which features are enabled. Acceptable value is <code>stable</code>, <code>beta</code>, or <code>alpha</code>.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2897,106 +2930,83 @@ For clusters that use injected sidecars, setting this option to <code>false</cod
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>embedded-status</code> flag is deprecated and will be removed in OpenShift Pipelines 1.11. In addition, the pipeline default embedded status will be changed to <code>minimal</code>.</p>
+<p>Red Hat OpenShift Pipelines does not support the <code>alpha</code> value.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 </li>
-</ul>
-</div>
+<li>
+<p><code>enable-provenance-in-status</code> (default: <code>false</code>): Set this field to <code>true</code> to enable populating the <code>provenance</code> field in <code>TaskRun</code> and <code>PipelineRun</code> statuses. The <code>provenance</code> field contains metadata about resources used in the task run and pipeline run, such as the source from where a remote task or pipeline definition was fetched.</p>
 </li>
 <li>
-<p><code>enable-api-fields</code> (default: <code>stable</code>): Setting this option determines which gated features are enabled. Acceptable values are <code>stable</code>, <code>beta</code>, or <code>alpha</code>.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>alpha</code> option is not supported.
-</td>
-</tr>
-</table>
-</div>
+<p><code>enable-custom-tasks</code> (default: <code>true</code>): Set this field to <code>false</code> to disable the use of custom tasks in pipelines.</p>
 </li>
 <li>
-<p><code>enable-provenance-in-status</code> (default: <code>false</code>): Set this option to <code>true</code> to enable populating the <code>provenance</code> field in <code>TaskRun</code> and <code>PipelineRun</code> statuses. The <code>provenance</code> field contains metadata about resources used in the task run and pipeline run, such as the source from where a remote task and pipeline definition was fetched.</p>
+<p><code>disable-creds-init</code> (default: <code>false</code>): Set this field to <code>true</code> to prevent OpenShift Pipelines from scanning attached service accounts and injecting any credentials into your steps.</p>
 </li>
 <li>
-<p><code>enable-custom-tasks</code> (default: <code>true</code>): Set this option to <code>false</code> to disable the use of custom tasks in pipelines.</p>
-</li>
-<li>
-<p><code>disable-creds-init</code> (default: <code>false</code>): Set this option to <code>true</code> to prevent OpenShift Pipelines from scanning attached service accounts and injecting any credentials into your steps.</p>
-</li>
-<li>
-<p><code>disable-affinity-assistant</code> (default: <code>true</code>): Set this option to <code>false</code> to enable Affinity Assistant for every <code>TaskRun</code> sharing a persistent volume claim workspace.</p>
+<p><code>disable-affinity-assistant</code> (default: <code>true</code>): Set this field to <code>false</code> to enable affinity assistant for each <code>TaskRun</code> resource sharing a persistent volume claim workspace.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <div class="title">Metrics options</div>
-<p>The following metrics options and their default values are modifiable in the <code>TektonConfig</code> CR.</p>
+<p>You can modify the default values of the following metrics fields in the <code>TektonConfig</code> CR:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>metrics.taskrun.duration-type</code>, <code>metrics.pipelinerun.duration-type</code> (default: <code>histogram</code>): Setting these options determines the duration type for task or pipeline run: <code>gauge</code> or <code>histogram</code>.</p>
+<p><code>metrics.taskrun.duration-type</code> and <code>metrics.pipelinerun.duration-type</code> (default: <code>histogram</code>): Setting these fields determines the duration type for a task or pipeline run. Acceptable value is <code>gauge</code> or <code>histogram</code>.</p>
 </li>
 <li>
-<p><code>metrics.taskrun.level</code> (default: <code>task</code>): This option determines the level of task run metrics: <code>taskrun</code>, <code>task</code>, or <code>namespace</code>.</p>
+<p><code>metrics.taskrun.level</code> (default: <code>task</code>): This field determines the level of the task run metrics. Acceptable value is <code>taskrun</code>, <code>task</code>, or <code>namespace</code>.</p>
 </li>
 <li>
-<p><code>metrics.pipelinerun.level</code> (default: <code>pipeline</code>): This option determines the level of pipeline run metrics: <code>pipelinerun</code>, <code>pipeline</code>, or <code>namespace</code>.</p>
-</li>
-</ul>
-</div>
-<div class="ulist _additional-resources">
-<div class="title">Additional resources</div>
-<ul>
-<li>
-<p>See <a href="../../cicd/pipelines/authenticating-pipelines-using-git-secret.html#op-configuring-ssh-authentication-for-git_authenticating-pipelines-using-git-secret">Configuring SSH authentication for Git</a> for more information about Git SSH secrets.</p>
+<p><code>metrics.pipelinerun.level</code> (default: <code>pipeline</code>): This field determines the level of the pipeline run metrics. Acceptable value is <code>pipelinerun</code>, <code>pipeline</code>, or <code>namespace</code>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="op-optional-configuration-options_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-optional-configuration-options_customizing-configurations-in-the-tektonconfig-cr"></a>Optional configuration options</h3>
-<div class="paragraph _abstract">
-<p>You can configure the following fields that do not have a default value and thus are considered only if you pass them. By default, the Operator does not add and configure these options in the <code>TektonConfig</code> CR.</p>
+<h3 id="op-optional-configuration-fields_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-optional-configuration-fields_customizing-configurations-in-the-tektonconfig-cr"></a>Optional configuration fields</h3>
+<div class="paragraph">
+<p>You can configure the following fields that do not have a default value and are considered only if you pass them. By default, the Operator does not add and configure these fields in the <code>TektonConfig</code> CR.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>default-timeout-minutes</code>: This option sets the default number of minutes to use for <code>TaskRun</code> and <code>PipelineRun</code>, if none is specified. For example, <code>default-timeout-minutes: 60</code> sets 60 minutes as default.</p>
+<p><code>default-timeout-minutes</code>: This field sets the default timeout for the <code>TaskRun</code> and <code>PipelineRun</code> resources, if none is specified when creating them. If a task run or pipeline run takes more than the set number of minutes for its execution, then the task run or pipeline run is timed out and cancelled. For example, <code>default-timeout-minutes: 60</code> sets 60 minutes as default.</p>
 </li>
 <li>
-<p><code>default-managed-by-label-value</code>: This option contains the default value given to the <code>app.kubernetes.io/managed-by</code> label applied to all <code>TaskRun</code> pods, if none is specified. For example, <code>default-managed-by-label-value: tekton-pipelines</code></p>
+<p><code>default-managed-by-label-value</code>: This field contains the default value given to the <code>app.kubernetes.io/managed-by</code> label that is applied to all <code>TaskRun</code> pods, if none is specified. For example, <code>default-managed-by-label-value: tekton-pipelines</code>.</p>
 </li>
 <li>
-<p><code>default-pod-template</code>: This option sets the default <code>TaskRun</code> and <code>PipelineRun</code> pod template, if none is specified.</p>
+<p><code>default-pod-template</code>: This field sets the default <code>TaskRun</code> and <code>PipelineRun</code> pod templates, if none is specified.</p>
 </li>
 <li>
-<p><code>default-cloud-events-sink</code>: This option sets the default <code>CloudEvents</code> sink to be used for <code>TaskRun</code> and <code>PipelineRun</code>, if none is specified.</p>
+<p><code>default-cloud-events-sink</code>: This field sets the default <code>CloudEvents</code> sink that is used for the <code>TaskRun</code> and <code>PipelineRun</code> resources, if none is specified.</p>
 </li>
 <li>
-<p><code>default-task-run-workspace-binding</code>: This option contains the default workspace configuration provided for the workspaces that <code>Task</code> declares, which <code>TaskRun</code> does not explicitly provide.</p>
+<p><code>default-task-run-workspace-binding</code>: This field contains the default workspace configuration for the workspaces that a <code>Task</code> resource declares, but a <code>TaskRun</code> resource does not explicitly declare.</p>
 </li>
 <li>
-<p><code>default-affinity-assistant-pod-template</code>: This option sets the default <code>PipelineRun</code> pod template to use for Affinity Assistant pods, if none is specified.</p>
+<p><code>default-affinity-assistant-pod-template</code>: This field sets the default <code>PipelineRun</code> pod template that is used for affinity assistant pods, if none is specified.</p>
 </li>
 <li>
-<p><code>default-max-matrix-combinations-count</code>: This option contains the default maximum number of combinations from a matrix, if none is specified.</p>
+<p><code>default-max-matrix-combinations-count</code>: This field contains the default maximum number of combinations generated from a matrix, if none is specified.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr"></a>Changing the default service account</h3>
-<div class="paragraph _abstract">
-<p>Change the default service account by configuring the <code>default-service-account</code> option in <code>.spec.pipeline</code> and <code>.spec.trigger</code> parameters. By default, the service account name is <code>pipeline</code>.</p>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr"></a>Changing the default service account</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can change the default service account by editing the <code>default-service-account</code> field in the <code>.spec.pipeline</code> and <code>.spec.trigger</code> specifications. The default service account name is <code>pipeline</code>.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
@@ -3007,17 +3017,19 @@ The <code>alpha</code> option is not supported.
   <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">pipeline</span><span class="pi">:</span>
-    <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipelines</span>
+    <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipeline</span>
   <span class="na">trigger</span><span class="pi">:</span>
-    <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipelines</span>
+    <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipeline</span>
     <span class="na">enable-api-fields</span><span class="pi">:</span> <span class="s">stable</span></code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the service monitor</h3>
-<div class="paragraph _abstract">
-<p>You can disable the service monitor which is part of OpenShift Pipelines to expose the telemetry data. To achieve that, configure the <code>enableMetrics</code> parameter in <code>.spec.pipeline</code> and change the default value from <code>true</code> to <code>false</code>.</p>
+</div>
+<div class="sect1">
+<h2 id="op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the service monitor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can disable the service monitor, which is part of OpenShift Pipelines, to expose the telemetry data. To disable, set the <code>enableMetrics</code> parameter to <code>false</code> in the <code>.spec.pipeline</code> specification of the <code>TektonConfig</code> CR.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
@@ -3034,8 +3046,10 @@ The <code>alpha</code> option is not supported.
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr"></a>Configuring the pipeline resolvers</h3>
+</div>
+<div class="sect1">
+<h2 id="op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr"></a>Configuring pipeline resolvers</h2>
+<div class="sectionbody">
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -3058,11 +3072,11 @@ the development process.</p>
 </tr>
 </table>
 </div>
-<div class="paragraph _abstract">
-<p>You can configure the pipeline resolvers in the <code>TektonConfig</code> CR. Enable or disable these pipeline resolvers:  <code>enable-bundles-resolver</code>, <code>enable-cluster-resolver</code>, <code>enable-git-resolver</code>, and <code>enable-hub-resolver</code>.</p>
+<div class="paragraph">
+<p>You can configure pipeline resolvers in the <code>TektonConfig</code> CR. You can enable or disable these pipeline resolvers:`enable-bundles-resolver`, <code>enable-cluster-resolver</code>, <code>enable-git-resolver</code>, and <code>enable-hub-resolver</code>.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example</div>
+<div class="title">Example: Enabling or disabling pipeline resolvers</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
@@ -3077,10 +3091,10 @@ the development process.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also provide resolver specific configurations in tekton config. For example, define the following fields in the <code>map[string]string</code> format to set configurations for individual resolvers.</p>
+<p>You can also provide resolver specific configurations in the <code>TektonConfig</code> CR. For example, define the following fields in the <code>map[string]string</code> format to set configurations for each pipeline resolver.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example</div>
+<div class="title">Example: Configuring pipeline resolvers</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
@@ -3100,18 +3114,17 @@ the development process.</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling cluster tasks and pipeline templates</h2>
 <div class="sectionbody">
-<div class="paragraph _abstract">
+<div class="paragraph">
 <p>By default, the <code>TektonAddon</code> CR installs <code>clusterTasks</code> and <code>pipelineTemplates</code> resources along with OpenShift Pipelines on the cluster.</p>
 </div>
 <div class="paragraph">
-<p>You can disable the installation of the <code>clusterTasks</code> and <code>pipelineTemplates</code> resources by changing the values under <code>.spec.addon.params</code> to <code>false</code>. In addition, you can disable <code>communityClusterTasks</code>.</p>
+<p>You can disable the installation of the <code>clusterTasks</code> and <code>pipelineTemplates</code> resources by setting the parameter value to <code>false</code> in the <code>.spec.addon</code> specification. In addition, you can disable the <code>communityClusterTasks</code> parameter.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example:</div>
+<div class="title">Example: Disabling cluster tasks and pipeline templates</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
@@ -3128,24 +3141,13 @@ the development process.</p>
         <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span></code></pre>
 </div>
 </div>
-<div class="ulist _additional-resources">
-<div class="title">Additional resources</div>
-<ul>
-<li>
-<p>To learn more about cluster tasks, see <a href="managing-nonversioned-and-versioned-cluster-tasks.html#managing-nonversioned-and-versioned-cluster-tasks">Managing non-versioned and versioned cluster tasks</a></p>
-</li>
-<li>
-<p>For more information on how to use custom pipeline templates, see <a href="../../cicd/pipelines/working-with-pipelines-using-the-developer-perspective.html#using-custom-pipeline-template-for-git-import_working-with-pipelines-using-the-developer-perspective">Using a custom pipeline template for creating and deploying an application from a Git repository</a></p>
-</li>
-</ul>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the integration of Tekton Hub</h2>
 <div class="sectionbody">
-<div class="paragraph _abstract">
-<p>You can disable the integration of Tekton Hub with the <strong>Developer</strong> perspective by setting the <code>enable-devconsole-integration</code> field in <code>TektonConfig</code> CR to <code>false</code>.</p>
+<div class="paragraph">
+<p>You can disable the integration of Tekton Hub with the <strong>Developer</strong> perspective by setting the <code>enable-devconsole-integration</code> parameter to <code>false</code> in the <code>TektonConfig</code> CR.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example:</div>
@@ -3166,7 +3168,7 @@ the development process.</p>
 <div class="sect1">
 <h2 id="op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the automatic creation of RBAC resources</h2>
 <div class="sectionbody">
-<div class="paragraph _abstract">
+<div class="paragraph">
 <p>The default installation of the Red Hat OpenShift Pipelines Operator creates multiple role-based access control (RBAC) resources for all namespaces in the cluster, except the namespaces matching the <code>^(openshift|kube)-*</code> regular expression pattern. Among these RBAC resources, the <code>pipelines-scc-rolebinding</code> security context constraint (SCC) role binding resource is a potential security issue, because the associated <code>pipelines-scc</code> SCC has the <code>RunAsAny</code> privilege.</p>
 </div>
 <div class="paragraph">
@@ -3203,10 +3205,10 @@ the development process.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"></a>Automatic pruning of task run and pipeline run</h2>
+<h2 id="op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"></a>Automatic pruning of task runs and pipeline runs</h2>
 <div class="sectionbody">
-<div class="paragraph _abstract">
-<p>Stale <code>TaskRun</code> and <code>PipelineRun</code> objects and their executed instances occupy physical resources that can be used for the active runs. To prevent this waste, Red Hat OpenShift Pipelines provides annotations that cluster administrators can use to automatically prune the unused objects and their instances in various namespaces.</p>
+<div class="paragraph">
+<p>Stale <code>TaskRun</code> and <code>PipelineRun</code> objects and their executed instances occupy physical resources that can be used for the active runs. For optimal utilization of these resources, Red Hat OpenShift Pipelines provides annotations that cluster administrators can use to automatically prune the unused objects and their instances in various namespaces.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3216,7 +3218,7 @@ the development process.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Configuring automatic pruning by specifying annotations affects the entire namespace. You cannot selectively auto-prune individual task runs and pipeline runs in a namespace.</p>
+<p>Configuring automatic pruning by specifying annotations affects the entire namespace. You cannot selectively auto-prune an individual task run or pipeline run in a namespace.</p>
 </div>
 </td>
 </tr>
@@ -3301,14 +3303,27 @@ the development process.</p>
 <span class="nn">...</span></code></pre>
 </div>
 </div>
-<div class="ulist _additional-resources">
-<div class="title">Additional resources</div>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="additional-resources_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#additional-resources_customizing-configurations-in-the-tektonconfig-cr"></a>Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
 <ul>
+<li>
+<p>See <a href="../../cicd/pipelines/authenticating-pipelines-using-git-secret.html#op-configuring-ssh-authentication-for-git_authenticating-pipelines-using-git-secret">Configuring SSH authentication for Git</a> for more information about Git SSH secrets.</p>
+</li>
+<li>
+<p>To learn more about cluster tasks, see <a href="managing-nonversioned-and-versioned-cluster-tasks.html#managing-nonversioned-and-versioned-cluster-tasks">Managing non-versioned and versioned cluster tasks</a></p>
+</li>
+<li>
+<p>For more information on how to use custom pipeline templates, see <a href="../../cicd/pipelines/working-with-pipelines-using-the-developer-perspective.html#using-custom-pipeline-template-for-git-import_working-with-pipelines-using-the-developer-perspective">Using a custom pipeline template for creating and deploying an application from a Git repository</a></p>
+</li>
 <li>
 <p>For information on manual pruning of various objects, see <a href="../../applications/pruning-objects.html#pruning-objects">Pruning objects to reclaim resources</a>.</p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
