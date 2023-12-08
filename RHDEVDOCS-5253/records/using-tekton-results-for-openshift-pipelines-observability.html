@@ -1,0 +1,1811 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>Using Tekton Results for OpenShift Pipelines observability | Observability in OpenShift Pipelines | Red Hat OpenShift Pipelines Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../about/op-release-notes.html">Red Hat OpenShift Pipelines Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Observability in OpenShift Pipelines</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        Using Tekton Results for OpenShift Pipelines observability
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/records/using-tekton-results-for-openshift-pipelines-observability.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+records/using-tekton-results-for-openshift-pipelines-observability.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-right"></span>About OpenShift Pipelines</a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../about/op-release-notes.html">OpenShift Pipelines release notes</a></li>
+            <li><a class="" href="../about/about-pipelines.html">About OpenShift Pipelines</a></li>
+            <li><a class="" href="../about/understanding-openshift-pipelines.html">Understanding OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-right"></span>Installing and configuring</a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../install_config/installing-pipelines.html">Installing OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/uninstalling-pipelines.html">Uninstalling OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/customizing-configurations-in-the-tektonconfig-cr.html">Customizing configurations in the TektonConfig custom resource</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../resource/reducing-pipelines-resource-consumption.html">Reducing resource consumption of OpenShift Pipelines</a></li>
+            <li><a class="" href="../resource/setting-compute-resource-quota-for-openshift-pipelines.html">Setting compute resource quota for OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-right"></span>Creating CI/CD pipelines</a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD solutions for applications using OpenShift Pipelines</a></li>
+            <li><a class="" href="../create/working-with-pipelines-web-console.html">Working with OpenShift Pipelines in the web console</a></li>
+            <li><a class="" href="../create/remote-pipelines-tasks-resolvers.html">Specifying remote pipelines and tasks using resolvers</a></li>
+            <li><a class="" href="../create/managing-nonversioned-and-versioned-cluster-tasks.html">Managing non-versioned and versioned cluster tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-down"></span>Observability in OpenShift Pipelines</a>
+      <ul id="topicGroup4" class="collapse in list-unstyled">
+            <li><a class=" active" href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Using Tekton Results for OpenShift Pipelines observability</a></li>
+            <li><a class="" href="../records/viewing-pipeline-logs-using-the-openshift-logging-operator.html">Viewing pipeline logs using the OpenShift Logging Operator</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-right"></span>Pipelines as Code</a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../pac/about-pipelines-as-code.html">About Pipelines as Code</a></li>
+            <li><a class="" href="../pac/install-config-pipelines-as-code.html">Installing and configuring Pipelines as Code</a></li>
+            <li><a class="" href="../pac/using-pipelines-as-code-repos.html">Using Pipelines as Code with a Git repository hosting service provider</a></li>
+            <li><a class="" href="../pac/using-repository-crd.html">Using the Repository custom resource</a></li>
+            <li><a class="" href="../pac/using-pac-resolver.html">Using the Pipelines as Code resolver</a></li>
+            <li><a class="" href="../pac/managing-pipeline-runs-pac.html">Managing pipeline runs</a></li>
+            <li><a class="" href="../pac/pac-command-reference.html">Pipelines as Code command reference</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-right"></span>Securing OpenShift Pipelines</a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Using Tekton Chains for OpenShift Pipelines supply chain security</a></li>
+            <li><a class="" href="../secure/configuring-security-context-for-pods.html">Configuring the security context for pods</a></li>
+            <li><a class="" href="../secure/securing-webhooks-with-event-listeners.html">Securing webhooks with event listeners</a></li>
+            <li><a class="" href="../secure/authenticating-pipelines-using-git-secret.html">Authenticating pipelines using git secret</a></li>
+            <li><a class="" href="../secure/unprivileged-building-of-container-images-using-buildah.html">Unprivileged building of container images using Buildah</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Custom Tekton Hub instance</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../hub/using-tekton-hub-with-openshift-pipelines.html">Using Tekton Hub with OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Pipelines CLI (tkn) reference</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../tkn_cli/installing-tkn.html">Installing tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-configuring-tkn.html">Configuring tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-tkn-reference.html">Basic tkn commands</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Using Tekton Results for OpenShift Pipelines observability
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#results-concepts_using-tekton-results-for-openshift-pipelines-observability">Tekton Results concepts</a></li>
+<li><a href="#preparing-to-install_using-tekton-results-for-openshift-pipelines-observability">Preparing to install Tekton Results</a>
+<ul class="sectlevel2">
+<li><a href="#results-cert_using-tekton-results-for-openshift-pipelines-observability">Preparing a secret with an SSL certificate</a></li>
+<li><a href="#results-db_using-tekton-results-for-openshift-pipelines-observability">Preparing a secret with the database credentials</a></li>
+<li><a href="#results-storage_using-tekton-results-for-openshift-pipelines-observability">Preparing storage for logging information</a></li>
+</ul>
+</li>
+<li><a href="#installing-results_using-tekton-results-for-openshift-pipelines-observability">Installing Tekton Results</a></li>
+<li><a href="#querying-using-opc_using-tekton-results-for-openshift-pipelines-observability">Querying Tekton Results using the opc command line utility</a>
+<ul class="sectlevel2">
+<li><a href="#prepare-opc-for-results_using-tekton-results-for-openshift-pipelines-observability">Preparing the opc utility environment for querying Tekton Results</a></li>
+<li><a href="#query-results-uuid_using-tekton-results-for-openshift-pipelines-observability">Querying for results and records by name</a></li>
+<li><a href="#results-search-results_using-tekton-results-for-openshift-pipelines-observability">Searching for results</a></li>
+<li><a href="#results-search-records_using-tekton-results-for-openshift-pipelines-observability">Searching for records</a></li>
+<li><a href="#results-reference-results_using-tekton-results-for-openshift-pipelines-observability">Reference information for searching results</a></li>
+<li><a href="#results-reference-records_using-tekton-results-for-openshift-pipelines-observability">Reference information for searching records</a></li>
+</ul>
+</li>
+<li><a href="#additional-resources_using-tekton-results-for-openshift-pipelines-observability">Additional resources</a></li>
+</ul>
+</div>
+<div class="paragraph _abstract">
+<p>Tekton Results is a service that archives the complete information for every pipeline run and task run. You can prune the <code>PipelineRun</code> and <code>TaskRun</code> resources as necessary and use the Tekton Results API or the <code>opc</code> command line utility to access their YAML manifests as well as logging information.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Tekton Results is a Technology Preview feature only. Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production. These features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process.</p>
+</div>
+<div class="paragraph">
+<p>For more information about the support scope of Red Hat Technology Preview features, see <a href="https://access.redhat.com/support/offerings/techpreview/">Technology Preview Features Support Scope</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="results-concepts_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-concepts_using-tekton-results-for-openshift-pipelines-observability"></a>Tekton Results concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tekton Results archives pipeline runs and task runs in the form of results and records.</p>
+</div>
+<div class="paragraph">
+<p>For every <code>PipelineRun</code> and <code>TaskRun</code> custom resource (CR) that completes running, Tekton Results creates a <em>record</em>.</p>
+</div>
+<div class="paragraph">
+<p>A <em>result</em> can contain one or several records. A record is always a part of exactly one result.</p>
+</div>
+<div class="paragraph">
+<p>A result corresponds to a pipeline run, and includes the records for the <code>PipelineRun</code> CR itself and for all the <code>TaskRun</code> CRs that were started as a part of the pipeline run.</p>
+</div>
+<div class="paragraph">
+<p>If a task run was started directly, without the use of a pipeline run, a result is created for this task run. This result contains the record for the same task run.</p>
+</div>
+<div class="paragraph">
+<p>Each result has a name that includes the namespace in which the <code>PipelineRun</code> or <code>TaskRun</code> CR was created and the UUID of the CR.  The format for the result name is <code>&lt;namespace_name&gt;/results/&lt;parent_run_uuid&gt;</code>. In this format, <code>&lt;parent_run_uuid&gt;</code> is the UUUD of a pipeline run or else of a task run that was started directly.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example result name</div>
+<div class="content">
+<pre class="nowrap">results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each record has a name that includes name of the result that contains the record, as well as the UUID of the <code>PipelineRun</code> or <code>TaskRun</code> CR to which the record corresponds.  The format for the result name is <code>&lt;namespace_name&gt;/results/&lt;parent_run_uuid&gt;/results/&lt;run_uuid&gt;</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example record name</div>
+<div class="content">
+<pre class="nowrap">results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/e9c736db-5665-441f-922f-7c1d65c9d621</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The record includes the full YAML manifest of the <code>TaskRun</code> or <code>PipelineRun</code> CR as it existed after the completion of the run. This manifest contains the specification of the run, any annotation specified for the run, as well as certain information about the results of the run, such as the time when it was completed and whether the run was successful.</p>
+</div>
+<div class="paragraph">
+<p>While the <code>TaskRun</code> or <code>PipelineRun</code> CR exists, you can view the YAML manifest by using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc get pipelinerun &lt;cr_name&gt; <span class="nt">-o</span> yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Tekton Results preserves this manifest after the <code>TaskRun</code> or <code>PipelineRun</code> CR is deleted and makes it available for viewing and searching.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example YAML manifest of a pipeline run after its completion</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">  <span class="na">kind</span><span class="pi">:</span> <span class="s">PipelineRun</span>
+  <span class="na">spec</span><span class="pi">:</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">message</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">five</span>
+    <span class="na">timeouts</span><span class="pi">:</span>
+      <span class="na">pipeline</span><span class="pi">:</span> <span class="s">1h0m0s</span>
+    <span class="na">pipelineRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">echo-pipeline</span>
+    <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">status</span><span class="pi">:</span>
+    <span class="na">startTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:40Z"</span>
+    <span class="na">conditions</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">Succeeded</span>
+        <span class="na">reason</span><span class="pi">:</span> <span class="s">Succeeded</span>
+        <span class="na">status</span><span class="pi">:</span> <span class="s2">"</span><span class="s">True"</span>
+        <span class="na">message</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Tasks</span><span class="nv"> </span><span class="s">Completed:</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">(Failed:</span><span class="nv"> </span><span class="s">0,</span><span class="nv"> </span><span class="s">Cancelled</span><span class="nv"> </span><span class="s">0),</span><span class="nv"> </span><span class="s">Skipped:</span><span class="nv"> </span><span class="s">0'</span>
+        <span class="na">lastTransitionTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:49Z"</span>
+    <span class="na">pipelineSpec</span><span class="pi">:</span>
+      <span class="na">tasks</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">echo-task</span>
+          <span class="na">params</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">message</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="s">five</span>
+          <span class="na">taskRef</span><span class="pi">:</span>
+            <span class="na">kind</span><span class="pi">:</span> <span class="s">Task</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s">echo-task-pipeline</span>
+      <span class="na">params</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">message</span>
+          <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">completionTime</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:49Z"</span>
+    <span class="na">childReferences</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">TaskRun</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">echo-pipeline-run-gmzrx-echo-task</span>
+        <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span>
+        <span class="na">pipelineTaskName</span><span class="pi">:</span> <span class="s">echo-task</span>
+  <span class="na">metadata</span><span class="pi">:</span>
+    <span class="na">uid</span><span class="pi">:</span> <span class="s">62c3b02e-f12b-416c-9771-c02af518f6d4</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">echo-pipeline-run-gmzrx</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="s">tekton.dev/pipeline</span><span class="pi">:</span> <span class="s">echo-pipeline</span>
+    <span class="na">namespace</span><span class="pi">:</span> <span class="s">releasetest-js5tt</span>
+    <span class="na">finalizers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">chains.tekton.dev/pipelinerun</span>
+    <span class="na">generation</span><span class="pi">:</span> <span class="m">2</span>
+    <span class="na">annotations</span><span class="pi">:</span>
+      <span class="s">results.tekton.dev/log</span><span class="pi">:</span> <span class="s">releasetest-js5tt/results/62c3b02e-f12b-416c-9771-c02af518f6d4/logs/c1e49dd8-d641-383e-b708-e3a02b6a4378</span>
+      <span class="s">chains.tekton.dev/signed</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+      <span class="s">results.tekton.dev/record</span><span class="pi">:</span> <span class="s">releasetest-js5tt/results/62c3b02e-f12b-416c-9771-c02af518f6d4/records/62c3b02e-f12b-416c-9771-c02af518f6d4</span>
+      <span class="s">results.tekton.dev/result</span><span class="pi">:</span> <span class="s">releasetest-js5tt/results/62c3b02e-f12b-416c-9771-c02af518f6d4</span>
+    <span class="na">generateName</span><span class="pi">:</span> <span class="s">echo-pipeline-run-</span>
+    <span class="na">managedFields</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:39Z"</span>
+        <span class="na">manager</span><span class="pi">:</span> <span class="s">kubectl-create</span>
+        <span class="na">fieldsV1</span><span class="pi">:</span>
+          <span class="s">f:spec:</span>
+            <span class="s">.</span><span class="pi">:</span> <span class="pi">{}</span>
+            <span class="s">f:params: {}</span>
+            <span class="s">f:pipelineRef:</span>
+              <span class="s">.</span><span class="pi">:</span> <span class="pi">{}</span>
+              <span class="s">f:name: {}</span>
+          <span class="s">f:metadata:</span>
+            <span class="s">f:generateName: {}</span>
+        <span class="na">operation</span><span class="pi">:</span> <span class="s">Update</span>
+        <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span>
+        <span class="na">fieldsType</span><span class="pi">:</span> <span class="s">FieldsV1</span>
+      <span class="pi">-</span> <span class="na">time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:40Z"</span>
+        <span class="na">manager</span><span class="pi">:</span> <span class="s">openshift-pipelines-controller</span>
+        <span class="na">fieldsV1</span><span class="pi">:</span>
+          <span class="s">f:metadata:</span>
+            <span class="s">f:labels:</span>
+              <span class="s">.</span><span class="pi">:</span> <span class="pi">{}</span>
+              <span class="s">f:tekton.dev/pipeline: {}</span>
+        <span class="na">operation</span><span class="pi">:</span> <span class="s">Update</span>
+        <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span>
+        <span class="na">fieldsType</span><span class="pi">:</span> <span class="s">FieldsV1</span>
+      <span class="pi">-</span> <span class="na">time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:49Z"</span>
+        <span class="na">manager</span><span class="pi">:</span> <span class="s">openshift-pipelines-chains-controller</span>
+        <span class="na">fieldsV1</span><span class="pi">:</span>
+          <span class="s">f:metadata:</span>
+            <span class="s">f:finalizers:</span>
+              <span class="s">.</span><span class="pi">:</span> <span class="pi">{}</span>
+              <span class="s">v:"chains.tekton.dev/pipelinerun": {}</span>
+            <span class="s">f:annotations:</span>
+              <span class="s">.</span><span class="pi">:</span> <span class="pi">{}</span>
+              <span class="s">f:chains.tekton.dev/signed: {}</span>
+        <span class="na">operation</span><span class="pi">:</span> <span class="s">Update</span>
+        <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span>
+        <span class="na">fieldsType</span><span class="pi">:</span> <span class="s">FieldsV1</span>
+      <span class="pi">-</span> <span class="na">time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:49Z"</span>
+        <span class="na">manager</span><span class="pi">:</span> <span class="s">openshift-pipelines-controller</span>
+        <span class="na">fieldsV1</span><span class="pi">:</span>
+          <span class="s">f:status:</span>
+            <span class="s">f:startTime: {}</span>
+            <span class="s">f:conditions: {}</span>
+            <span class="s">f:pipelineSpec:</span>
+              <span class="s">.</span><span class="pi">:</span> <span class="pi">{}</span>
+              <span class="s">f:tasks: {}</span>
+              <span class="s">f:params: {}</span>
+            <span class="s">f:completionTime: {}</span>
+            <span class="s">f:childReferences: {}</span>
+        <span class="na">operation</span><span class="pi">:</span> <span class="s">Update</span>
+        <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span>
+        <span class="na">fieldsType</span><span class="pi">:</span> <span class="s">FieldsV1</span>
+        <span class="na">subresource</span><span class="pi">:</span> <span class="s">status</span>
+      <span class="pi">-</span> <span class="na">time</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:42:15Z"</span>
+        <span class="na">manager</span><span class="pi">:</span> <span class="s">openshift-pipelines-results-watcher</span>
+        <span class="na">fieldsV1</span><span class="pi">:</span>
+          <span class="s">f:metadata:</span>
+            <span class="s">f:annotations:</span>
+              <span class="s">f:results.tekton.dev/log: {}</span>
+              <span class="s">f:results.tekton.dev/record: {}</span>
+              <span class="s">f:results.tekton.dev/result: {}</span>
+        <span class="na">operation</span><span class="pi">:</span> <span class="s">Update</span>
+        <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span>
+        <span class="na">fieldsType</span><span class="pi">:</span> <span class="s">FieldsV1</span>
+    <span class="na">resourceVersion</span><span class="pi">:</span> <span class="s2">"</span><span class="s">126429"</span>
+    <span class="na">creationTimestamp</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:41:39Z"</span>
+    <span class="na">deletionTimestamp</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2023-08-07T11:42:23Z"</span>
+    <span class="na">deletionGracePeriodSeconds</span><span class="pi">:</span> <span class="m">0</span>
+  <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Tekton Results also creates a log record that contains the logging information of all the tools that ran as a part of a pipeline run or task run.</p>
+</div>
+<div class="paragraph">
+<p>You can access every result and record by its name. You can also use Common Expression Language (CEL) queries to search for results and records by the information they contain, including the YAML manifest.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="preparing-to-install_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#preparing-to-install_using-tekton-results-for-openshift-pipelines-observability"></a>Preparing to install Tekton Results</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You must complete several preparatory steps before installing Tekton Results.</p>
+</div>
+<div class="sect2">
+<h3 id="results-cert_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-cert_using-tekton-results-for-openshift-pipelines-observability"></a>Preparing a secret with an SSL certificate</h3>
+<div class="paragraph">
+<p>Tekton Results provides a REST API using the HTTPS protocol, which requires an SSL certificate. Provide a secret with this certificate. If you have an existing certificate provided by a certificate authority (CA), use this certificate, otherwise create a self-signed certificate.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>The <code>openssl</code> command-line utility is installed.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>If you do not have a certificate provided by a CA, create a self-signed certificate by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-x509</span> <span class="se">\</span>
+<span class="nt">-newkey</span> rsa:4096 <span class="se">\</span>
+<span class="nt">-keyout</span> key.pem <span class="se">\</span>
+<span class="nt">-out</span> cert.pem <span class="se">\</span>
+<span class="nt">-days</span> 365 <span class="se">\</span>
+<span class="nt">-nodes</span> <span class="se">\</span>
+<span class="nt">-subj</span> <span class="s2">"/CN=tekton-results-api-service.openshift-pipelines.svc.cluster.local"</span> <span class="se">\</span>
+<span class="nt">-addext</span> <span class="s2">"subjectAltName = DNS:tekton-results-api-service.openshift-pipelines.svc.cluster.local"</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace <code>tekton-results-api-service.openshift-pipelines.svc.cluster.local</code> with the route endpoint that you plan to use for the Tekton Results API.</p>
+</div>
+</li>
+<li>
+<p>Create a transport security layer (TLS) secret from the certificate by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create secret tls <span class="nt">-n</span> openshift-pipelines tekton-results-tls <span class="nt">--cert</span><span class="o">=</span>cert.pem <span class="nt">--key</span><span class="o">=</span>key.pem</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to use an existing certificate provided by a CA, replace <code>cert.pem</code> with the name of the file containing this certificate.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="results-db_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-db_using-tekton-results-for-openshift-pipelines-observability"></a>Preparing a secret with the database credentials</h3>
+<div class="paragraph">
+<p>Tekton Results uses a PostgreSQL database to store data. You can configure the installation to use either a PostgreSQL server that is automatically installed with Tekton Results or an external PostgreSQL server that already exists in your deployment. In both cases, provide a secret with the database credentials.</p>
+</div>
+<div class="paragraph">
+<div class="title">Procedure</div>
+<p>Complete one of the following steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you do not need to use an external PostgreSQL server, create a secret with the database user named <code>result</code> and a random password in the <code>openshift-pipelines</code> namespace by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create secret generic tekton-results-postgres <span class="se">\</span>
+  <span class="nt">--namespace</span><span class="o">=</span>openshift-pipelines <span class="se">\</span>
+  <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">POSTGRES_USER</span><span class="o">=</span>result <span class="se">\</span>
+  <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span><span class="si">$(</span>openssl rand <span class="nt">-base64</span> 20<span class="si">)</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In this command and in subsequent commads, if you configured a custom target namespace for OpenShift Pipelines, use the name of this namespace instead of <code>openshift-pipelines</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>If you want to use an external PostgreSQL database server to store Tekton Results data, create a secret with the credentials for this server by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create secret generic tekton-results-postgres <span class="se">\</span>
+  <span class="nt">--namespace</span><span class="o">=</span>openshift-pipelines <span class="se">\</span>
+  <span class="nt">--from-literal</span><span class="o">=</span><span class="nv">POSTGRES_USER</span><span class="o">=</span>&lt;user&gt; <span class="se">\ </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="gp">  --from-literal=POSTGRES_PASSWORD=&lt;password&gt;</span><span class="w"> <i class="conum" data-value="2"></i><b>(2)</b>
+</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace <code>&lt;user&gt;</code> with the username for the PostgreSQL user that Tekton Results must use. Replace <code>&lt;password&gt;</code> with the password for the same account.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="results-storage_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-storage_using-tekton-results-for-openshift-pipelines-observability"></a>Preparing storage for logging information</h3>
+<div class="paragraph">
+<p>Tekton Results uses separate storage for logging information related to pipeline runs and task runs. You can configure any one of the following types of storage:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Persistent volume claim (PVC) on your Red Hat OpenShift Pipelines cluster</p>
+</li>
+<li>
+<p>Google Cloud Storage</p>
+</li>
+<li>
+<p>S3 bucket storage</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Procedure</div>
+<p>Complete one of the following procedures:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To use a PVC, complete the following steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create a file named <code>pvc.yaml</code> with the following definition for the PVC:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">  <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+  <span class="na">metadata</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">tekton-logs</span>
+  <span class="na">spec</span><span class="pi">:</span>
+    <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="na">requests</span><span class="pi">:</span>
+        <span class="na">storage</span><span class="pi">:</span> <span class="s">1Gi</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Apply the definition by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc apply <span class="nt">-n</span> openshift-pipelines <span class="nt">-f</span> pvc.yaml</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>To use Google Cloud Storage, complete the following steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create an application credentials file by using the <code>gcloud</code> command. For instructions about providing application credentials in a file, see <a href="https://cloud.google.com/docs/authentication/application-default-credentials#personal">User credentials provided by using the gcloud CLI</a> in the Google Cloud documentation.</p>
+</li>
+<li>
+<p>Create a secret from the application credentials file by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create secret generic gcs-credentials <span class="se">\</span>
+  <span class="nt">--from-file</span><span class="o">=</span><span class="nv">$HOME</span>/.config/gcloud/application_default_credentials.json <span class="se">\</span>
+  <span class="nt">-n</span> openshift-pipelines</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Adjust the path and filename of the application credentials file as necessary.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>To use S3 bucket storage, complete the following steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create a file named <code>s3_secret.yaml</code> with the following content:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">  <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span>
+  <span class="na">metadata</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">my_custom_secret</span>
+    <span class="na">namespace</span><span class="pi">:</span> <span class="s">tekton-pipelines</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">Opaque</span>
+  <span class="na">stringData</span><span class="pi">:</span>
+    <span class="na">S3_BUCKET_NAME</span><span class="pi">:</span> <span class="s">bucket1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="na">S3_ENDPOINT</span><span class="pi">:</span> <span class="s">https://example.localhost.com</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="na">S3_HOSTNAME_IMMUTABLE</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+    <span class="na">S3_REGION</span><span class="pi">:</span> <span class="s">region-1</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="na">S3_ACCESS_KEY_ID</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1234"</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="na">S3_SECRET_ACCESS_KEY</span><span class="pi">:</span> <span class="s">secret_key</span> <i class="conum" data-value="5"></i><b>(5)</b>
+    <span class="na">S3_MULTI_PART_SIZE</span><span class="pi">:</span> <span class="s2">"</span><span class="s">5242880"</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the S3 storage bucket</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The S3 API endpoint URL</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The S3 region</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The S3 access key ID</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The S3 secret access key</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Create a secret from the file by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create secret generic s3-credentials <span class="se">\</span>
+  <span class="nt">--from-file</span><span class="o">=</span>s3_secret.yaml <span class="nt">-n</span> openshift-pipelines</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="installing-results_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#installing-results_using-tekton-results-for-openshift-pipelines-observability"></a>Installing Tekton Results</h2>
+<div class="sectionbody">
+<div class="paragraph _abstract">
+<p>To install Tekton Results, you must provide the required resources and then create and apply a <code>TektonResult</code> custom resource (CR). The OpenShift Pipelines Operator installs the Results services when you apply the <code>TektonResult</code> custom resource.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You installed OpenShift Pipelines using the Operator.</p>
+</li>
+<li>
+<p>You prepared a secret with the SSL certificate.</p>
+</li>
+<li>
+<p>You prepared storage for the logging information.</p>
+</li>
+<li>
+<p>You prepared a secret with the database credentials.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create the resource definition file named <code>result.yaml</code> based on the following example. You can adjust the settings as necessary.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">  <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">TektonResult</span>
+  <span class="na">metadata</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">result</span>
+  <span class="na">spec</span><span class="pi">:</span>
+    <span class="na">targetNamespace</span><span class="pi">:</span> <span class="s">openshift-pipelines</span>
+    <span class="na">logs_api</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">log_level</span><span class="pi">:</span> <span class="s">debug</span>
+    <span class="na">db_port</span><span class="pi">:</span> <span class="m">5432</span>
+    <span class="na">db_host</span><span class="pi">:</span> <span class="s">tekton-results-postgres-service.openshift-pipelines.svc.cluster.local</span>
+    <span class="na">logs_path</span><span class="pi">:</span> <span class="s">/logs</span>
+    <span class="na">logs_type</span><span class="pi">:</span> <span class="s">File</span>
+    <span class="na">logs_buffer_size</span><span class="pi">:</span> <span class="m">32768</span>
+    <span class="na">auth_disable</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">tls_hostname_override</span><span class="pi">:</span> <span class="s">tekton-results-api-service.openshift-pipelines.svc.cluster.local</span>
+    <span class="na">db_enable_auto_migration</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">server_port</span><span class="pi">:</span> <span class="m">8080</span>
+    <span class="na">prometheus_port</span><span class="pi">:</span> <span class="s">9090</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add configuration for the storage for logging information to this file:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If you configured a persistent volume claim (PVC), add the following line to provide the name of the PVC:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">    <span class="na">logging_pvc_name</span><span class="pi">:</span> <span class="s">tekton-logs</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you configured Google Cloud Storage, add the following lines to provide the secret name, the credentials file name, and the name of the Google Cloud Storage bucket:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">    <span class="na">gcs_creds_secret_name</span><span class="pi">:</span> <span class="s">gcs-credentials</span>
+    <span class="na">gcs_creds_secret_key</span><span class="pi">:</span> <span class="s">application_default_credentials.json</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="na">gcs_bucket_name</span><span class="pi">:</span> <span class="s">bucket-name</span> <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Provide the name, without the path, of the application credentials file that you used when creating the secret.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provide the name of a bucket in Google Cloud Storage. Tekton Chains uses this bucket to store logging information for pipeline runs and task runs.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>If you configured S3 bucket storage, add the following line to provide the name of the S3 secret:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">    <span class="na">secret_name</span><span class="pi">:</span> <span class="s">s3-credentials</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Optional: If you want to use an external PostgreSQL database server to store Tekton Results information, add the following lines to the file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml">    <span class="na">db_host</span><span class="pi">:</span> <span class="s">postgres.internal.example.com</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="na">db_port</span><span class="pi">:</span> <span class="s">5432</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="na">is_external_db</span><span class="pi">:</span> <span class="no">true</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The host name for the PostgreSQL server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The port for the PostgreSQL server.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Apply the resource definition by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc apply <span class="nt">-n</span> openshift-pipelines <span class="nt">-f</span> result.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Expose the route for the Tekton Results service API by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create route <span class="nt">-n</span> openshift-pipelines <span class="se">\</span>
+  passthrough tekton-results-api-service <span class="se">\</span>
+  <span class="nt">--service</span><span class="o">=</span>tekton-results-api-service <span class="nt">--port</span><span class="o">=</span>8080</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="querying-using-opc_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#querying-using-opc_using-tekton-results-for-openshift-pipelines-observability"></a>Querying Tekton Results using the opc command line utility</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use the <code>opc</code> command line utility to query Tekton Results for results and records. To install the <code>opc</code> command line utility, install the package for the <code>tkn</code> command line utility. For instructions about installing this package, see <a href="../tkn_cli/installing-tkn.html#installing-tkn">Installing tkn</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can use the names of records and results to retrieve the data in them.</p>
+</div>
+<div class="paragraph">
+<p>You can search for results and records using Common Expression Language (CEL) queries. These searches display the UUIDs of the results or records. You can use the provided examples to create queries for common search types. You can also use reference information to create other queries.</p>
+</div>
+<div class="sect2">
+<h3 id="prepare-opc-for-results_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#prepare-opc-for-results_using-tekton-results-for-openshift-pipelines-observability"></a>Preparing the opc utility environment for querying Tekton Results</h3>
+<div class="paragraph _abstract">
+<p>Before you can query Tekton Results, you must prepare the environment for the <code>opc</code> utility.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You installed Tekton Results.</p>
+</li>
+<li>
+<p>You installed the <code>opc</code> utility.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Set the <code>RESULTS_API</code> environment variable to the route to the Tekton Results API by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">RESULTS_API</span><span class="o">=</span><span class="si">$(</span>oc get route tekton-results-api-service <span class="nt">-n</span> openshift-pipelines <span class="nt">--no-headers</span> <span class="nt">-o</span> custom-columns<span class="o">=</span><span class="s2">":spec.host"</span><span class="si">)</span>:443</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create an authentication token for the Tekton Results API by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create token sa &lt;service_account&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Save the string that this command outputs.</p>
+</div>
+</li>
+<li>
+<p>Optional: Create the <code>~/.config/tkn/results.yaml</code> file for automatic authentication with the Tekton Results API. The file must have the following contents:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">address</span><span class="pi">:</span> <span class="s">&lt;tekton_results_route&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">token</span><span class="pi">:</span> <span class="s">&lt;authentication_token&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">ssl</span><span class="pi">:</span>
+   <span class="na">roots_file_path</span><span class="pi">:</span> <span class="s">/home/example/cert.pem</span> <i class="conum" data-value="3"></i><b>(3)</b>
+   <span class="na">server_name_override</span><span class="pi">:</span> <span class="s">tekton-results-api-service.openshift-pipelines.svc.cluster.local</span> <i class="conum" data-value="4"></i><b>(4)</b>
+ <span class="na">service_account</span><span class="pi">:</span>
+   <span class="na">namespace</span><span class="pi">:</span> <span class="s">service_acc_1</span> <i class="conum" data-value="5"></i><b>(5)</b>
+   <span class="na">name</span><span class="pi">:</span> <span class="s">service_acc_1</span> <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The route to the Tekton Results API. Use the same value as you set for <code>RESULTS_API</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The authentication token that was created by the <code>oc create token</code> command. If you provide this token, it overrides the <code>service_account</code> setting and <code>opc</code> uses this token to authenticate.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The location of the file with the SSL certificate that you configured for the API endpoint.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>If you configured a custom target namespace for OpenShift Pipelines, replace <code>openshift-pipelines</code> with the name of this namespace.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The name of a service account for authenticating with the Tekton Results API. If you provided the authentication token, you do not need to provide the <code>service_account</code> parameters.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Alternatively, if you do not create the <code>~/.config/tkn/results.yaml</code> file, you can pass the token to each <code>opc</code> command by using the <code>--authtoken</code> option.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="query-results-uuid_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#query-results-uuid_using-tekton-results-for-openshift-pipelines-observability"></a>Querying for results and records by name</h3>
+<div class="paragraph _abstract">
+<p>You can list and query results and records using their names.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You installed Tekton Results.</p>
+</li>
+<li>
+<p>You installed the <code>opc</code> utility and prepared its environment to query Tekton Results.</p>
+</li>
+<li>
+<p>You installed the <code>jq</code> package.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>List the names of all results that correspond to pipeline runs and task runs created in a namespace. Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results list <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> &lt;namespace_name&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example command</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results list <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> results-testing</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="text">Name                                                          Start                                   Update
+results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed  2023-06-29 02:49:53 +0530 IST           2023-06-29 02:50:05 +0530 IST
+results-testing/results/ad7eb937-90cc-4510-8380-defe51ad793f  2023-06-29 02:49:38 +0530 IST           2023-06-29 02:50:06 +0530 IST
+results-testing/results/d064ce6e-d851-4b4e-8db4-7605a23671e4  2023-06-29 02:49:45 +0530 IST           2023-06-29 02:49:56 +0530 IST</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>List the names of all records in a result by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results records list <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> &lt;result_name&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example command</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results records list <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="text">Name                                                                                                   Type                                    Start                                   Update
+results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/e9c736db-5665-441f-922f-7c1d65c9d621  tekton.dev/v1.TaskRun              2023-06-29 02:49:53 +0530 IST           2023-06-29 02:49:57 +0530 IST
+results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/5de23a76-a12b-3a72-8a6a-4f15a3110a3e  results.tekton.dev/v1alpha2.Log         2023-06-29 02:49:57 +0530 IST           2023-06-29 02:49:57 +0530 IST
+results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/57ce92f9-9bf8-3a0a-aefb-dc20c3e2862d  results.tekton.dev/v1alpha2.Log         2023-06-29 02:50:05 +0530 IST           2023-06-29 02:50:05 +0530 IST
+results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/e9a0c21a-f826-42ab-a9d7-a03bcefed4fd  tekton.dev/v1.TaskRun              2023-06-29 02:49:57 +0530 IST           2023-06-29 02:50:05 +0530 IST
+results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/04e2fbf2-8653-405f-bc42-a262bcf02bed  tekton.dev/v1.PipelineRun          2023-06-29 02:49:53 +0530 IST           2023-06-29 02:50:05 +0530 IST
+results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/e6eea2f9-ec80-388c-9982-74a018a548e4  results.tekton.dev/v1alpha2.Log         2023-06-29 02:50:05 +0530 IST           2023-06-29 02:50:05 +0530 IST</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Retrieve the YAML manifest for a pipeline run or task run from a record by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results records get <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> &lt;record_name&gt; <span class="se">\</span>
+  | jq <span class="nt">-r</span> .data.value | <span class="nb">base64</span> <span class="nt">-d</span> | <span class="se">\</span>
+  xargs <span class="nt">-0</span> python3 <span class="nt">-c</span> <span class="s1">'import sys, yaml, json; j=json.loads(sys.argv[1]); print(yaml.safe_dump(j))'</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example command</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results records get <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> <span class="se">\</span>
+  results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/records/e9c736db-5665-441f-922f-7c1d65c9d621 | <span class="se">\</span>
+  jq <span class="nt">-r</span> .data.value | <span class="nb">base64</span> <span class="nt">-d</span> | <span class="se">\</span>
+  xargs <span class="nt">-0</span> python3 <span class="nt">-c</span> <span class="s1">'import sys, yaml, json; j=json.loads(sys.argv[1]); print(yaml.safe_dump(j))'</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Optional: Retrieve the logging information for a task run from a record using the log record name. To get the log record name, replace <code>records</code> with <code>logs</code> in the record name. Enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results logs get <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> &lt;log_record_name&gt; | jq <span class="nt">-r</span> .data | <span class="nb">base64</span> <span class="nt">-d</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example command</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results logs get <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> <span class="se">\</span>
+  results-testing/results/04e2fbf2-8653-405f-bc42-a262bcf02bed/logs/e9c736db-5665-441f-922f-7c1d65c9d621 | <span class="se">\</span>
+  jq <span class="nt">-r</span> .data | <span class="nb">base64</span> <span class="nt">-d</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="results-search-results_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-search-results_using-tekton-results-for-openshift-pipelines-observability"></a>Searching for results</h3>
+<div class="paragraph _abstract">
+<p>You can search for results using Common Expression Language (CEL) queries. For example, you can find results for pipeline runs that did not succeed. However, most of the relevant information is not contained in result objects; to search by the names, completion times, and other data, search for records.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You installed Tekton Results.</p>
+</li>
+<li>
+<p>You installed the <code>opc</code> utility and prepared its environment to query Tekton Results.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Procedure</div>
+<ul>
+<li>
+<p>Search for results using a CEL query by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results list <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> <span class="nt">--filter</span><span class="o">=</span><span class="s2">"&lt;cel_query&gt;"</span> &lt;namespace-name&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Replace <code>&lt;namespace_name&gt;</code> with the namespace in which the pipeline runs or task runs were created.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Example CEL queries for results</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">CEL query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The results of all runs that failed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>!(summary.status == SUCCESS)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The results all pipeline runs that contained the annotations <code>ann1</code> and <code>ann2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>summary.annotations.contains('ann1') &amp;&amp; summary.annotations.contains('ann2') &amp;&amp; summary.type=='PIPELINE_RUN'</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="results-search-records_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-search-records_using-tekton-results-for-openshift-pipelines-observability"></a>Searching for records</h3>
+<div class="paragraph _abstract">
+<p>You can search for records using Common Expression Language (CEL) queries. As each record contains full YAML information for a pipeline run or task run, you can find records by many different criteria.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You installed Tekton Results.</p>
+</li>
+<li>
+<p>You installed the <code>opc</code> utility and prepared its environment to query Tekton Results.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Procedure</div>
+<ul>
+<li>
+<p>Search for records using a CEL query by entering the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results records list <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> <span class="nt">--filter</span><span class="o">=</span><span class="s2">"&lt;cel_query&gt;"</span> &lt;namespace_name&gt;/result/-</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace <code>&lt;namespace_name&gt;</code> with the namespace in which the pipeline runs or task runs were created. Alternatively, search for records within a single result by entering the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>opc results records list <span class="nt">--addr</span> <span class="k">${</span><span class="nv">RESULTS_API</span><span class="k">}</span> <span class="nt">--filter</span><span class="o">=</span><span class="s2">"&lt;cel_query&gt;"</span> &lt;result_name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace <code>&lt;result_name&gt;</code> with the full name of the result.</p>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Example CEL queries for records</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">CEL query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all task runs or pipeline runs that failed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>!(data.status.conditions[0].status == 'True')</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records where the name of the <code>TaskRun</code> or <code>PipelineRun</code> custom resource (CR) was <code>run1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.metadata.name == 'run1'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records for all task runs that were started by the <code>PipelineRun</code> CR named <code>run1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data_type == 'TASK_RUN' &amp;&amp; data.metadata.labels['tekton.dev/pipelineRun'] == 'run1'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all pipeline runs and task runs that were created from a <code>Pipeline</code> CR named <code>pipeline1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.metadata.labels['tekton.dev/pipeline'] == 'pipeline1'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all pipeline runs that were created from a <code>Pipeline</code> CR named <code>pipeline1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.metadata.labels['tekton.dev/pipeline'] == 'pipeline1' &amp;&amp; data_type == 'PIPELINE_RUN'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all task runs where the <code>TaskRun</code> CR name stared with <code>hello</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.metadata.name.startsWith('hello') &amp;&amp; data_type=='TASK_RUN'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all pipeline runs that took more than five minutes to complete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.status.completionTime - data.status.startTime &gt; duration('5m') &amp;&amp; data_type == 'PIPELINE_RUN'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all pipeline runs and task runs that completed on October 7, 2023</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.status.completionTime.getDate() == 7 &amp;&amp; data.status.completionTime.getMonth() == 10 &amp;&amp; data.status.completionTime.getFullYear() == 2023</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all pipeline runs that included three or more tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size(data.status.pipelineSpec.tasks) &gt;= 3 &amp;&amp; data_type == 'PIPELINE_RUN'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all pipeline runs that had annotations containing <code>ann1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.metadata.annotations.contains('ann1') &amp;&amp; data_type == 'PIPELINE_RUN'</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Records of all pipeline runs that had annotations containing <code>ann1</code> and the name of the <code>PipelineRun</code> CR started with <code>hello</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.metadata.annotations.contains('ann1') &amp;&amp; data.metadata.name.startsWith('hello') &amp;&amp; data_type == 'PIPELINE_RUN'</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="results-reference-results_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-reference-results_using-tekton-results-for-openshift-pipelines-observability"></a>Reference information for searching results</h3>
+<div class="paragraph">
+<p>You can use the following fields in Common Expression Language (CEL) queries for results:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Fields available in CEL queries for results</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">CEL field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>parent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The namespace in which the <code>PipelineRun</code> or <code>TaskRun</code> custom resource (CR) was created.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique identifier for the result.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>annotations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annotations added to the <code>PipelineRun</code> or <code>TaskRun</code> CR.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>summary</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The summary of the result.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>create_time</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The creation time of the result.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>update_time</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The last update time of the result.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You can use the <code>summary.status</code> field to determine whether the pipeline run was successful. This field can have the following values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UNKNOWN</code></p>
+</li>
+<li>
+<p><code>SUCCESS</code></p>
+</li>
+<li>
+<p><code>FAILURE</code></p>
+</li>
+<li>
+<p><code>TIMEOUT</code></p>
+</li>
+<li>
+<p><code>CANCELLED</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do not use quote characters such as <code>"</code> or <code>'</code> to provide the value for this field.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="results-reference-records_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#results-reference-records_using-tekton-results-for-openshift-pipelines-observability"></a>Reference information for searching records</h3>
+<div class="paragraph">
+<p>You can use the following fields in Common Expression Language (CEL) queries for records:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Fields available in CEL queries for records</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">CEL field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record name</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data_type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record type identifier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tekton.dev/v1.TaskRun</code> or <code>TASK_RUN</code>
+<code>tekton.dev/v1.PipelineRun</code> or <code>PIPELINE_RUN</code>
+<code>results.tekton.dev/v1alpha2.Log</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The YAML data for the task run or pipeline run. In log records, this field contains the logging output.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Because the <code>data</code> field contains the entire YAML data for the task run or pipeline run, you can use all elements of this data in your CEL query. For example, <code>data.status.completionTime</code> contains the completion time of the task run or pipeline run.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="additional-resources_using-tekton-results-for-openshift-pipelines-observability"><a class="anchor" href="#additional-resources_using-tekton-results-for-openshift-pipelines-observability"></a>Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/google/cel-spec">Common Expression Language specification</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-pipelines';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
