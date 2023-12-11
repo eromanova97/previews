@@ -1,0 +1,1161 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>Unprivileged building of container images using Buildah | Securing OpenShift Pipelines | Red Hat OpenShift Pipelines Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../about/op-release-notes.html">Red Hat OpenShift Pipelines Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Securing OpenShift Pipelines</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        Unprivileged building of container images using Buildah
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/secure/unprivileged-building-of-container-images-using-buildah.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+secure/unprivileged-building-of-container-images-using-buildah.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-right"></span>About OpenShift Pipelines</a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../about/op-release-notes.html">OpenShift Pipelines release notes</a></li>
+            <li><a class="" href="../about/about-pipelines.html">About OpenShift Pipelines</a></li>
+            <li><a class="" href="../about/understanding-openshift-pipelines.html">Understanding OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-right"></span>Installing and configuring</a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../install_config/installing-pipelines.html">Installing OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/uninstalling-pipelines.html">Uninstalling OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/customizing-configurations-in-the-tektonconfig-cr.html">Customizing configurations in the TektonConfig custom resource</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../resource/reducing-pipelines-resource-consumption.html">Reducing resource consumption of OpenShift Pipelines</a></li>
+            <li><a class="" href="../resource/setting-compute-resource-quota-for-openshift-pipelines.html">Setting compute resource quota for OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-right"></span>Creating CI/CD pipelines</a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD solutions for applications using OpenShift Pipelines</a></li>
+            <li><a class="" href="../create/working-with-pipelines-web-console.html">Working with OpenShift Pipelines in the web console</a></li>
+            <li><a class="" href="../create/remote-pipelines-tasks-resolvers.html">Specifying remote pipelines and tasks using resolvers</a></li>
+            <li><a class="" href="../create/managing-nonversioned-and-versioned-cluster-tasks.html">Managing non-versioned and versioned cluster tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-right"></span>Observability in OpenShift Pipelines</a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Using Tekton Results for OpenShift Pipelines observability</a></li>
+            <li><a class="" href="../records/viewing-pipeline-logs-using-the-openshift-logging-operator.html">Viewing pipeline logs using the OpenShift Logging Operator</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-right"></span>Pipelines as Code</a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../pac/about-pipelines-as-code.html">About Pipelines as Code</a></li>
+            <li><a class="" href="../pac/install-config-pipelines-as-code.html">Installing and configuring Pipelines as Code</a></li>
+            <li><a class="" href="../pac/using-pipelines-as-code-repos.html">Using Pipelines as Code with a Git repository hosting service provider</a></li>
+            <li><a class="" href="../pac/using-repository-crd.html">Using the Repository custom resource</a></li>
+            <li><a class="" href="../pac/using-pac-resolver.html">Using the Pipelines as Code resolver</a></li>
+            <li><a class="" href="../pac/managing-pipeline-runs-pac.html">Managing pipeline runs</a></li>
+            <li><a class="" href="../pac/pac-command-reference.html">Pipelines as Code command reference</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-down"></span>Securing OpenShift Pipelines</a>
+      <ul id="topicGroup6" class="collapse in list-unstyled">
+            <li><a class="" href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Using Tekton Chains for OpenShift Pipelines supply chain security</a></li>
+            <li><a class="" href="../secure/configuring-security-context-for-pods.html">Configuring the security context for pods</a></li>
+            <li><a class="" href="../secure/securing-webhooks-with-event-listeners.html">Securing webhooks with event listeners</a></li>
+            <li><a class="" href="../secure/authenticating-pipelines-using-git-secret.html">Authenticating pipelines using git secret</a></li>
+            <li><a class=" active" href="../secure/unprivileged-building-of-container-images-using-buildah.html">Unprivileged building of container images using Buildah</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Custom Tekton Hub instance</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../hub/using-tekton-hub-with-openshift-pipelines.html">Using Tekton Hub with OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Pipelines CLI (tkn) reference</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../tkn_cli/installing-tkn.html">Installing tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-configuring-tkn.html">Configuring tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-tkn-reference.html">Basic tkn commands</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Building of container images using Buildah as a non-root user
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#configuring-custom-sa-and-scc_unprivileged-building-of-container-images-using-buildah">Configuring custom service account and security context constraint</a></li>
+<li><a href="#configuring-builah-to-use-build-user_unprivileged-building-of-container-images-using-buildah">Configuring Buildah to use <code>build</code> user</a></li>
+<li><a href="#starting-a-task-run-with-custom-config-map-or-a-pipeline-run_unprivileged-building-of-container-images-using-buildah">Starting a task run with custom config map, or a pipeline run</a></li>
+<li><a href="#limitations-of-unprivileged-builds_unprivileged-building-of-container-images-using-buildah">Limitations of unprivileged builds</a></li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Running OpenShift Pipelines as the root user on a container can expose the container processes and the host to other potentially malicious resources. You can reduce this type of exposure by running the workload as a specific non-root user in the container. To run builds of container images using Buildah as a non-root user, you can perform the following steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Define custom service account (SA) and security context constraint (SCC).</p>
+</li>
+<li>
+<p>Configure Buildah to use the <code>build</code> user with id <code>1000</code>.</p>
+</li>
+<li>
+<p>Start a task run with a custom config map, or integrate it with a pipeline run.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-custom-sa-and-scc_unprivileged-building-of-container-images-using-buildah"><a class="anchor" href="#configuring-custom-sa-and-scc_unprivileged-building-of-container-images-using-buildah"></a>Configuring custom service account and security context constraint</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default <code>pipeline</code> SA allows using a user id outside of the namespace range. To reduce dependency on the default SA, you can define a custom SA and SCC with necessary cluster role and role bindings for the <code>build</code> user with user id <code>1000</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>At this time, enabling the <code>allowPrivilegeEscalation</code> setting is required for Buildah to run successfully in the container. With this setting, Buildah can leverage <code>SETUID</code> and <code>SETGID</code> capabilities when running as a non-root user.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<div class="title">Procedure</div>
+<ul>
+<li>
+<p>Create a custom SA and SCC with necessary cluster role and role bindings.</p>
+<div class="listingblock">
+<div class="title">Example: Custom SA and SCC for used id <code>1000</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipelines-sa-userid-1000</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="nn">---</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">SecurityContextConstraints</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipelines-scc-userid-1000</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">allowHostDirVolumePlugin</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">allowHostIPC</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">allowHostNetwork</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">allowHostPID</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">allowHostPorts</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">allowPrivilegeEscalation</span><span class="pi">:</span> <span class="no">true</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">allowPrivilegedContainer</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">allowedCapabilities</span><span class="pi">:</span> <span class="no">null</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">security.openshift.io/v1</span>
+<span class="na">defaultAddCapabilities</span><span class="pi">:</span> <span class="no">null</span>
+<span class="na">fsGroup</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">MustRunAs</span>
+<span class="na">groups</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">system:cluster-admins</span>
+<span class="na">priority</span><span class="pi">:</span> <span class="m">10</span>
+<span class="na">readOnlyRootFilesystem</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">requiredDropCapabilities</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">MKNOD</span>
+<span class="pi">-</span> <span class="s">KILL</span>
+<span class="na">runAsUser</span><span class="pi">:</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">MustRunAs</span>
+  <span class="na">uid</span><span class="pi">:</span> <span class="m">1000</span>
+<span class="na">seLinuxContext</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">MustRunAs</span>
+<span class="na">supplementalGroups</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">RunAsAny</span>
+<span class="na">users</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">volumes</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">configMap</span>
+<span class="pi">-</span> <span class="s">downwardAPI</span>
+<span class="pi">-</span> <span class="s">emptyDir</span>
+<span class="pi">-</span> <span class="s">persistentVolumeClaim</span>
+<span class="pi">-</span> <span class="s">projected</span>
+<span class="pi">-</span> <span class="s">secret</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipelines-scc-userid-1000-clusterrole</span> <i class="conum" data-value="5"></i><b>(5)</b>
+<span class="na">rules</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">security.openshift.io</span>
+  <span class="na">resourceNames</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">pipelines-scc-userid-1000</span>
+  <span class="na">resources</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">securitycontextconstraints</span>
+  <span class="na">verbs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">use</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">RoleBinding</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipelines-scc-userid-1000-rolebinding</span> <i class="conum" data-value="6"></i><b>(6)</b>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipelines-scc-userid-1000-clusterrole</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipelines-sa-userid-1000</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Define a custom SA.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Define a custom SCC created based on restricted privileges, with modified <code>runAsUser</code> field.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>At this time, enabling the <code>allowPrivilegeEscalation</code> setting is required for Buildah to run successfully in the container. With this setting, Buildah can leverage <code>SETUID</code> and <code>SETGID</code> capabilities when running as a non-root user.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Restrict any pod that gets attached with the custom SCC through the custom SA to run as user id <code>1000</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Define a cluster role that uses the custom SCC.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Bind the cluster role that uses the custom SCC to the custom SA.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-builah-to-use-build-user_unprivileged-building-of-container-images-using-buildah"><a class="anchor" href="#configuring-builah-to-use-build-user_unprivileged-building-of-container-images-using-buildah"></a>Configuring Buildah to use <code>build</code> user</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can define a Buildah task to use the <code>build</code> user with user id <code>1000</code>.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a copy of the <code>buildah</code> cluster task as an ordinary task.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc get clustertask buildah <span class="nt">-o</span> yaml | yq <span class="s1">'. |= (del .metadata |= with_entries(select(.key == "name" )))'</span> | yq <span class="s1">'.kind="Task"'</span> | yq <span class="s1">'.metadata.name="buildah-as-user"'</span> | oc create <span class="nt">-f</span> -</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Edit the copied <code>buildah</code> task.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc edit task buildah-as-user</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: Modified Buildah task with <code>build</code> user</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Task</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">buildah-as-user</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+    <span class="s">Buildah task builds source into a container image and</span>
+    <span class="s">then pushes it to a container registry.</span>
+    <span class="s">Buildah Task builds source into a container image using Project Atomic's</span>
+    <span class="s">Buildah build tool.It uses Buildah's support for building from Dockerfiles,</span>
+    <span class="s">using its buildah bud command.This command executes the directives in the</span>
+    <span class="s">Dockerfile to assemble a container image, then pushes that image to a</span>
+    <span class="s">container registry.</span>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Reference of the image buildah will produce.</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">BUILDER_IMAGE</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The location of the buildah builder image.</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s">registry.redhat.io/rhel8/buildah@sha256:99cae35f40c7ec050fed3765b2b27e0b8bbea2aa2da7c16408e2ca13c60ff8ee</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">STORAGE_DRIVER</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Set buildah storage driver</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s">vfs</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">DOCKERFILE</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Path to the Dockerfile to build.</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s">./Dockerfile</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">CONTEXT</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Path to the directory to use as context.</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">TLSVERIFY</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Verify the TLS on the registry endpoint (for push/pull to a non-TLS registry)</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">FORMAT</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The format of the built container, oci or docker</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">oci"</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">BUILD_EXTRA_ARGS</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">Extra parameters passed for the build command when building images.</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+  <span class="pi">-</span> <span class="na">description</span><span class="pi">:</span> <span class="s">Extra parameters passed for the push command when pushing images.</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">PUSH_EXTRA_ARGS</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+  <span class="pi">-</span> <span class="na">description</span><span class="pi">:</span> <span class="s">Skip pushing the built image</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">SKIP_PUSH</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+  <span class="na">results</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">description</span><span class="pi">:</span> <span class="s">Digest of the image just built.</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE_DIGEST</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+  <span class="na">workspaces</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+  <span class="na">steps</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">build</span>
+    <span class="na">securityContext</span><span class="pi">:</span>
+      <span class="na">runAsUser</span><span class="pi">:</span> <span class="s">1000</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">$(params.BUILDER_IMAGE)</span>
+    <span class="na">workingDir</span><span class="pi">:</span> <span class="s">$(workspaces.source.path)</span>
+    <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">echo "Running as USER ID `id`" </span><i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="s">buildah --storage-driver=$(params.STORAGE_DRIVER) bud \</span>
+        <span class="s">$(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \</span>
+        <span class="s">--tls-verify=$(params.TLSVERIFY) --no-cache \</span>
+        <span class="s">-f $(params.DOCKERFILE) -t $(params.IMAGE) $(params.CONTEXT)</span>
+      <span class="s">[[ "$(params.SKIP_PUSH)" == "true" ]] &amp;&amp; echo "Push skipped" &amp;&amp; exit 0</span>
+      <span class="s">buildah --storage-driver=$(params.STORAGE_DRIVER) push \</span>
+        <span class="s">$(params.PUSH_EXTRA_ARGS) --tls-verify=$(params.TLSVERIFY) \</span>
+        <span class="s">--digestfile $(workspaces.source.path)/image-digest $(params.IMAGE) \</span>
+        <span class="s">docker://$(params.IMAGE)</span>
+      <span class="s">cat $(workspaces.source.path)/image-digest | tee /tekton/results/IMAGE_DIGEST</span>
+    <span class="na">volumeMounts</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">varlibcontainers</span>
+      <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/home/build/.local/share/containers</span> <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="na">volumes</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">varlibcontainers</span>
+    <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Run the container explicitly as the user id <code>1000</code>, which corresponds to the <code>build</code> user in the Buildah image.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Display the user id to confirm that the process is running as user id <code>1000</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>You can change the path for the volume mount as necessary.</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="starting-a-task-run-with-custom-config-map-or-a-pipeline-run_unprivileged-building-of-container-images-using-buildah"><a class="anchor" href="#starting-a-task-run-with-custom-config-map-or-a-pipeline-run_unprivileged-building-of-container-images-using-buildah"></a>Starting a task run with custom config map, or a pipeline run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After defining the custom Buildah cluster task, you can create a <code>TaskRun</code> object that builds an image as a <code>build</code> user with user id <code>1000</code>. In addition, you can integrate the <code>TaskRun</code> object as part of a <code>PipelineRun</code> object.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a <code>TaskRun</code> object with a custom <code>ConfigMap</code> and <code>Dockerfile</code> objects.</p>
+<div class="listingblock">
+<div class="title">Example: A task run that runs Buildah as user id <code>1000</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="na">Dockerfile</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">ARG BASE_IMG=registry.access.redhat.com/ubi9/ubi</span>
+    <span class="s">FROM $BASE_IMG AS buildah-runner</span>
+    <span class="s">RUN dnf -y update &amp;&amp; \</span>
+        <span class="s">dnf -y install git &amp;&amp; \</span>
+        <span class="s">dnf clean all</span>
+    <span class="s">CMD git</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">dockerfile</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TaskRun</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">buildah-as-user-1000</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipelines-sa-userid-1000</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">image-registry.openshift-image-registry.svc:5000/test/buildahuser</span>
+  <span class="na">taskRef</span><span class="pi">:</span>
+    <span class="na">kind</span><span class="pi">:</span> <span class="s">Task</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">buildah-as-user</span>
+  <span class="na">workspaces</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">configMap</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">dockerfile</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">source</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use a config map because the focus is on the task run, without any prior task that fetches some sources with a Dockerfile.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name of the service account that you created.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Mount a config map as the source workspace for the <code>buildah-as-user</code> task.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>(Optional) Create a pipeline and a corresponding pipeline run.</p>
+<div class="listingblock">
+<div class="title">Example: A pipeline and corresponding pipeline run</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pipeline</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipeline-buildah-as-user-1000</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">URL</span>
+  <span class="na">workspaces</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">sslcertdir</span>
+    <span class="na">optional</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">tasks</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">fetch-repository</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">git-clone</span>
+      <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterTask</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">output</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">url</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.URL)</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">subdirectory</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deleteExisting</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">buildah</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">buildah-as-user</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="na">runAfter</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">fetch-repository</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">sslcertdir</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">sslcertdir</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.IMAGE)</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PipelineRun</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pipelinerun-buildah-as-user-1000</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">taskRunSpecs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">pipelineTaskName</span><span class="pi">:</span> <span class="s">buildah</span>
+      <span class="na">taskServiceAccountName</span><span class="pi">:</span> <span class="s">pipelines-sa-userid-1000</span> <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">URL</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">https://github.com/openshift/pipelines-vote-api</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">image-registry.openshift-image-registry.svc:5000/test/buildahuser</span>
+  <span class="na">pipelineRef</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">pipeline-buildah-as-user-1000</span>
+  <span class="na">workspaces</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+      <span class="na">spec</span><span class="pi">:</span>
+        <span class="na">accessModes</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">storage</span><span class="pi">:</span> <span class="s">100Mi</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use the <code>git-clone</code> cluster task to fetch the source containing a Dockerfile and build it using the modified Buildah task.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Refer to the modified Buildah task.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Use the service account that you created for the Buildah task.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Share data between the <code>git-clone</code> task and the modified Buildah task using a persistent volume claim (PVC) created automatically by the controller.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Start the task run or the pipeline run.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="limitations-of-unprivileged-builds_unprivileged-building-of-container-images-using-buildah"><a class="anchor" href="#limitations-of-unprivileged-builds_unprivileged-building-of-container-images-using-buildah"></a>Limitations of unprivileged builds</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The process for unprivileged builds works with most <code>Dockerfile</code> objects. However, there are some known limitations might cause a build to fail:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using the <code>--mount=type=cache</code> option might fail due to lack of necessay permissions issues. For more information, see this <a href="https://access.redhat.com/solutions/6969529">article</a>.</p>
+</li>
+<li>
+<p>Using the <code>--mount=type=secret</code> option fails because mounting resources requires additionnal capabilities that are not provided by the custom SCC.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/authentication/managing-security-context-constraints.html">Managing security context constraints (SCCs)</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-pipelines';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1149 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>Installing OpenShift Pipelines | Installing and configuring | Red Hat OpenShift Pipelines Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../about/op-release-notes.html">Red Hat OpenShift Pipelines Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../install_config/installing-pipelines.html">Installing and configuring</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        Installing OpenShift Pipelines
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/install_config/installing-pipelines.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+install_config/installing-pipelines.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-right"></span>About OpenShift Pipelines</a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../about/op-release-notes.html">OpenShift Pipelines release notes</a></li>
+            <li><a class="" href="../about/about-pipelines.html">About OpenShift Pipelines</a></li>
+            <li><a class="" href="../about/understanding-openshift-pipelines.html">Understanding OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-down"></span>Installing and configuring</a>
+      <ul id="topicGroup1" class="collapse in list-unstyled">
+            <li><a class=" active" href="../install_config/installing-pipelines.html">Installing OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/uninstalling-pipelines.html">Uninstalling OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/customizing-configurations-in-the-tektonconfig-cr.html">Customizing configurations in the TektonConfig custom resource</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../resource/reducing-pipelines-resource-consumption.html">Reducing resource consumption of OpenShift Pipelines</a></li>
+            <li><a class="" href="../resource/setting-compute-resource-quota-for-openshift-pipelines.html">Setting compute resource quota for OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-right"></span>Creating CI/CD pipelines</a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD solutions for applications using OpenShift Pipelines</a></li>
+            <li><a class="" href="../create/working-with-pipelines-web-console.html">Working with OpenShift Pipelines in the web console</a></li>
+            <li><a class="" href="../create/remote-pipelines-tasks-resolvers.html">Specifying remote pipelines and tasks using resolvers</a></li>
+            <li><a class="" href="../create/managing-nonversioned-and-versioned-cluster-tasks.html">Managing non-versioned and versioned cluster tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-right"></span>Observability in OpenShift Pipelines</a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Using Tekton Results for OpenShift Pipelines observability</a></li>
+            <li><a class="" href="../records/viewing-pipeline-logs-using-the-openshift-logging-operator.html">Viewing pipeline logs using the OpenShift Logging Operator</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-right"></span>Pipelines as Code</a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../pac/about-pipelines-as-code.html">About Pipelines as Code</a></li>
+            <li><a class="" href="../pac/install-config-pipelines-as-code.html">Installing and configuring Pipelines as Code</a></li>
+            <li><a class="" href="../pac/using-pipelines-as-code-repos.html">Using Pipelines as Code with a Git repository hosting service provider</a></li>
+            <li><a class="" href="../pac/using-repository-crd.html">Using the Repository custom resource</a></li>
+            <li><a class="" href="../pac/using-pac-resolver.html">Using the Pipelines as Code resolver</a></li>
+            <li><a class="" href="../pac/managing-pipeline-runs-pac.html">Managing pipeline runs</a></li>
+            <li><a class="" href="../pac/pac-command-reference.html">Pipelines as Code command reference</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-right"></span>Securing OpenShift Pipelines</a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Using Tekton Chains for OpenShift Pipelines supply chain security</a></li>
+            <li><a class="" href="../secure/configuring-security-context-for-pods.html">Configuring the security context for pods</a></li>
+            <li><a class="" href="../secure/securing-webhooks-with-event-listeners.html">Securing webhooks with event listeners</a></li>
+            <li><a class="" href="../secure/authenticating-pipelines-using-git-secret.html">Authenticating pipelines using git secret</a></li>
+            <li><a class="" href="../secure/unprivileged-building-of-container-images-using-buildah.html">Unprivileged building of container images using Buildah</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Custom Tekton Hub instance</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../hub/using-tekton-hub-with-openshift-pipelines.html">Using Tekton Hub with OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Pipelines CLI (tkn) reference</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../tkn_cli/installing-tkn.html">Installing tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-configuring-tkn.html">Configuring tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-tkn-reference.html">Basic tkn commands</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Installing OpenShift Pipelines
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#op-installing-pipelines-operator-in-web-console_installing-pipelines">Installing the Red Hat OpenShift Pipelines Operator in web console</a></li>
+<li><a href="#op-installing-pipelines-operator-using-the-cli_installing-pipelines">Installing the OpenShift Pipelines Operator using the CLI</a></li>
+<li><a href="#op-pipelines-operator-in-restricted-environment_installing-pipelines">Red Hat OpenShift Pipelines Operator in a restricted environment</a></li>
+<li><a href="#op-performance-tuning-using-tektonconfig-cr_installing-pipelines">Performance tuning using TektonConfig CR</a></li>
+<li><a href="#additional-resources">Additional resources</a></li>
+</ul>
+</div>
+<div class="paragraph _abstract">
+<p>This guide walks cluster administrators through the process of installing the Red Hat OpenShift Pipelines Operator to an OpenShift Container Platform cluster.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In a cluster with both Windows and Linux nodes, the Red Hat OpenShift Pipelines can only run on Linux nodes.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="prerequisites" class="discrete">Prerequisites</h2>
+<div class="ulist">
+<ul>
+<li>
+<p>You have access to an OpenShift Container Platform cluster using an account with <code>cluster-admin</code> permissions.</p>
+</li>
+<li>
+<p>You have installed <code>oc</code> CLI.</p>
+</li>
+<li>
+<p>You have installed <a href="../tkn_cli/installing-tkn.html#installing-tkn">OpenShift Pipelines (<code>tkn</code>) CLI</a> on your local system.</p>
+</li>
+<li>
+<p>Your cluster has the <a href="https://docs.openshift.com/container-platform/latest/installing/cluster-capabilities.html#marketplace-operator_cluster-capabilities">Marketplace capability</a> enabled or the Red Hat Operator catalog source configured manually.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-installing-pipelines-operator-in-web-console_installing-pipelines"><a class="anchor" href="#op-installing-pipelines-operator-in-web-console_installing-pipelines"></a>Installing the Red Hat OpenShift Pipelines Operator in web console</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can install Red Hat OpenShift Pipelines using the Operator listed in the OpenShift Container Platform OperatorHub. When you install the Red Hat OpenShift Pipelines Operator, the custom resources (CRs) required for the pipelines configuration are automatically installed along with the Operator.</p>
+</div>
+<div class="paragraph">
+<p>The default Operator custom resource definition (CRD) <code>config.operator.tekton.dev</code> is now replaced by <code>tektonconfigs.operator.tekton.dev</code>.  In addition, the Operator provides the following additional CRDs to individually manage OpenShift Pipelines components:
+ <code>tektonpipelines.operator.tekton.dev</code>, <code>tektontriggers.operator.tekton.dev</code> and <code>tektonaddons.operator.tekton.dev</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you have OpenShift Pipelines already installed on your cluster, the existing installation is seamlessly upgraded. The Operator will replace the instance of <code>config.operator.tekton.dev</code> on your cluster with an instance of <code>tektonconfigs.operator.tekton.dev</code> and additional objects of the other CRDs as necessary.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you manually changed your existing installation, such as, changing the target namespace in the <code>config.operator.tekton.dev</code> CRD instance by making changes to the <code>resource name - cluster</code> field, then the upgrade path is not smooth. In such cases, the recommended workflow is to uninstall your installation and reinstall the Red Hat OpenShift Pipelines Operator.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Red Hat OpenShift Pipelines Operator now provides the option to choose the components that you want to install by specifying profiles as part of the <code>TektonConfig</code> custom resource (CR). The <code>TektonConfig</code> CR is automatically installed when the Operator is installed.
+The supported profiles are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Lite: This installs only Tekton Pipelines.</p>
+</li>
+<li>
+<p>Basic: This installs Tekton Pipelines, Tekton Triggers, and Tekton Chains.</p>
+</li>
+<li>
+<p>All: This is the default profile used when the <code>TektonConfig</code> CR is installed. This profile installs all of the Tekton components, including Tekton Pipelines, Tekton Triggers, Tekton Chains, Pipelines as Code, and Tekton Addons. Tekton Addons includes the <code>ClusterTasks</code>, <code>ClusterTriggerBindings</code>, <code>ConsoleCLIDownload</code>, <code>ConsoleQuickStart</code>, and <code>ConsoleYAMLSample</code> resources.</p>
+</li>
+</ul>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>In the <strong>Administrator</strong> perspective of the web console, navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong>.</p>
+</li>
+<li>
+<p>Use the <strong>Filter by keyword</strong> box to search for <code>Red Hat OpenShift Pipelines</code> Operator in the catalog. Click the <strong>Red Hat OpenShift Pipelines</strong> Operator tile.</p>
+</li>
+<li>
+<p>Read the brief description about the Operator on the <strong>Red Hat OpenShift Pipelines</strong> Operator page. Click <strong>Install</strong>.</p>
+</li>
+<li>
+<p>On the <strong>Install Operator</strong> page:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Select <strong>All namespaces on the cluster (default)</strong> for the <strong>Installation Mode</strong>. This mode installs the Operator in the default <code>openshift-operators</code> namespace, which enables the Operator to watch and be made available to all namespaces in the cluster.</p>
+</li>
+<li>
+<p>Select <strong>Automatic</strong> for the <strong>Approval Strategy</strong>. This ensures that the future upgrades to the Operator are handled automatically by the Operator Lifecycle Manager (OLM). If you select the <strong>Manual</strong> approval strategy, OLM creates an update request. As a cluster administrator, you must then manually approve the OLM update request to update the Operator to the new version.</p>
+</li>
+<li>
+<p>Select an <strong>Update Channel</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>latest</code> channel enables installation of the most recent stable version of the Red Hat OpenShift Pipelines Operator. Currently, it is the default channel for installing the Red Hat OpenShift Pipelines Operator.</p>
+</li>
+<li>
+<p>To install a specific version of the Red Hat OpenShift Pipelines Operator, cluster administrators can use the corresponding <code>pipelines-&lt;version&gt;</code> channel. For example, to install the Red Hat OpenShift Pipelines Operator version <code>1.8.x</code>, you can use the <code>pipelines-1.8</code> channel.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Starting with OpenShift Container Platform 4.11, the <code>preview</code> and <code>stable</code> channels for installing and upgrading the Red Hat OpenShift Pipelines Operator are not available. However, in OpenShift Container Platform 4.10 and earlier versions, you can use the <code>preview</code> and <code>stable</code> channels for installing and upgrading the Operator.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Click <strong>Install</strong>. You will see the Operator listed on the <strong>Installed Operators</strong> page.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Operator is installed automatically into the <code>openshift-operators</code> namespace.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Verify that the <strong>Status</strong> is set to <strong>Succeeded Up to date</strong>  to confirm successful installation of Red Hat OpenShift Pipelines Operator.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The success status may show as <strong>Succeeded Up to date</strong> even if installation of other components is in-progress. Therefore, it is important to verify the installation manually in the terminal.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Verify that all components of the Red Hat OpenShift Pipelines Operator were installed successfully. Login to the cluster on the terminal, and run the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc get tektonconfig config</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal">NAME     VERSION   READY   REASON
+config   1.13.0     True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <strong>READY</strong> condition is <strong>True</strong>, the Operator and its components have been installed successfully.</p>
+</div>
+<div class="paragraph">
+<p>Additonally, check the components' versions by running the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc get tektonpipeline,tektontrigger,tektonchain,tektonaddon,pac</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="nowrap">NAME                                          VERSION   READY   REASON
+tektonpipeline.operator.tekton.dev/pipeline   v0.47.0   True
+
+NAME                                        VERSION   READY   REASON
+tektontrigger.operator.tekton.dev/trigger   v0.23.1   True
+
+NAME                                    VERSION   READY   REASON
+tektonchain.operator.tekton.dev/chain   v0.16.0   True
+
+NAME                                    VERSION   READY   REASON
+tektonaddon.operator.tekton.dev/addon   1.11.0     True
+
+NAME                                                             VERSION   READY   REASON
+openshiftpipelinesascode.operator.tekton.dev/pipelines-as-code   v0.19.0   True</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-installing-pipelines-operator-using-the-cli_installing-pipelines"><a class="anchor" href="#op-installing-pipelines-operator-using-the-cli_installing-pipelines"></a>Installing the OpenShift Pipelines Operator using the CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can install Red Hat OpenShift Pipelines Operator from the OperatorHub using the CLI.</p>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Create a Subscription object YAML file to subscribe a namespace to the Red Hat OpenShift Pipelines Operator,
+for example, <code>sub.yaml</code>:</p>
+<div class="listingblock">
+<div class="title">Example Subscription</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operators.coreos.com/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Subscription</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">openshift-pipelines-operator</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">openshift-operators</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">channel</span><span class="pi">:</span>  <span class="s">&lt;channel name&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">openshift-pipelines-operator-rh</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="na">source</span><span class="pi">:</span> <span class="s">redhat-operators</span> <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="na">sourceNamespace</span><span class="pi">:</span> <span class="s">openshift-marketplace</span> <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The channel name of the Operator. The <code>pipelines-&lt;version&gt;</code> channel is the default channel. For example, the default channel for Red Hat OpenShift Pipelines Operator version <code>1.7</code> is <code>pipelines-1.7</code>. The <code>latest</code> channel enables installation of the most recent stable version of the Red Hat OpenShift Pipelines Operator.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Name of the Operator to subscribe to.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Name of the CatalogSource that provides the Operator.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Namespace of the CatalogSource. Use <code>openshift-marketplace</code> for the default OperatorHub CatalogSources.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Create the Subscription object:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc apply -f sub.yaml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The subscription installs the Red Hat OpenShift Pipelines Operator into the <code>openshift-operators</code> namespace. The Operator automatically installs OpenShift Pipelines into the default <code>openshift-pipelines</code> target namespace.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-pipelines-operator-in-restricted-environment_installing-pipelines"><a class="anchor" href="#op-pipelines-operator-in-restricted-environment_installing-pipelines"></a>Red Hat OpenShift Pipelines Operator in a restricted environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Red Hat OpenShift Pipelines Operator enables support for installation of pipelines in a restricted network environment.</p>
+</div>
+<div class="paragraph">
+<p>The Operator installs a proxy webhook that sets the proxy environment variables in the containers of the pod created by tekton-controllers based on the <code>cluster</code> proxy object. It also sets the proxy environment variables in the <code>TektonPipelines</code>, <code>TektonTriggers</code>, <code>Controllers</code>, <code>Webhooks</code>, and <code>Operator Proxy Webhook</code> resources.</p>
+</div>
+<div class="paragraph">
+<p>By default, the proxy webhook is disabled for the <code>openshift-pipelines</code> namespace. To disable it for any other namespace, you can add the <code>operator.tekton.dev/disable-proxy: true</code> label to the <code>namespace</code> object.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-performance-tuning-using-tektonconfig-cr_installing-pipelines"><a class="anchor" href="#op-performance-tuning-using-tektonconfig-cr_installing-pipelines"></a>Performance tuning using TektonConfig CR</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can modify the fields under the <code>.spec.pipeline.performance</code> parameter in the <code>TektonConfig</code> custom resource (CR) to change high availability (HA) support and performance configuration for the OpenShift Pipelines controller.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example TektonConfig performance fields</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipeline</span><span class="pi">:</span>
+    <span class="na">performance</span><span class="pi">:</span>
+      <span class="na">disable-ha</span><span class="pi">:</span> <span class="no">false</span>
+      <span class="na">buckets</span><span class="pi">:</span> <span class="m">1</span>
+      <span class="na">threads-per-controller</span><span class="pi">:</span> <span class="m">2</span>
+      <span class="na">kube-api-qps</span><span class="pi">:</span> <span class="m">5.0</span>
+      <span class="na">kube-api-burst</span><span class="pi">:</span> <span class="s">10</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The fields are optional. If you set them, the Red Hat OpenShift Pipelines Operator includes most of the fields as arguments in the <code>openshift-pipelines-controller</code> deployment under the <code>openshift-pipelines-controller</code> container. The OpenShift Pipelines Operator also updates the <code>buckets</code> field in the <code>config-leader-election</code> configuration map under the <code>openshift-pipelines</code> namespace.</p>
+</div>
+<div class="paragraph">
+<p>If you do not specify the values, the OpenShift Pipelines Operator does not update those fields and applies the default values for the OpenShift Pipelines controller.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you modify or remove any of the performance fields, the OpenShift Pipelines Operator updates the <code>openshift-pipelines-controller</code> deployment and the <code>config-leader-election</code> configuration map (if the <code>buckets</code> field changed) and re-creates <code>openshift-pipelines-controller</code> pods.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Modifiable fields for tuning OpenShift Pipelines performance</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default value for the OpenShift Pipelines controller</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>disable-ha</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable or disable the high availability (HA) support. By default, the HA support is enabled.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>buckets</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of buckets used to partition the key space for each reconciler.</p>
+<p class="tableblock">Each of the replicas uses these buckets. The instance that owns a bucket reconciles the keys partitioned into that bucket. The maximum value is <code>10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>threads-per-controller</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of threads (workers) to use when the work queue of the OpenShift Pipelines controller is processed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kube-api-qps</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum queries per second (QPS) to the cluster master from the REST client.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5.0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kube-api-burst</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum burst for a throttle.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The OpenShift Pipelines Operator does not control the number of replicas of the OpenShift Pipelines controller. The <code>replicas</code> setting of the deployment determines the number of replicas. For example, to change the number of replicas to 3, enter the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc <span class="nt">--namespace</span> openshift-pipelines scale deployment openshift-pipelines-controller <span class="nt">--replicas</span><span class="o">=</span>3</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>kube-api-qps</code> and <code>kube-api-burst</code> fields are multiplied by 2 in the OpenShift Pipelines controller. For example, if the <code>kube-api-qps</code> and <code>kube-api-burst</code> values are <code>10</code>, the actual QPS and burst values become <code>20</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="additional-resources"><a class="anchor" href="#additional-resources"></a>Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You can learn more about installing Operators on OpenShift Container Platform in the <a href="https://docs.openshift.com/container-platform/latest/operators/admin/olm-adding-operators-to-cluster.html">adding Operators to a cluster</a> section.</p>
+</li>
+<li>
+<p>To install Tekton Chains using the Red Hat OpenShift Pipelines Operator, see <a href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html#using-tekton-chains-for-openshift-pipelines-supply-chain-security">Using Tekton Chains for Red Hat OpenShift Pipelines supply chain security</a>.</p>
+</li>
+<li>
+<p>To install and deploy in-cluster Tekton Hub, see <a href="../hub/using-tekton-hub-with-openshift-pipelines.html#using-tekton-hub-with-openshift-pipelines">Using Tekton Hub with Red Hat OpenShift Pipelines</a>.</p>
+</li>
+<li>
+<p>For more information on using pipelines in a restricted environment, see:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../create/creating-applications-with-cicd-pipelines.html#op-mirroring-images-to-run-pipelines-in-restricted-environment_creating-applications-with-cicd-pipelines">Mirroring images to run pipelines in a restricted environment</a></p>
+</li>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/openshift_images/configuring-samples-operator.html#samples-operator-restricted-network-install">Configuring Samples Operator for a restricted cluster</a></p>
+</li>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/installing/disconnected_install/installing-mirroring-installation-images.html#installation-about-mirror-registry_installing-mirroring-installation-images">Creating a cluster with a mirrored registry</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-pipelines';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

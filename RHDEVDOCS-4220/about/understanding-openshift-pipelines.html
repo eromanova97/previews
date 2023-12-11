@@ -1,0 +1,1884 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>Understanding OpenShift Pipelines | About OpenShift Pipelines | Red Hat OpenShift Pipelines Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../about/op-release-notes.html">Red Hat OpenShift Pipelines Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../about/op-release-notes.html">About OpenShift Pipelines</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        Understanding OpenShift Pipelines
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/about/understanding-openshift-pipelines.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+about/understanding-openshift-pipelines.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-down"></span>About OpenShift Pipelines</a>
+      <ul id="topicGroup0" class="collapse in list-unstyled">
+            <li><a class="" href="../about/op-release-notes.html">OpenShift Pipelines release notes</a></li>
+            <li><a class="" href="../about/about-pipelines.html">About OpenShift Pipelines</a></li>
+            <li><a class=" active" href="../about/understanding-openshift-pipelines.html">Understanding OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-right"></span>Installing and configuring</a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../install_config/installing-pipelines.html">Installing OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/uninstalling-pipelines.html">Uninstalling OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/customizing-configurations-in-the-tektonconfig-cr.html">Customizing configurations in the TektonConfig custom resource</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../resource/reducing-pipelines-resource-consumption.html">Reducing resource consumption of OpenShift Pipelines</a></li>
+            <li><a class="" href="../resource/setting-compute-resource-quota-for-openshift-pipelines.html">Setting compute resource quota for OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-right"></span>Creating CI/CD pipelines</a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD solutions for applications using OpenShift Pipelines</a></li>
+            <li><a class="" href="../create/working-with-pipelines-web-console.html">Working with OpenShift Pipelines in the web console</a></li>
+            <li><a class="" href="../create/remote-pipelines-tasks-resolvers.html">Specifying remote pipelines and tasks using resolvers</a></li>
+            <li><a class="" href="../create/managing-nonversioned-and-versioned-cluster-tasks.html">Managing non-versioned and versioned cluster tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-right"></span>Observability in OpenShift Pipelines</a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Using Tekton Results for OpenShift Pipelines observability</a></li>
+            <li><a class="" href="../records/viewing-pipeline-logs-using-the-openshift-logging-operator.html">Viewing pipeline logs using the OpenShift Logging Operator</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-right"></span>Pipelines as Code</a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../pac/about-pipelines-as-code.html">About Pipelines as Code</a></li>
+            <li><a class="" href="../pac/install-config-pipelines-as-code.html">Installing and configuring Pipelines as Code</a></li>
+            <li><a class="" href="../pac/using-pipelines-as-code-repos.html">Using Pipelines as Code with a Git repository hosting service provider</a></li>
+            <li><a class="" href="../pac/using-repository-crd.html">Using the Repository custom resource</a></li>
+            <li><a class="" href="../pac/using-pac-resolver.html">Using the Pipelines as Code resolver</a></li>
+            <li><a class="" href="../pac/managing-pipeline-runs-pac.html">Managing pipeline runs</a></li>
+            <li><a class="" href="../pac/pac-command-reference.html">Pipelines as Code command reference</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-right"></span>Securing OpenShift Pipelines</a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Using Tekton Chains for OpenShift Pipelines supply chain security</a></li>
+            <li><a class="" href="../secure/configuring-security-context-for-pods.html">Configuring the security context for pods</a></li>
+            <li><a class="" href="../secure/securing-webhooks-with-event-listeners.html">Securing webhooks with event listeners</a></li>
+            <li><a class="" href="../secure/authenticating-pipelines-using-git-secret.html">Authenticating pipelines using git secret</a></li>
+            <li><a class="" href="../secure/unprivileged-building-of-container-images-using-buildah.html">Unprivileged building of container images using Buildah</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Custom Tekton Hub instance</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../hub/using-tekton-hub-with-openshift-pipelines.html">Using Tekton Hub with OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Pipelines CLI (tkn) reference</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../tkn_cli/installing-tkn.html">Installing tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-configuring-tkn.html">Configuring tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-tkn-reference.html">Basic tkn commands</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Understanding OpenShift Pipelines
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#op-key-features">Key features</a></li>
+<li><a href="#op-detailed-concepts">OpenShift Pipelines Concepts</a>
+<ul class="sectlevel2">
+<li><a href="#about-tasks_understanding-openshift-pipelines">Tasks</a></li>
+<li><a href="#about-whenexpression_understanding-openshift-pipelines">When expression</a></li>
+<li><a href="#about-finally_tasks_understanding-openshift-pipelines">Finally tasks</a></li>
+<li><a href="#about-taskrun_understanding-openshift-pipelines">TaskRun</a></li>
+<li><a href="#about-pipelines_understanding-openshift-pipelines">Pipelines</a></li>
+<li><a href="#about-pipelinerun_understanding-openshift-pipelines">PipelineRun</a></li>
+<li><a href="#about-workspaces_understanding-openshift-pipelines">Workspaces</a></li>
+<li><a href="#about-triggers_understanding-openshift-pipelines">Triggers</a></li>
+</ul>
+</li>
+<li><a href="#additional-resources">Additional resources</a></li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift Pipelines is a cloud-native, continuous integration and continuous delivery (CI/CD) solution based on Kubernetes resources. It uses Tekton building blocks to automate deployments across multiple platforms by abstracting away the underlying implementation details. Tekton introduces a number of standard custom resource definitions (CRDs) for defining CI/CD pipelines that are portable across Kubernetes distributions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-key-features"><a class="anchor" href="#op-key-features"></a>Key features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat OpenShift Pipelines is a serverless CI/CD system that runs pipelines with all the required dependencies in isolated containers.</p>
+</li>
+<li>
+<p>Red Hat OpenShift Pipelines are designed for decentralized teams that work on microservice-based architecture.</p>
+</li>
+<li>
+<p>Red Hat OpenShift Pipelines use standard CI/CD pipeline definitions that are easy to extend and integrate with the existing Kubernetes tools, enabling you to scale on-demand.</p>
+</li>
+<li>
+<p>You can use Red Hat OpenShift Pipelines to build images with Kubernetes tools such as Source-to-Image (S2I), Buildah, Buildpacks, and Kaniko that are portable across any Kubernetes platform.</p>
+</li>
+<li>
+<p>You can use the OpenShift Container Platform Developer console to create Tekton resources, view logs of pipeline runs, and manage pipelines in your OpenShift Container Platform namespaces.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-detailed-concepts"><a class="anchor" href="#op-detailed-concepts"></a>OpenShift Pipelines Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This guide provides a detailed view of the various pipeline concepts.</p>
+</div>
+<div class="sect2">
+<h3 id="about-tasks_understanding-openshift-pipelines"><a class="anchor" href="#about-tasks_understanding-openshift-pipelines"></a>Tasks</h3>
+<div class="paragraph">
+<p><code>Task</code> resources are the building blocks of a pipeline and consist of sequentially executed steps. It is essentially a function of inputs and outputs. A task can run individually or as a part of the pipeline. Tasks are reusable and can be used in multiple pipelines.</p>
+</div>
+<div class="paragraph">
+<p><em>Steps</em> are a series of commands that are sequentially executed by the task and achieve a specific goal, such as building an image. Every task runs as a pod, and each step runs as a container within that pod. Because steps run within the same pod, they can access the same volumes for caching files, config maps, and secrets.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows the <code>apply-manifests</code> task.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Task</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="na">workspaces</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+  <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">manifest_dir</span>
+      <span class="na">description</span><span class="pi">:</span> <span class="s">The directory in source that contains yaml manifests</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">k8s"</span>
+  <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">apply</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">image-registry.openshift-image-registry.svc:5000/openshift/cli:latest</span>
+      <span class="na">workingDir</span><span class="pi">:</span> <span class="s">/workspace/source</span>
+      <span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">/bin/bash"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-c"</span><span class="pi">]</span>
+      <span class="na">args</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="pi">|-</span>
+          <span class="s">echo Applying manifests in $(params.manifest_dir) directory</span>
+          <span class="s">oc apply -f $(params.manifest_dir)</span>
+          <span class="s">echo -----------------------------------</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The task API version, <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The type of Kubernetes object, <code>Task</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The unique name of this task.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The list of parameters and steps in the task and the workspace used by the task.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This task starts the pod and runs a container inside that pod using the specified image to run the specified commands.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Starting with OpenShift Pipelines 1.6, the following defaults from the step YAML file are removed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>HOME</code> environment variable does not default to the <code>/tekton/home</code> directory</p>
+</li>
+<li>
+<p>The <code>workingDir</code> field does not default to the <code>/workspace</code> directory</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead, the container for the step defines the <code>HOME</code> environment variable and the <code>workingDir</code> field. However, you can override the default values by specifying the custom values in the YAML file for the step.</p>
+</div>
+<div class="paragraph">
+<p>As a temporary measure, to maintain backward compatibility with the older OpenShift Pipelines versions, you can set the following fields in the <code>TektonConfig</code> custom resource definition to <code>false</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code>spec:
+  pipeline:
+    disable-working-directory-overwrite: false
+    disable-home-env-overwrite: false</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-whenexpression_understanding-openshift-pipelines"><a class="anchor" href="#about-whenexpression_understanding-openshift-pipelines"></a>When expression</h3>
+<div class="paragraph">
+<p>When expressions guard task execution by setting criteria for the execution of tasks within a pipeline. They contain a list of components that allows a task to run only when certain criteria are met. When expressions are also supported in the final set of tasks that are specified using the <code>finally</code> field in the pipeline YAML file.</p>
+</div>
+<div class="paragraph">
+<p>The key components of a when expression are as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>input</code>: Specifies static inputs or variables such as a parameter, task result, and execution status. You must enter a valid input. If you do not enter a valid input, its value defaults to an empty string.</p>
+</li>
+<li>
+<p><code>operator</code>: Specifies the relationship of an input to a set of <code>values</code>. Enter <code>in</code> or <code>notin</code> as your operator values.</p>
+</li>
+<li>
+<p><code>values</code>: Specifies an array of string values. Enter a non-empty array of static values or variables such as parameters, results, and a bound state of a workspace.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The declared when expressions are evaluated before the task is run. If the value of a when expression is <code>True</code>, the task is run. If the value of a when expression is <code>False</code>, the task is skipped.</p>
+</div>
+<div class="paragraph">
+<p>You can use the when expressions in various use cases. For example, whether:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The result of a previous task is as expected.</p>
+</li>
+<li>
+<p>A file in a Git repository has changed in the previous commits.</p>
+</li>
+<li>
+<p>An image exists in the registry.</p>
+</li>
+<li>
+<p>An optional workspace is available.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following example shows the when expressions for a pipeline run. The pipeline run will execute the <code>create-file</code> task only if the following criteria are met: the <code>path</code> parameter is <code>README.md</code>,  and the <code>echo-file-exists</code> task executed only if the <code>exists</code> result from the <code>check-file</code> task is <code>yes</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PipelineRun</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">generateName</span><span class="pi">:</span> <span class="s">guarded-pr-</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s1">'</span><span class="s">pipeline'</span>
+  <span class="na">pipelineSpec</span><span class="pi">:</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">path</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">The path of the file to be created</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">This workspace is shared among all the pipeline tasks to read/write common resources</span>
+    <span class="na">tasks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">create-file</span> <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="na">when</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">input</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(params.path)"</span>
+            <span class="na">operator</span><span class="pi">:</span> <span class="s">in</span>
+            <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">README.md"</span><span class="pi">]</span>
+        <span class="na">workspaces</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+            <span class="na">workspace</span><span class="pi">:</span> <span class="s">source</span>
+        <span class="na">taskSpec</span><span class="pi">:</span>
+          <span class="na">workspaces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+              <span class="na">description</span><span class="pi">:</span> <span class="s">The workspace to create the readme file in</span>
+          <span class="na">steps</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">write-new-stuff</span>
+              <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu</span>
+              <span class="na">script</span><span class="pi">:</span> <span class="s1">'</span><span class="s">touch</span><span class="nv"> </span><span class="s">$(workspaces.source.path)/README.md'</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">check-file</span>
+        <span class="na">params</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">path</span>
+            <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(params.path)"</span>
+        <span class="na">workspaces</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+            <span class="na">workspace</span><span class="pi">:</span> <span class="s">source</span>
+        <span class="na">runAfter</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">create-file</span>
+        <span class="na">taskSpec</span><span class="pi">:</span>
+          <span class="na">params</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">path</span>
+          <span class="na">workspaces</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+              <span class="na">description</span><span class="pi">:</span> <span class="s">The workspace to check for the file</span>
+          <span class="na">results</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">exists</span>
+              <span class="na">description</span><span class="pi">:</span> <span class="s">indicates whether the file exists or is missing</span>
+          <span class="na">steps</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">check-file</span>
+              <span class="na">image</span><span class="pi">:</span> <span class="s">alpine</span>
+              <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
+                <span class="s">if test -f $(workspaces.source.path)/$(params.path); then</span>
+                  <span class="s">printf yes | tee /tekton/results/exists</span>
+                <span class="s">else</span>
+                  <span class="s">printf no | tee /tekton/results/exists</span>
+                <span class="s">fi</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">echo-file-exists</span>
+        <span class="na">when</span><span class="pi">:</span> <i class="conum" data-value="3"></i><b>(3)</b>
+          <span class="pi">-</span> <span class="na">input</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(tasks.check-file.results.exists)"</span>
+            <span class="na">operator</span><span class="pi">:</span> <span class="s">in</span>
+            <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">yes"</span><span class="pi">]</span>
+        <span class="na">taskSpec</span><span class="pi">:</span>
+          <span class="na">steps</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">echo</span>
+              <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu</span>
+              <span class="na">script</span><span class="pi">:</span> <span class="s1">'</span><span class="s">echo</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">exists'</span>
+<span class="nn">...</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">task-should-be-skipped-1</span>
+        <span class="na">when</span><span class="pi">:</span> <i class="conum" data-value="4"></i><b>(4)</b>
+          <span class="pi">-</span> <span class="na">input</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(params.path)"</span>
+            <span class="na">operator</span><span class="pi">:</span> <span class="s">notin</span>
+            <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">README.md"</span><span class="pi">]</span>
+        <span class="na">taskSpec</span><span class="pi">:</span>
+          <span class="na">steps</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">echo</span>
+              <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu</span>
+              <span class="na">script</span><span class="pi">:</span> <span class="s">exit </span><span class="m">1</span>
+<span class="nn">...</span>
+    <span class="na">finally</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">finally-task-should-be-executed</span>
+        <span class="na">when</span><span class="pi">:</span> <i class="conum" data-value="5"></i><b>(5)</b>
+          <span class="pi">-</span> <span class="na">input</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(tasks.echo-file-exists.status)"</span>
+            <span class="na">operator</span><span class="pi">:</span> <span class="s">in</span>
+            <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">Succeeded"</span><span class="pi">]</span>
+          <span class="pi">-</span> <span class="na">input</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(tasks.status)"</span>
+            <span class="na">operator</span><span class="pi">:</span> <span class="s">in</span>
+            <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">Succeeded"</span><span class="pi">]</span>
+          <span class="pi">-</span> <span class="na">input</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(tasks.check-file.results.exists)"</span>
+            <span class="na">operator</span><span class="pi">:</span> <span class="s">in</span>
+            <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">yes"</span><span class="pi">]</span>
+          <span class="pi">-</span> <span class="na">input</span><span class="pi">:</span> <span class="s2">"</span><span class="s">$(params.path)"</span>
+            <span class="na">operator</span><span class="pi">:</span> <span class="s">in</span>
+            <span class="na">values</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">README.md"</span><span class="pi">]</span>
+        <span class="na">taskSpec</span><span class="pi">:</span>
+          <span class="na">steps</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">echo</span>
+              <span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu</span>
+              <span class="na">script</span><span class="pi">:</span> <span class="s1">'</span><span class="s">echo</span><span class="nv"> </span><span class="s">finally</span><span class="nv"> </span><span class="s">done'</span>
+<span class="err">  </span><span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">path</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">README.md</span>
+  <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+        <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">16Mi</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Specifies the type of Kubernetes object. In this example, <code>PipelineRun</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Task <code>create-file</code> used in the pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>when</code> expression that specifies to execute the <code>echo-file-exists</code> task only if the <code>exists</code> result from the <code>check-file</code> task is <code>yes</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>when</code> expression that specifies to skip the <code>task-should-be-skipped-1</code> task only if the <code>path</code> parameter is <code>README.md</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>when</code> expression that specifies to execute the <code>finally-task-should-be-executed</code> task only if the execution status of the <code>echo-file-exists</code> task and the task status is <code>Succeeded</code>, the <code>exists</code> result from the <code>check-file</code> task is <code>yes</code>, and the <code>path</code> parameter is <code>README.md</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <strong>Pipeline Run details</strong> page of the OpenShift Container Platform web console shows the status of the tasks and when expressions as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All the criteria are met: Tasks and the when expression symbol, which is represented by a diamond shape are green.</p>
+</li>
+<li>
+<p>Any one of the criteria are not met: Task is skipped. Skipped tasks and the when expression symbol are grey.</p>
+</li>
+<li>
+<p>None of the criteria are met: Task is skipped. Skipped tasks and the when expression symbol are grey.</p>
+</li>
+<li>
+<p>Task run fails: Failed tasks and the when expression symbol are red.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-finally_tasks_understanding-openshift-pipelines"><a class="anchor" href="#about-finally_tasks_understanding-openshift-pipelines"></a>Finally tasks</h3>
+<div class="paragraph">
+<p>The <code>finally</code> tasks are the final set of tasks specified using the <code>finally</code> field in the pipeline YAML file. A <code>finally</code> task always executes the tasks within the pipeline, irrespective of whether the pipeline runs are executed successfully. The <code>finally</code> tasks are executed in parallel after all the pipeline tasks are run, before the corresponding pipeline exits.</p>
+</div>
+<div class="paragraph">
+<p>You can configure a <code>finally</code> task to consume the results of any task within the same pipeline. This approach does not change the order in which this final task is run. It is executed in parallel with other final tasks after all the non-final tasks are executed.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows a code snippet of the <code>clone-cleanup-workspace</code> pipeline. This code clones the repository into a shared workspace and cleans up the workspace. After executing the pipeline tasks, the <code>cleanup</code> task specified in the <code>finally</code> section of the pipeline YAML file cleans up the workspace.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pipeline</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">clone-cleanup-workspace</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-source</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="na">tasks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">clone-app-repo</span> <i class="conum" data-value="3"></i><b>(3)</b>
+      <span class="na">taskRef</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">git-clone-from-catalog</span>
+      <span class="na">params</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">url</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s">https://github.com/tektoncd/community.git</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">subdirectory</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s">application</span>
+      <span class="na">workspaces</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">output</span>
+          <span class="na">workspace</span><span class="pi">:</span> <span class="s">git-source</span>
+  <span class="na">finally</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cleanup</span> <i class="conum" data-value="4"></i><b>(4)</b>
+      <span class="na">taskRef</span><span class="pi">:</span> <i class="conum" data-value="5"></i><b>(5)</b>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">cleanup-workspace</span>
+      <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="6"></i><b>(6)</b>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+          <span class="na">workspace</span><span class="pi">:</span> <span class="s">git-source</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">check-git-commit</span>
+      <span class="na">params</span><span class="pi">:</span> <i class="conum" data-value="7"></i><b>(7)</b>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">commit</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s">$(tasks.clone-app-repo.results.commit)</span>
+      <span class="na">taskSpec</span><span class="pi">:</span> <i class="conum" data-value="8"></i><b>(8)</b>
+        <span class="na">params</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">commit</span>
+        <span class="na">steps</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">check-commit-initialized</span>
+            <span class="na">image</span><span class="pi">:</span> <span class="s">alpine</span>
+            <span class="na">script</span><span class="pi">:</span> <span class="pi">|</span>
+              <span class="s">if [[ ! $(params.commit) ]]; then</span>
+                <span class="s">exit 1</span>
+              <span class="s">fi</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Unique name of the pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The shared workspace where the git repository is cloned.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The task to clone the application repository to the shared workspace.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The task to clean-up the shared workspace.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>A reference to the task that is to be executed in the task run.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>A shared storage volume that a task in a pipeline needs at runtime to receive input or provide output.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>A list of parameters required for a task. If a parameter does not have an implicit default value, you must explicitly set its value.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Embedded task definition.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-taskrun_understanding-openshift-pipelines"><a class="anchor" href="#about-taskrun_understanding-openshift-pipelines"></a>TaskRun</h3>
+<div class="paragraph">
+<p>A <code>TaskRun</code> instantiates a task for execution with specific inputs, outputs, and execution parameters on a cluster. It can be invoked on its own or as part of a pipeline run for each task in a pipeline.</p>
+</div>
+<div class="paragraph">
+<p>A task consists of one or more steps that execute container images, and each container image performs a specific piece of build work. A task run executes the steps in a task in the specified order, until all steps execute successfully or a failure occurs. A <code>TaskRun</code> is automatically created by a <code>PipelineRun</code> for each task in a pipeline.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows a task run that runs the <code>apply-manifests</code> task with the relevant input parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TaskRun</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests-taskrun</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">taskRef</span><span class="pi">:</span> <i class="conum" data-value="5"></i><b>(5)</b>
+    <span class="na">kind</span><span class="pi">:</span> <span class="s">Task</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span>
+  <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="6"></i><b>(6)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+    <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+      <span class="na">claimName</span><span class="pi">:</span> <span class="s">source-pvc</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The task run API version <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies the type of Kubernetes object. In this example, <code>TaskRun</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unique name to identify this task run.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Definition of the task run. For this task run, the task and the required workspace are specified.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Name of the task reference used for this task run. This task run executes the <code>apply-manifests</code> task.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Workspace used by the task run.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-pipelines_understanding-openshift-pipelines"><a class="anchor" href="#about-pipelines_understanding-openshift-pipelines"></a>Pipelines</h3>
+<div class="paragraph">
+<p>A <code>Pipeline</code> is a collection of <code>Task</code> resources arranged in a specific order of execution. They are executed to construct complex workflows that automate the build, deployment and delivery of applications. You can define a CI/CD workflow for your application using pipelines containing one or more tasks.</p>
+</div>
+<div class="paragraph">
+<p>A <code>Pipeline</code> resource definition consists of a number of fields or attributes, which together enable the pipeline to accomplish a specific goal. Each <code>Pipeline</code> resource definition must contain at least one <code>Task</code> resource, which ingests specific inputs and produces specific outputs. The pipeline definition can also optionally include <em>Conditions</em>, <em>Workspaces</em>, <em>Parameters</em>, or <em>Resources</em> depending on the application requirements.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows the <code>build-and-deploy</code> pipeline, which builds an application image from a Git repository using the <code>buildah</code> <code>ClusterTask</code> resource:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pipeline</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="5"></i><b>(5)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+  <span class="na">params</span><span class="pi">:</span> <i class="conum" data-value="6"></i><b>(6)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deployment-name</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">name of the deployment to be patched</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-url</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">url of the git repo for the code of deployment</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">revision to be used from repo of the code for deployment</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">pipelines-1.13"</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">image to be built from the code</span>
+  <span class="na">tasks</span><span class="pi">:</span> <i class="conum" data-value="7"></i><b>(7)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">fetch-repository</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">git-clone</span>
+      <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterTask</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">output</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">url</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.git-url)</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">subdirectory</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deleteExisting</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">revision</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.git-revision)</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">build-image</span> <i class="conum" data-value="8"></i><b>(8)</b>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">buildah</span>
+      <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterTask</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">TLSVERIFY</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.IMAGE)</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">runAfter</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">fetch-repository</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span> <i class="conum" data-value="9"></i><b>(9)</b>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">runAfter</span><span class="pi">:</span> <i class="conum" data-value="10"></i><b>(10)</b>
+    <span class="pi">-</span> <span class="s">build-image</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">update-deployment</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">update-deployment</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deployment</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.deployment-name)</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.IMAGE)</span>
+    <span class="na">runAfter</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">apply-manifests</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Pipeline API version <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies the type of Kubernetes object. In this example, <code>Pipeline</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unique name of this pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Specifies the definition and structure of the pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Workspaces used across all the tasks in the pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Parameters used across all the tasks in the pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Specifies the list of tasks used in the pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Task <code>build-image</code>, which uses the <code>buildah</code> <code>ClusterTask</code> to build application images from a given Git repository.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Task <code>apply-manifests</code>, which uses a user-defined task with the same name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Specifies the sequence in which tasks are run in a pipeline. In this example, the <code>apply-manifests</code> task is run only after the <code>build-image</code> task is completed.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Red Hat OpenShift Pipelines Operator installs the Buildah cluster task and creates the <code>pipeline</code> service account with sufficient permission to build and push an image. The Buildah cluster task can fail when associated with a different service account with insufficient permissions.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-pipelinerun_understanding-openshift-pipelines"><a class="anchor" href="#about-pipelinerun_understanding-openshift-pipelines"></a>PipelineRun</h3>
+<div class="paragraph">
+<p>A <code>PipelineRun</code> is a type of resource that binds a pipeline, workspaces, credentials, and a set of parameter values specific to a scenario to run the CI/CD workflow.</p>
+</div>
+<div class="paragraph">
+<p>A pipeline run is the running instance of a pipeline. It instantiates a pipeline for execution with specific inputs, outputs, and execution parameters on a cluster. It also creates a task run for each task in the pipeline run.</p>
+</div>
+<div class="paragraph">
+<p>The pipeline runs the tasks sequentially until they are complete or a task fails. The <code>status</code> field tracks and the progress of each task run and stores it for monitoring and auditing purposes.</p>
+</div>
+<div class="paragraph">
+<p>The following example runs the <code>build-and-deploy</code> pipeline with relevant resources and parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PipelineRun</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">build-deploy-api-pipelinerun</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipelineRef</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="na">params</span><span class="pi">:</span> <i class="conum" data-value="5"></i><b>(5)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deployment-name</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">vote-api</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-url</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">https://github.com/openshift-pipelines/vote-api.git</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/vote-api</span>
+  <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="6"></i><b>(6)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+      <span class="na">spec</span><span class="pi">:</span>
+        <span class="na">accessModes</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">storage</span><span class="pi">:</span> <span class="s">500Mi</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Pipeline run API version <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The type of Kubernetes object. In this example, <code>PipelineRun</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unique name to identify this pipeline run.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Name of the pipeline to be run. In this example, <code>build-and-deploy</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The list of parameters required to run the pipeline.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Workspace used by the pipeline run.</td>
+</tr>
+</table>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="../secure/authenticating-pipelines-using-git-secret.html#authenticating-pipelines-using-git-secret">Authenticating pipelines using git secret</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-workspaces_understanding-openshift-pipelines"><a class="anchor" href="#about-workspaces_understanding-openshift-pipelines"></a>Workspaces</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It is recommended that you use workspaces instead of the <code>PipelineResource</code> CRs in Red Hat OpenShift Pipelines, as <code>PipelineResource</code> CRs are difficult to debug, limited in scope, and make tasks less reusable.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Workspaces declare shared storage volumes that a task in a pipeline needs at runtime to receive input or provide output. Instead of specifying the actual location of the volumes, workspaces enable you to declare the filesystem or parts of the filesystem that would be required at runtime. A task or pipeline declares the workspace and you must provide the specific location details of the volume. It is then mounted into that workspace in a task run or a pipeline run. This separation of volume declaration from runtime storage volumes makes the tasks reusable, flexible, and independent of the user environment.</p>
+</div>
+<div class="paragraph">
+<p>With workspaces, you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Store task inputs and outputs</p>
+</li>
+<li>
+<p>Share data among tasks</p>
+</li>
+<li>
+<p>Use it as a mount point for credentials held in secrets</p>
+</li>
+<li>
+<p>Use it as a mount point for configurations held in config maps</p>
+</li>
+<li>
+<p>Use it as a mount point for common tools shared by an organization</p>
+</li>
+<li>
+<p>Create a cache of build artifacts that speed up jobs</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can specify workspaces in the <code>TaskRun</code> or <code>PipelineRun</code> using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A read-only config map or secret</p>
+</li>
+<li>
+<p>An existing persistent volume claim shared with other tasks</p>
+</li>
+<li>
+<p>A persistent volume claim from a provided volume claim template</p>
+</li>
+<li>
+<p>An <code>emptyDir</code> that is discarded when the task run completes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following example shows a code snippet of the <code>build-and-deploy</code> pipeline, which declares a <code>shared-workspace</code> workspace for the <code>build-image</code> and <code>apply-manifests</code> tasks as defined in the pipeline.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pipeline</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+  <span class="na">params</span><span class="pi">:</span>
+<span class="nn">...</span>
+  <span class="na">tasks</span><span class="pi">:</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">build-image</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">buildah</span>
+      <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterTask</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">TLSVERIFY</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.IMAGE)</span>
+    <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span> <i class="conum" data-value="4"></i><b>(4)</b>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span> <i class="conum" data-value="5"></i><b>(5)</b>
+    <span class="na">runAfter</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">fetch-repository</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span>
+    <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="6"></i><b>(6)</b>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">runAfter</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">build-image</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>List of workspaces shared between the tasks defined in the pipeline. A pipeline can define as many workspaces as required. In this example, only one workspace named <code>shared-workspace</code> is declared.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Definition of tasks used in the pipeline. This snippet defines two tasks, <code>build-image</code> and <code>apply-manifests</code>, which share a common workspace.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>List of workspaces used in the <code>build-image</code> task. A task definition can include as many workspaces as it requires. However, it is recommended that a task uses at most one writable workspace.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Name that uniquely identifies the workspace used in the task. This task uses one workspace named <code>source</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Name of the pipeline workspace used by the task. Note that the workspace <code>source</code> in turn uses the pipeline workspace named <code>shared-workspace</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>List of workspaces used in the <code>apply-manifests</code> task. Note that this task shares the <code>source</code> workspace with the <code>build-image</code> task.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Workspaces help tasks share data, and allow you to specify one or more volumes that each task in the pipeline requires during execution. You can create a persistent volume claim or provide a volume claim template that creates a persistent volume claim for you.</p>
+</div>
+<div class="paragraph">
+<p>The following code snippet of the <code>build-deploy-api-pipelinerun</code> pipeline run uses a volume claim template to create a persistent volume claim for defining the storage volume for the <code>shared-workspace</code> workspace used in the <code>build-and-deploy</code> pipeline.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PipelineRun</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">build-deploy-api-pipelinerun</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipelineRef</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span>
+  <span class="na">params</span><span class="pi">:</span>
+<span class="nn">...</span>
+
+  <span class="na">workspaces</span><span class="pi">:</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="na">volumeClaimTemplate</span><span class="pi">:</span> <i class="conum" data-value="3"></i><b>(3)</b>
+      <span class="na">spec</span><span class="pi">:</span>
+        <span class="na">accessModes</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+        <span class="na">resources</span><span class="pi">:</span>
+          <span class="na">requests</span><span class="pi">:</span>
+            <span class="na">storage</span><span class="pi">:</span> <span class="s">500Mi</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Specifies the list of pipeline workspaces for which volume binding will be provided in the pipeline run.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The name of the workspace in the pipeline for which the volume is being provided.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Specifies a volume claim template that creates a persistent volume claim to define the storage volume for the workspace.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="about-triggers_understanding-openshift-pipelines"><a class="anchor" href="#about-triggers_understanding-openshift-pipelines"></a>Triggers</h3>
+<div class="paragraph">
+<p>Use <em>Triggers</em> in conjunction with pipelines to create a full-fledged CI/CD system where Kubernetes resources define the entire CI/CD execution. Triggers capture the external events, such as a Git pull request, and process them to extract key pieces of information. Mapping this event data to a set of predefined parameters triggers a series of tasks that can then create and deploy Kubernetes resources and instantiate the pipeline.</p>
+</div>
+<div class="paragraph">
+<p>For example, you define a CI/CD workflow using Red Hat OpenShift Pipelines for your application. The pipeline must start for any new changes to take effect in the application repository. Triggers automate this process by capturing and processing any change event and by triggering a pipeline run that deploys the new image with the latest changes.</p>
+</div>
+<div class="paragraph">
+<p>Triggers consist of the following main resources that work together to form a reusable, decoupled, and self-sustaining CI/CD system:</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>TriggerBinding</code> resource extracts the fields from an event payload and stores them as parameters.</p>
+<div class="paragraph">
+<p>The following example shows a code snippet of the <code>TriggerBinding</code> resource, which extracts the Git repository information from the received event payload:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TriggerBinding</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">params</span><span class="pi">:</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-url</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">$(body.repository.url)</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-name</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">$(body.repository.name)</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">$(body.head_commit.id)</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The API version of the <code>TriggerBinding</code> resource. In this example, <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies the type of Kubernetes object. In this example, <code>TriggerBinding</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unique name to identify the <code>TriggerBinding</code> resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>List of parameters which will be extracted from the received event payload and passed to the <code>TriggerTemplate</code> resource. In this example, the Git repository URL, name, and revision are extracted from the body of the event payload.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>The <code>TriggerTemplate</code> resource acts as a standard for the way resources must be created. It specifies the way parameterized data from the <code>TriggerBinding</code> resource should be used.
+A trigger template receives input from the trigger binding, and then performs a series of actions that results in creation of new pipeline resources, and initiation of a new pipeline run.</p>
+<div class="paragraph">
+<p>The following example shows a code snippet of a <code>TriggerTemplate</code> resource, which creates a pipeline run using the Git repository information received from the <code>TriggerBinding</code> resource you just created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TriggerTemplate</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">params</span><span class="pi">:</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-url</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The git repository url</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The git revision</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s">pipelines-1.13</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-name</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The name of the deployment to be created / patched</span>
+
+  <span class="na">resourcetemplates</span><span class="pi">:</span> <i class="conum" data-value="5"></i><b>(5)</b>
+  <span class="pi">-</span> <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+    <span class="na">kind</span><span class="pi">:</span> <span class="s">PipelineRun</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">build-deploy-$(tt.params.git-repo-name)-$(uid)</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+      <span class="na">pipelineRef</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span>
+      <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deployment-name</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">$(tt.params.git-repo-name)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-url</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">$(tt.params.git-repo-url)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">$(tt.params.git-revision)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/$(tt.params.git-repo-name)</span>
+      <span class="na">workspaces</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+        <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+         <span class="na">spec</span><span class="pi">:</span>
+          <span class="na">accessModes</span><span class="pi">:</span>
+           <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+          <span class="na">resources</span><span class="pi">:</span>
+            <span class="na">requests</span><span class="pi">:</span>
+              <span class="na">storage</span><span class="pi">:</span> <span class="s">500Mi</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The API version of the <code>TriggerTemplate</code> resource. In this example, <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies the type of Kubernetes object. In this example, <code>TriggerTemplate</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unique name to identify the <code>TriggerTemplate</code> resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Parameters supplied by the <code>TriggerBinding</code> resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>List of templates that specify the way resources must be created using the parameters received through the <code>TriggerBinding</code> or <code>EventListener</code> resources.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>The <code>Trigger</code> resource combines the <code>TriggerBinding</code> and <code>TriggerTemplate</code> resources, and optionally, the <code>interceptors</code> event processor.</p>
+<div class="paragraph">
+<p>Interceptors process all the events for a specific platform that runs before the <code>TriggerBinding</code> resource.  You can use interceptors to filter the payload, verify events, define and test trigger conditions, and implement other useful processing. Interceptors use secret for event verification. After the event data passes through an interceptor, it then goes to the trigger before you pass the payload data to the trigger binding. You can also use an interceptor to modify the behavior of the associated trigger referenced in the <code>EventListener</code> specification.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows a code snippet of a <code>Trigger</code> resource, named <code>vote-trigger</code> that connects the <code>TriggerBinding</code> and <code>TriggerTemplate</code> resources, and the <code>interceptors</code> event processor.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Trigger</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-trigger</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="na">interceptors</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">github"</span> <i class="conum" data-value="5"></i><b>(5)</b>
+      <span class="na">params</span><span class="pi">:</span> <i class="conum" data-value="6"></i><b>(6)</b>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">secretRef"</span>
+          <span class="na">value</span><span class="pi">:</span>
+            <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-secret</span>
+            <span class="na">secretKey</span><span class="pi">:</span> <span class="s">secretToken</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eventTypes"</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">push"</span><span class="pi">]</span>
+  <span class="na">bindings</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span> <i class="conum" data-value="7"></i><b>(7)</b>
+  <span class="na">template</span><span class="pi">:</span> <i class="conum" data-value="8"></i><b>(8)</b>
+     <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Secret</span> <i class="conum" data-value="9"></i><b>(9)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">github-secret</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">Opaque</span>
+<span class="na">stringData</span><span class="pi">:</span>
+  <span class="na">secretToken</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1234567"</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The API version of the <code>Trigger</code> resource. In this example, <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies the type of Kubernetes object. In this example, <code>Trigger</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unique name to identify the <code>Trigger</code> resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Service account name to be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Interceptor name to be referenced. In this example, <code>github</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Desired parameters to be specified.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Name of the <code>TriggerBinding</code> resource to be connected to the <code>TriggerTemplate</code> resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Name of the <code>TriggerTemplate</code> resource to be connected to the <code>TriggerBinding</code> resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Secret to be used to verify events.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>The <code>EventListener</code> resource provides an endpoint, or an event sink, that listens for incoming HTTP-based events with a JSON payload. It  extracts event parameters from each <code>TriggerBinding</code> resource, and then processes this data to create Kubernetes resources as specified by the corresponding <code>TriggerTemplate</code> resource. The <code>EventListener</code> resource also performs lightweight event processing or basic filtering on the payload using event <code>interceptors</code>, which identify the type of payload and optionally modify it. Currently, pipeline triggers support five types of interceptors: <em>Webhook Interceptors</em>, <em>GitHub Interceptors</em>, <em>GitLab Interceptors</em>, <em>Bitbucket Interceptors</em>, and <em>Common Expression Language (CEL) Interceptors</em>.</p>
+<div class="paragraph">
+<p>The following example shows an <code>EventListener</code> resource, which references the <code>Trigger</code> resource named <code>vote-trigger</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span> <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="na">triggers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">triggerRef</span><span class="pi">:</span> <span class="s">vote-trigger</span> <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The API version of the <code>EventListener</code> resource. In this example, <code>v1beta1</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Specifies the type of Kubernetes object. In this example, <code>EventListener</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Unique name to identify the <code>EventListener</code> resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Service account name to be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Name of the <code>Trigger</code> resource referenced by the <code>EventListener</code> resource.</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="additional-resources"><a class="anchor" href="#additional-resources"></a>Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>For information on installing OpenShift Pipelines, see <a href="../install_config/installing-pipelines.html#installing-pipelines">Installing OpenShift Pipelines</a>.</p>
+</li>
+<li>
+<p>For more details on creating custom CI/CD solutions, see <a href="../create/creating-applications-with-cicd-pipelines.html#creating-applications-with-cicd-pipelines">Creating CI/CD solutions for applications using OpenShift Pipelines</a>.</p>
+</li>
+<li>
+<p>For more details on re-encrypt TLS termination, see <a href="https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html#re-encryption-termination">Re-encryption Termination</a>.</p>
+</li>
+<li>
+<p>For more details on secured routes, see the <a href="https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html">Secured routes</a> section.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-pipelines';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

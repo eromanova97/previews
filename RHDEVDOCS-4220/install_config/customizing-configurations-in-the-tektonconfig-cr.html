@@ -1,0 +1,1329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>Customizing configurations in the TektonConfig custom resource | Installing and configuring | Red Hat OpenShift Pipelines Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../about/op-release-notes.html">Red Hat OpenShift Pipelines Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../install_config/installing-pipelines.html">Installing and configuring</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        Customizing configurations in the TektonConfig custom resource
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/install_config/customizing-configurations-in-the-tektonconfig-cr.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+install_config/customizing-configurations-in-the-tektonconfig-cr.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-right"></span>About OpenShift Pipelines</a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../about/op-release-notes.html">OpenShift Pipelines release notes</a></li>
+            <li><a class="" href="../about/about-pipelines.html">About OpenShift Pipelines</a></li>
+            <li><a class="" href="../about/understanding-openshift-pipelines.html">Understanding OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-down"></span>Installing and configuring</a>
+      <ul id="topicGroup1" class="collapse in list-unstyled">
+            <li><a class="" href="../install_config/installing-pipelines.html">Installing OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/uninstalling-pipelines.html">Uninstalling OpenShift Pipelines</a></li>
+            <li><a class=" active" href="../install_config/customizing-configurations-in-the-tektonconfig-cr.html">Customizing configurations in the TektonConfig custom resource</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../resource/reducing-pipelines-resource-consumption.html">Reducing resource consumption of OpenShift Pipelines</a></li>
+            <li><a class="" href="../resource/setting-compute-resource-quota-for-openshift-pipelines.html">Setting compute resource quota for OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-right"></span>Creating CI/CD pipelines</a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD solutions for applications using OpenShift Pipelines</a></li>
+            <li><a class="" href="../create/working-with-pipelines-web-console.html">Working with OpenShift Pipelines in the web console</a></li>
+            <li><a class="" href="../create/remote-pipelines-tasks-resolvers.html">Specifying remote pipelines and tasks using resolvers</a></li>
+            <li><a class="" href="../create/managing-nonversioned-and-versioned-cluster-tasks.html">Managing non-versioned and versioned cluster tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-right"></span>Observability in OpenShift Pipelines</a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Using Tekton Results for OpenShift Pipelines observability</a></li>
+            <li><a class="" href="../records/viewing-pipeline-logs-using-the-openshift-logging-operator.html">Viewing pipeline logs using the OpenShift Logging Operator</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-right"></span>Pipelines as Code</a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../pac/about-pipelines-as-code.html">About Pipelines as Code</a></li>
+            <li><a class="" href="../pac/install-config-pipelines-as-code.html">Installing and configuring Pipelines as Code</a></li>
+            <li><a class="" href="../pac/using-pipelines-as-code-repos.html">Using Pipelines as Code with a Git repository hosting service provider</a></li>
+            <li><a class="" href="../pac/using-repository-crd.html">Using the Repository custom resource</a></li>
+            <li><a class="" href="../pac/using-pac-resolver.html">Using the Pipelines as Code resolver</a></li>
+            <li><a class="" href="../pac/managing-pipeline-runs-pac.html">Managing pipeline runs</a></li>
+            <li><a class="" href="../pac/pac-command-reference.html">Pipelines as Code command reference</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-right"></span>Securing OpenShift Pipelines</a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Using Tekton Chains for OpenShift Pipelines supply chain security</a></li>
+            <li><a class="" href="../secure/configuring-security-context-for-pods.html">Configuring the security context for pods</a></li>
+            <li><a class="" href="../secure/securing-webhooks-with-event-listeners.html">Securing webhooks with event listeners</a></li>
+            <li><a class="" href="../secure/authenticating-pipelines-using-git-secret.html">Authenticating pipelines using git secret</a></li>
+            <li><a class="" href="../secure/unprivileged-building-of-container-images-using-buildah.html">Unprivileged building of container images using Buildah</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Custom Tekton Hub instance</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../hub/using-tekton-hub-with-openshift-pipelines.html">Using Tekton Hub with OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Pipelines CLI (tkn) reference</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../tkn_cli/installing-tkn.html">Installing tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-configuring-tkn.html">Configuring tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-tkn-reference.html">Basic tkn commands</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Customizing configurations in the TektonConfig custom resource
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#prerequisites_customizing-configurations-in-the-tektonconfig-cr">Prerequisites</a></li>
+<li><a href="#op-configuring-pipelines-control-plane_customizing-configurations-in-the-tektonconfig-cr">Configuring the Red Hat OpenShift Pipelines control plane</a>
+<ul class="sectlevel2">
+<li><a href="#op-modifiable-fields-with-default-values_customizing-configurations-in-the-tektonconfig-cr">Modifiable fields with default values</a></li>
+<li><a href="#op-optional-configuration-fields_customizing-configurations-in-the-tektonconfig-cr">Optional configuration fields</a></li>
+</ul>
+</li>
+<li><a href="#op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr">Changing the default service account for OpenShift Pipelines</a></li>
+<li><a href="#op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr">Disabling the service monitor</a></li>
+<li><a href="#op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr">Configuring pipeline resolvers</a></li>
+<li><a href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr">Disabling cluster tasks and pipeline templates</a></li>
+<li><a href="#op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr">Disabling the integration of Tekton Hub</a></li>
+<li><a href="#op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr">Disabling the automatic creation of RBAC resources</a></li>
+<li><a href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr">Automatic pruning of task runs and pipeline runs</a>
+<ul class="sectlevel2">
+<li><a href="#default-pruner-configuration_customizing-configurations-in-the-tektonconfig-cr">Configuring the pruner</a></li>
+<li><a href="#annotations-for-automatic-pruning-taskruns-pipelineruns_customizing-configurations-in-the-tektonconfig-cr">Annotations for automatically pruning task runs and pipeline runs</a></li>
+</ul>
+</li>
+<li><a href="#additional-resources_customizing-configurations-in-the-tektonconfig-cr">Additional resources</a></li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In Red Hat OpenShift Pipelines, you can customize the following configurations by using the <code>TektonConfig</code> custom resource (CR):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Configuring the Red Hat OpenShift Pipelines control plane</p>
+</li>
+<li>
+<p>Changing the default service account</p>
+</li>
+<li>
+<p>Disabling the service monitor</p>
+</li>
+<li>
+<p>Configuring pipeline resolvers</p>
+</li>
+<li>
+<p>Disabling cluster tasks and pipeline templates</p>
+</li>
+<li>
+<p>Disabling the integration of Tekton Hub</p>
+</li>
+<li>
+<p>Disabling the automatic creation of RBAC resources</p>
+</li>
+<li>
+<p>Pruning of task runs and pipeline runs</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisites_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#prerequisites_customizing-configurations-in-the-tektonconfig-cr"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You have installed the Red Hat OpenShift Pipelines Operator.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-configuring-pipelines-control-plane_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-configuring-pipelines-control-plane_customizing-configurations-in-the-tektonconfig-cr"></a>Configuring the Red Hat OpenShift Pipelines control plane</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can customize the OpenShift Pipelines control plane by editing the configuration fields in the <code>TektonConfig</code> custom resource (CR). The Red Hat OpenShift Pipelines Operator automatically adds the configuration fields with their default values so that you can use the OpenShift Pipelines control plane.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>In the <strong>Administrator</strong> perspective of the web console, navigate to <strong>Administration</strong> → <strong>CustomResourceDefinitions</strong>.</p>
+</li>
+<li>
+<p>Use the <strong>Search by name</strong> box to search for the <code>tektonconfigs.operator.tekton.dev</code> custom resource definition (CRD). Click <strong>TektonConfig</strong> to see the CRD details page.</p>
+</li>
+<li>
+<p>Click the <strong>Instances</strong> tab.</p>
+</li>
+<li>
+<p>Click the <strong>config</strong> instance to see the <code>TektonConfig</code> CR details.</p>
+</li>
+<li>
+<p>Click the <strong>YAML</strong> tab.</p>
+</li>
+<li>
+<p>Edit the <code>TektonConfig</code> YAML file based on your requirements.</p>
+<div class="listingblock">
+<div class="title">Example of <code>TektonConfig</code> CR with default values</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipeline</span><span class="pi">:</span>
+    <span class="na">running-in-environment-with-injected-sidecars</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="s">metrics.taskrun.duration-type</span><span class="pi">:</span> <span class="s">histogram</span>
+    <span class="s">metrics.pipelinerun.duration-type</span><span class="pi">:</span> <span class="s">histogram</span>
+    <span class="na">await-sidecar-readiness</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">enableMetrics</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+    <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipeline</span>
+    <span class="na">require-git-ssh-secret-known-hosts</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">enable-tekton-oci-bundles</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="s">metrics.taskrun.level</span><span class="pi">:</span> <span class="s">task</span>
+    <span class="s">metrics.pipelinerun.level</span><span class="pi">:</span> <span class="s">pipeline</span>
+    <span class="na">enable-api-fields</span><span class="pi">:</span> <span class="s">stable</span>
+    <span class="na">enable-provenance-in-status</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">enable-custom-tasks</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">disable-creds-init</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">disable-affinity-assistant</span><span class="pi">:</span> <span class="no">true</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="op-modifiable-fields-with-default-values_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-modifiable-fields-with-default-values_customizing-configurations-in-the-tektonconfig-cr"></a>Modifiable fields with default values</h3>
+<div class="paragraph">
+<p>The following list includes all modifiable fields with their default values in the <code>TektonConfig</code> CR:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>running-in-environment-with-injected-sidecars</code> (default: <code>true</code>): Set this field to <code>false</code> if pipelines run in a cluster that does not use injected sidecars, such as Istio. Setting it to <code>false</code> decreases the time a pipeline takes for a task run to start.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For clusters that use injected sidecars, setting this field to <code>false</code> can lead to an unexpected behavior.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><code>await-sidecar-readiness</code> (default: <code>true</code>): Set this field to <code>false</code> to stop OpenShift Pipelines from waiting for <code>TaskRun</code> sidecar containers to run before it begins to operate. This allows tasks to be run in environments that do not support the <code>downwardAPI</code> volume type.</p>
+</li>
+<li>
+<p><code>default-service-account</code> (default: <code>pipeline</code>): This field contains the default service account name to use for the <code>TaskRun</code> and <code>PipelineRun</code> resources, if none is specified.</p>
+</li>
+<li>
+<p><code>require-git-ssh-secret-known-hosts</code> (default: <code>false</code>): Setting this field to <code>true</code> requires that any Git SSH secret must include the <code>known_hosts</code> field.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For more information about configuring Git SSH secrets, see  <em>Configuring SSH authentication for Git</em> in the <em>Additional resources</em> section.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>enable-tekton-oci-bundles</code> (default: <code>false</code>): Set this field to <code>true</code> to enable the use of an experimental alpha feature named Tekton OCI bundle.</p>
+</li>
+<li>
+<p><code>enable-api-fields</code> (default: <code>stable</code>): Setting this field determines which features are enabled. Acceptable value is <code>stable</code>, <code>beta</code>, or <code>alpha</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Red Hat OpenShift Pipelines does not support the <code>alpha</code> value.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p><code>enable-provenance-in-status</code> (default: <code>false</code>): Set this field to <code>true</code> to enable populating the <code>provenance</code> field in <code>TaskRun</code> and <code>PipelineRun</code> statuses. The <code>provenance</code> field contains metadata about resources used in the task run and pipeline run, such as the source from where a remote task or pipeline definition was fetched.</p>
+</li>
+<li>
+<p><code>enable-custom-tasks</code> (default: <code>true</code>): Set this field to <code>false</code> to disable the use of custom tasks in pipelines.</p>
+</li>
+<li>
+<p><code>disable-creds-init</code> (default: <code>false</code>): Set this field to <code>true</code> to prevent OpenShift Pipelines from scanning attached service accounts and injecting any credentials into your steps.</p>
+</li>
+<li>
+<p><code>disable-affinity-assistant</code> (default: <code>true</code>): Set this field to <code>false</code> to enable affinity assistant for each <code>TaskRun</code> resource sharing a persistent volume claim workspace.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Metrics options</div>
+<p>You can modify the default values of the following metrics fields in the <code>TektonConfig</code> CR:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>metrics.taskrun.duration-type</code> and <code>metrics.pipelinerun.duration-type</code> (default: <code>histogram</code>): Setting these fields determines the duration type for a task or pipeline run. Acceptable value is <code>gauge</code> or <code>histogram</code>.</p>
+</li>
+<li>
+<p><code>metrics.taskrun.level</code> (default: <code>task</code>): This field determines the level of the task run metrics. Acceptable value is <code>taskrun</code>, <code>task</code>, or <code>namespace</code>.</p>
+</li>
+<li>
+<p><code>metrics.pipelinerun.level</code> (default: <code>pipeline</code>): This field determines the level of the pipeline run metrics. Acceptable value is <code>pipelinerun</code>, <code>pipeline</code>, or <code>namespace</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="op-optional-configuration-fields_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-optional-configuration-fields_customizing-configurations-in-the-tektonconfig-cr"></a>Optional configuration fields</h3>
+<div class="paragraph">
+<p>The following fields do not have a default value, and are considered only if you configure them. By default, the Operator does not add and configure these fields in the <code>TektonConfig</code> custom resource (CR).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>default-timeout-minutes</code>: This field sets the default timeout for the <code>TaskRun</code> and <code>PipelineRun</code> resources, if none is specified when creating them. If a task run or pipeline run takes more time than the set number of minutes for its execution, then the task run or pipeline run is timed out and cancelled. For example, <code>default-timeout-minutes: 60</code> sets 60 minutes as default.</p>
+</li>
+<li>
+<p><code>default-managed-by-label-value</code>: This field contains the default value given to the <code>app.kubernetes.io/managed-by</code> label that is applied to all <code>TaskRun</code> pods, if none is specified. For example, <code>default-managed-by-label-value: tekton-pipelines</code>.</p>
+</li>
+<li>
+<p><code>default-pod-template</code>: This field sets the default <code>TaskRun</code> and <code>PipelineRun</code> pod templates, if none is specified.</p>
+</li>
+<li>
+<p><code>default-cloud-events-sink</code>: This field sets the default <code>CloudEvents</code> sink that is used for the <code>TaskRun</code> and <code>PipelineRun</code> resources, if none is specified.</p>
+</li>
+<li>
+<p><code>default-task-run-workspace-binding</code>: This field contains the default workspace configuration for the workspaces that a <code>Task</code> resource declares, but a <code>TaskRun</code> resource does not explicitly declare.</p>
+</li>
+<li>
+<p><code>default-affinity-assistant-pod-template</code>: This field sets the default <code>PipelineRun</code> pod template that is used for affinity assistant pods, if none is specified.</p>
+</li>
+<li>
+<p><code>default-max-matrix-combinations-count</code>: This field contains the default maximum number of combinations generated from a matrix, if none is specified.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-changing-default-service-account_customizing-configurations-in-the-tektonconfig-cr"></a>Changing the default service account for OpenShift Pipelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can change the default service account for OpenShift Pipelines by editing the <code>default-service-account</code> field in the <code>.spec.pipeline</code> and <code>.spec.trigger</code> specifications. The default service account name is <code>pipeline</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipeline</span><span class="pi">:</span>
+    <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">trigger</span><span class="pi">:</span>
+    <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipeline</span>
+    <span class="na">enable-api-fields</span><span class="pi">:</span> <span class="s">stable</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-the-service-monitor_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the service monitor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can disable the service monitor, which is part of OpenShift Pipelines, to expose the telemetry data. To disable the service monitor, set the <code>enableMetrics</code> parameter to <code>false</code> in the <code>.spec.pipeline</code> specification of the <code>TektonConfig</code> custom resource (CR):</p>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipeline</span><span class="pi">:</span>
+    <span class="na">params</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">enableMetrics</span>
+         <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">false'</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-configuring-pipeline-resolvers_customizing-configurations-in-the-tektonconfig-cr"></a>Configuring pipeline resolvers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure pipeline resolvers in the <code>TektonConfig</code> custom resource (CR). You can enable or disable these pipeline resolvers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>enable-bundles-resolver</code></p>
+</li>
+<li>
+<p><code>enable-cluster-resolver</code></p>
+</li>
+<li>
+<p><code>enable-git-resolver</code></p>
+</li>
+<li>
+<p><code>enable-hub-resolver</code></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipeline</span><span class="pi">:</span>
+    <span class="na">enable-bundles-resolver</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">enable-cluster-resolver</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">enable-git-resolver</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">enable-hub-resolver</span><span class="pi">:</span> <span class="no">true</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also provide resolver specific configurations in the <code>TektonConfig</code> CR. For example, define the following fields in the <code>map[string]string</code> format to set configurations for each pipeline resolver:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pipeline</span><span class="pi">:</span>
+    <span class="na">bundles-resolver-config</span><span class="pi">:</span>
+      <span class="na">default-service-account</span><span class="pi">:</span> <span class="s">pipelines</span>
+    <span class="na">cluster-resolver-config</span><span class="pi">:</span>
+      <span class="na">default-namespace</span><span class="pi">:</span> <span class="s">test</span>
+    <span class="na">git-resolver-config</span><span class="pi">:</span>
+      <span class="na">server-url</span><span class="pi">:</span> <span class="s">localhost.com</span>
+    <span class="na">hub-resolver-config</span><span class="pi">:</span>
+      <span class="na">default-tekton-hub-catalog</span><span class="pi">:</span> <span class="s">tekton</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-cluster-tasks-and-pipeline-templates_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling cluster tasks and pipeline templates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the <code>TektonAddon</code> custom resource (CR) installs <code>clusterTasks</code> and <code>pipelineTemplates</code> resources along with OpenShift Pipelines on the cluster.</p>
+</div>
+<div class="paragraph">
+<p>You can disable installation of the <code>clusterTasks</code> and <code>pipelineTemplates</code> resources by setting the parameter value to <code>false</code> in the <code>.spec.addon</code> specification. In addition, you can disable the <code>communityClusterTasks</code> parameter.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">addon</span><span class="pi">:</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">clusterTasks</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">false'</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pipelineTemplates</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">false'</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">communityClusterTasks</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-the-integretion-of-tekton-hub_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the integration of Tekton Hub</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can disable the integration of Tekton Hub in the web console <strong>Developer</strong> perspective by setting the <code>enable-devconsole-integration</code> parameter to <code>false</code> in the <code>TektonConfig</code> custom resource (CR).</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of disabling Tekton Hub</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">hub</span><span class="pi">:</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">enable-devconsole-integration</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="no">false</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-disabling-automatic-creation-of-rbac-resources_customizing-configurations-in-the-tektonconfig-cr"></a>Disabling the automatic creation of RBAC resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default installation of the Red Hat OpenShift Pipelines Operator creates multiple role-based access control (RBAC) resources for all namespaces in the cluster, except the namespaces matching the <code>^(openshift|kube)-*</code> regular expression pattern. Among these RBAC resources, the <code>pipelines-scc-rolebinding</code> security context constraint (SCC) role binding resource is a potential security issue, because the associated <code>pipelines-scc</code> SCC has the <code>RunAsAny</code> privilege.</p>
+</div>
+<div class="paragraph">
+<p>To disable the automatic creation of cluster-wide RBAC resources after the Red Hat OpenShift Pipelines Operator is installed, cluster administrators can set the <code>createRbacResource</code> parameter to <code>false</code> in the cluster-level <code>TektonConfig</code> custom resource (CR).</p>
+</div>
+<div class="listingblock">
+<div class="title">Example <code>TektonConfig</code> CR</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">createRbacResource</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>As a cluster administrator or an user with appropriate privileges, when you disable the automatic creation of RBAC resources for all namespaces, the default <code>ClusterTask</code> resource does not work. For the <code>ClusterTask</code> resource to function, you must create the RBAC resources manually for each intended namespace.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#op-automatic-pruning-taskrun-pipelinerun_customizing-configurations-in-the-tektonconfig-cr"></a>Automatic pruning of task runs and pipeline runs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stale <code>TaskRun</code> and <code>PipelineRun</code> objects and their executed instances occupy physical resources that can be used for active runs. For optimal utilization of these resources, Red Hat OpenShift Pipelines provides a pruner component that automatically removes unused objects and their instances in various namespaces.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can configure the pruner for your entire installation by using the <code>TektonConfig</code> custom resource and modify configuration for a namespace by using namespace annotations. However, you cannot selectively auto-prune an individual task run or pipeline run in a namespace.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="default-pruner-configuration_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#default-pruner-configuration_customizing-configurations-in-the-tektonconfig-cr"></a>Configuring the pruner</h3>
+<div class="paragraph">
+<p>You can use the <code>TektonConfig</code> custom resource to configure periodic pruning of resources associated with pipeline runs and task runs.</p>
+</div>
+<div class="paragraph">
+<p>The following example corresponds to the default configuration:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of the pruner configuration</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="c1"># ...</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">pruner</span><span class="pi">:</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">taskrun</span>
+      <span class="pi">-</span> <span class="s">pipelinerun</span>
+    <span class="na">keep</span><span class="pi">:</span> <span class="m">100</span>
+    <span class="na">prune-per-resource</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">schedule</span><span class="pi">:</span> <span class="s2">"</span><span class="s">*</span><span class="nv"> </span><span class="s">8</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*"</span>
+<span class="c1"># ...</span></code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Supported parameters for pruner configuration</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schedule</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Cron schedule for running the pruner process. The default schedule runs the process at 08:00 every day. For more information about the Cron schedule syntax, see <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#cron-schedule-syntax">Cron schedule syntax</a> in the Kubernetes documentation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>resources</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The resource types to which the pruner applies. The available resource types are <code>taskrun</code> and <code>pipelinerun</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keep</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of most recent resources of every type to keep.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prune-per-resource</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If set to <code>false</code>, the value for the <code>keep</code> parameter denotes the total number of task runs or pipeline runs. For example, if <code>keep</code> is set to <code>100</code>, then the pruner keeps 100 most recent task runs and 100 most recent pipeline runs and removes all other resources.</p>
+<p class="tableblock">If set to <code>true</code>, the value for the <code>keep</code> parameter is calculated separately for pipeline runs referencing each pipeline and for task runs referencing each task. For example, if <code>keep</code> is set to <code>100</code>, then the pruner keeps 100 most recent pipeline runs for <code>Pipeline1</code>, 100 most recent pipeline runs for <code>Pipeline2</code>, 100 most recent task runs for <code>Task1</code>, and so on, and removes all other resources.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keep-since</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum time for which to keep resources, in minutes. For example, to retain resources which were created not more than five days ago, set <code>keep-since</code> to <code>7200</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>keep</code> and <code>keep-since</code> parameters are mutually exclusive. Use only one of them in your configuration.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="annotations-for-automatic-pruning-taskruns-pipelineruns_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#annotations-for-automatic-pruning-taskruns-pipelineruns_customizing-configurations-in-the-tektonconfig-cr"></a>Annotations for automatically pruning task runs and pipeline runs</h3>
+<div class="paragraph">
+<p>To modify the configuration for automatic pruning of task runs and pipeline runs in a namespace, you can set annotations in the namespace.</p>
+</div>
+<div class="paragraph">
+<p>The following namespace annotations have the same meanings as the corresponding keys in the <code>TektonConfig</code> custom resource:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>operator.tekton.dev/prune.schedule</code></p>
+</li>
+<li>
+<p><code>operator.tekton.dev/prune.resources</code></p>
+</li>
+<li>
+<p><code>operator.tekton.dev/prune.keep</code></p>
+</li>
+<li>
+<p><code>operator.tekton.dev/prune.prune-per-resource</code></p>
+</li>
+<li>
+<p><code>operator.tekton.dev/prune.keep-since</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>operator.tekton.dev/prune.resources</code> annotation accepts a comma-separated list. To prune both task runs and pipeline runs, set this annotation to <code>"taskrun, pipelinerun"</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following additional namespace annotations are available:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>operator.tekton.dev/prune.skip</code>: When set to <code>true</code>, the namespace for which the annotation is configured is not pruned.</p>
+</li>
+<li>
+<p><code>operator.tekton.dev/prune.strategy</code>: Set the value of this annotation to either <code>keep</code> or <code>keep-since</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, the following annotations retain all task runs and pipeline runs created in the last five days and delete the older resources:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of auto-pruning annotations</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">kind</span><span class="pi">:</span> <span class="s">Namespace</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="c1"># ...</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="s">operator.tekton.dev/prune.resources</span><span class="pi">:</span> <span class="s2">"</span><span class="s">taskrun,</span><span class="nv"> </span><span class="s">pipelinerun"</span>
+    <span class="s">operator.tekton.dev/prune.keep-since</span><span class="pi">:</span> <span class="m">7200</span>
+<span class="c1"># ...</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="additional-resources_customizing-configurations-in-the-tektonconfig-cr"><a class="anchor" href="#additional-resources_customizing-configurations-in-the-tektonconfig-cr"></a>Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../secure/authenticating-pipelines-using-git-secret.html#op-configuring-ssh-authentication-for-git_authenticating-pipelines-using-git-secret">Configuring SSH authentication for Git</a></p>
+</li>
+<li>
+<p><a href="../create/managing-nonversioned-and-versioned-cluster-tasks.html#managing-nonversioned-and-versioned-cluster-tasks">Managing non-versioned and versioned cluster tasks</a></p>
+</li>
+<li>
+<p><a href="../create/working-with-pipelines-web-console.html#using-custom-pipeline-template-for-git-import_working-with-pipelines-web-console">Creating pipeline templates in the Administrator perspective</a></p>
+</li>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/applications/pruning-objects.html">Pruning objects to reclaim resources</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-pipelines';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

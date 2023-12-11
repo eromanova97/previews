@@ -1,0 +1,2416 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>Creating CI/CD solutions for applications using OpenShift Pipelines | Creating CI/CD pipelines | Red Hat OpenShift Pipelines Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../about/op-release-notes.html">Red Hat OpenShift Pipelines Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD pipelines</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        Creating CI/CD solutions for applications using OpenShift Pipelines
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/create/creating-applications-with-cicd-pipelines.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+create/creating-applications-with-cicd-pipelines.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-right"></span>About OpenShift Pipelines</a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../about/op-release-notes.html">OpenShift Pipelines release notes</a></li>
+            <li><a class="" href="../about/about-pipelines.html">About OpenShift Pipelines</a></li>
+            <li><a class="" href="../about/understanding-openshift-pipelines.html">Understanding OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-right"></span>Installing and configuring</a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../install_config/installing-pipelines.html">Installing OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/uninstalling-pipelines.html">Uninstalling OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/customizing-configurations-in-the-tektonconfig-cr.html">Customizing configurations in the TektonConfig custom resource</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../resource/reducing-pipelines-resource-consumption.html">Reducing resource consumption of OpenShift Pipelines</a></li>
+            <li><a class="" href="../resource/setting-compute-resource-quota-for-openshift-pipelines.html">Setting compute resource quota for OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-down"></span>Creating CI/CD pipelines</a>
+      <ul id="topicGroup3" class="collapse in list-unstyled">
+            <li><a class=" active" href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD solutions for applications using OpenShift Pipelines</a></li>
+            <li><a class="" href="../create/working-with-pipelines-web-console.html">Working with OpenShift Pipelines in the web console</a></li>
+            <li><a class="" href="../create/remote-pipelines-tasks-resolvers.html">Specifying remote pipelines and tasks using resolvers</a></li>
+            <li><a class="" href="../create/managing-nonversioned-and-versioned-cluster-tasks.html">Managing non-versioned and versioned cluster tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-right"></span>Observability in OpenShift Pipelines</a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Using Tekton Results for OpenShift Pipelines observability</a></li>
+            <li><a class="" href="../records/viewing-pipeline-logs-using-the-openshift-logging-operator.html">Viewing pipeline logs using the OpenShift Logging Operator</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-right"></span>Pipelines as Code</a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../pac/about-pipelines-as-code.html">About Pipelines as Code</a></li>
+            <li><a class="" href="../pac/install-config-pipelines-as-code.html">Installing and configuring Pipelines as Code</a></li>
+            <li><a class="" href="../pac/using-pipelines-as-code-repos.html">Using Pipelines as Code with a Git repository hosting service provider</a></li>
+            <li><a class="" href="../pac/using-repository-crd.html">Using the Repository custom resource</a></li>
+            <li><a class="" href="../pac/using-pac-resolver.html">Using the Pipelines as Code resolver</a></li>
+            <li><a class="" href="../pac/managing-pipeline-runs-pac.html">Managing pipeline runs</a></li>
+            <li><a class="" href="../pac/pac-command-reference.html">Pipelines as Code command reference</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-right"></span>Securing OpenShift Pipelines</a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Using Tekton Chains for OpenShift Pipelines supply chain security</a></li>
+            <li><a class="" href="../secure/configuring-security-context-for-pods.html">Configuring the security context for pods</a></li>
+            <li><a class="" href="../secure/securing-webhooks-with-event-listeners.html">Securing webhooks with event listeners</a></li>
+            <li><a class="" href="../secure/authenticating-pipelines-using-git-secret.html">Authenticating pipelines using git secret</a></li>
+            <li><a class="" href="../secure/unprivileged-building-of-container-images-using-buildah.html">Unprivileged building of container images using Buildah</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Custom Tekton Hub instance</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../hub/using-tekton-hub-with-openshift-pipelines.html">Using Tekton Hub with OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Pipelines CLI (tkn) reference</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../tkn_cli/installing-tkn.html">Installing tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-configuring-tkn.html">Configuring tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-tkn-reference.html">Basic tkn commands</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Creating CI/CD solutions for applications using OpenShift Pipelines
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#creating-project-and-checking-pipeline-service-account_creating-applications-with-cicd-pipelines">Creating a project and checking your pipeline service account</a></li>
+<li><a href="#creating-pipeline-tasks_creating-applications-with-cicd-pipelines">Creating pipeline tasks</a></li>
+<li><a href="#assembling-a-pipeline_creating-applications-with-cicd-pipelines">Assembling a pipeline</a></li>
+<li><a href="#op-mirroring-images-to-run-pipelines-in-restricted-environment_creating-applications-with-cicd-pipelines">Mirroring images to run pipelines in a restricted environment</a></li>
+<li><a href="#running-a-pipeline_creating-applications-with-cicd-pipelines">Running a pipeline</a></li>
+<li><a href="#adding-triggers_creating-applications-with-cicd-pipelines">Adding triggers to a pipeline</a></li>
+<li><a href="#configuring-eventlisteners-to-serve-multiple-namespaces_creating-applications-with-cicd-pipelines">Configuring event listeners to serve multiple namespaces</a></li>
+<li><a href="#creating-webhooks_creating-applications-with-cicd-pipelines">Creating webhooks</a></li>
+<li><a href="#triggering-a-pipeline_creating-applications-with-cicd-pipelines">Triggering a pipeline run</a></li>
+<li><a href="#enabling-monitoring-of-event-listeners-for-triggers-for-user-defined-projects_creating-applications-with-cicd-pipelines">Enabling monitoring of event listeners for Triggers for user-defined projects</a></li>
+<li><a href="#op-configuring-pull-request-capabilities-in-GitHub-interceptor_creating-applications-with-cicd-pipelines">Configuring pull request capabilities in GitHub Interceptor</a>
+<ul class="sectlevel2">
+<li><a href="#op-filtering-pull-requests-using-GitHub-interceptor_creating-applications-with-cicd-pipelines">Filtering pull requests using GitHub Interceptor</a></li>
+<li><a href="#op-validating-pull-requests-using-GitHub-interceptors_creating-applications-with-cicd-pipelines">Validating pull requests using GitHub Interceptors</a></li>
+</ul>
+</li>
+<li><a href="#pipeline-addtl-resources">Additional resources</a></li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With Red Hat OpenShift Pipelines, you can create a customized CI/CD solution to build, test, and deploy your application.</p>
+</div>
+<div class="paragraph">
+<p>To create a full-fledged, self-serving CI/CD pipeline for an application, perform the following tasks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create custom tasks, or install existing reusable tasks.</p>
+</li>
+<li>
+<p>Create and define the delivery pipeline for your application.</p>
+</li>
+<li>
+<p>Provide a storage volume or filesystem that is attached to a workspace for the pipeline execution, using one of the following approaches:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Specify a volume claim template that creates a persistent volume claim</p>
+</li>
+<li>
+<p>Specify a persistent volume claim</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Create a <code>PipelineRun</code> object to instantiate and invoke the pipeline.</p>
+</li>
+<li>
+<p>Add triggers to capture events in the source repository.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This section uses the <code>pipelines-tutorial</code> example to demonstrate the preceding tasks. The example uses a simple application which consists of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A front-end interface, <code>pipelines-vote-ui</code>, with the source code in the <a href="https://github.com/openshift/pipelines-vote-ui/tree/pipelines-1.13"><code>pipelines-vote-ui</code></a> Git repository.</p>
+</li>
+<li>
+<p>A back-end interface, <code>pipelines-vote-api</code>, with the source code in the <a href="https://github.com/openshift/pipelines-vote-api/tree/pipelines-1.13"><code>pipelines-vote-api</code></a>  Git repository.</p>
+</li>
+<li>
+<p>The <code>apply-manifests</code> and <code>update-deployment</code> tasks in the <a href="https://github.com/openshift/pipelines-tutorial/tree/pipelines-1.13"><code>pipelines-tutorial</code></a> Git repository.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You have access to an OpenShift Container Platform cluster.</p>
+</li>
+<li>
+<p>You have installed <a href="../install_config/installing-pipelines.html#installing-pipelines">OpenShift Pipelines</a> using the Red Hat OpenShift Pipelines Operator listed in the OpenShift OperatorHub. After it is installed, it is applicable to the entire cluster.</p>
+</li>
+<li>
+<p>You have installed <a href="../tkn_cli/installing-tkn.html#installing-tkn">OpenShift Pipelines CLI</a>.</p>
+</li>
+<li>
+<p>You have forked the front-end <a href="https://github.com/openshift/pipelines-vote-ui/tree/pipelines-1.13"><code>pipelines-vote-ui</code></a> and back-end <a href="https://github.com/openshift/pipelines-vote-api/tree/pipelines-1.13"><code>pipelines-vote-api</code></a> Git repositories using your GitHub ID, and have administrator access to these repositories.</p>
+</li>
+<li>
+<p>Optional: You have cloned the <a href="https://github.com/openshift/pipelines-tutorial/tree/pipelines-1.13"><code>pipelines-tutorial</code></a> Git repository.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-project-and-checking-pipeline-service-account_creating-applications-with-cicd-pipelines"><a class="anchor" href="#creating-project-and-checking-pipeline-service-account_creating-applications-with-cicd-pipelines"></a>Creating a project and checking your pipeline service account</h2>
+<div class="sectionbody">
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Log in to your OpenShift Container Platform cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc login -u &lt;login&gt; -p &lt;password&gt; https://openshift.example.com:6443</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a project for the sample application. For this example workflow, create the <code>pipelines-tutorial</code> project:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc new-project pipelines-tutorial</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you create a project with a different name, be sure to update the resource URLs used in the example with your project name.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>View the <code>pipeline</code> service account:</p>
+<div class="paragraph">
+<p>Red Hat OpenShift Pipelines Operator adds and configures a service account named <code>pipeline</code> that has sufficient permissions to build and push an image. This service account is used by the <code>PipelineRun</code> object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc get serviceaccount pipeline</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-pipeline-tasks_creating-applications-with-cicd-pipelines"><a class="anchor" href="#creating-pipeline-tasks_creating-applications-with-cicd-pipelines"></a>Creating pipeline tasks</h2>
+<div class="sectionbody">
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Install the <code>apply-manifests</code> and <code>update-deployment</code> task resources from the <code>pipelines-tutorial</code> repository, which contains a list of reusable tasks for pipelines:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/01_pipeline/01_apply_manifest_task.yaml
+<span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/01_pipeline/02_update_deployment_task.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Use the <code>tkn task list</code> command to list the tasks you created:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>tkn task list</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output verifies that the <code>apply-manifests</code> and <code>update-deployment</code> task resources were created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">NAME                DESCRIPTION   AGE
+apply-manifests                   1 minute ago
+update-deployment                 48 seconds ago</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Use the <code>tkn clustertasks list</code> command to list the Operator-installed additional cluster tasks such as <code>buildah</code> and <code>s2i-python</code>:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To use the <code>buildah</code> cluster task in a restricted environment, you must ensure that the Dockerfile uses an internal image stream as the base image.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>tkn clustertasks list</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output lists the Operator-installed <code>ClusterTask</code> resources:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">NAME                       DESCRIPTION   AGE
+buildah                                  1 day ago
+git-clone                                1 day ago
+s2i-python                               1 day ago
+tkn                                      1 day ago</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In Red Hat OpenShift Pipelines 1.10, cluster task functionality is deprecated and is planned to be removed in a future release.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="../create/managing-nonversioned-and-versioned-cluster-tasks.html#managing-nonversioned-and-versioned-cluster-tasks">Managing non-versioned and versioned cluster tasks</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="assembling-a-pipeline_creating-applications-with-cicd-pipelines"><a class="anchor" href="#assembling-a-pipeline_creating-applications-with-cicd-pipelines"></a>Assembling a pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A pipeline represents a CI/CD flow and is defined by the tasks to be executed. It is designed to be generic and reusable in multiple applications and environments.</p>
+</div>
+<div class="paragraph">
+<p>A pipeline specifies how the tasks interact with each other and their order of execution using the <code>from</code> and <code>runAfter</code> parameters. It uses the <code>workspaces</code> field to specify one or more volumes that each task in the pipeline requires during execution.</p>
+</div>
+<div class="paragraph">
+<p>In this section, you will create a pipeline that takes the source code of the application from GitHub, and then builds and deploys it on OpenShift Container Platform.</p>
+</div>
+<div class="paragraph">
+<p>The pipeline performs the following tasks for the back-end application <code>pipelines-vote-api</code> and front-end application <code>pipelines-vote-ui</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Clones the source code of the application from the Git repository by referring to the <code>git-url</code> and <code>git-revision</code> parameters.</p>
+</li>
+<li>
+<p>Builds the container image using the <code>buildah</code> cluster task.</p>
+</li>
+<li>
+<p>Pushes the image to the OpenShift image registry by referring to the <code>image</code> parameter.</p>
+</li>
+<li>
+<p>Deploys the new image on OpenShift Container Platform by using the <code>apply-manifests</code> and <code>update-deployment</code> tasks.</p>
+</li>
+</ul>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Copy the contents of the following sample pipeline YAML file and save it:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pipeline</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">workspaces</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deployment-name</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">name of the deployment to be patched</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-url</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">url of the git repo for the code of deployment</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">revision to be used from repo of the code for deployment</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s2">"</span><span class="s">pipelines-1.13"</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">image to be built from the code</span>
+  <span class="na">tasks</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">fetch-repository</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">git-clone</span>
+      <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterTask</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">output</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">url</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.git-url)</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">subdirectory</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deleteExisting</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">revision</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.git-revision)</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">build-image</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">buildah</span>
+      <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterTask</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.IMAGE)</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">runAfter</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">fetch-repository</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">apply-manifests</span>
+    <span class="na">workspaces</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">source</span>
+      <span class="na">workspace</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+    <span class="na">runAfter</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">build-image</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">update-deployment</span>
+    <span class="na">taskRef</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">update-deployment</span>
+    <span class="na">params</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deployment</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.deployment-name)</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s">$(params.IMAGE)</span>
+    <span class="na">runAfter</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">apply-manifests</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The pipeline definition abstracts away the specifics of the Git source repository and image registries. These details are added as <code>params</code> when a pipeline is triggered and executed.</p>
+</div>
+</li>
+<li>
+<p>Create the pipeline:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ oc create -f &lt;pipeline-yaml-file-name.yaml&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can also execute the YAML file directly from the Git repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/01_pipeline/04_pipeline.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Use the <code>tkn pipeline list</code> command to verify that the pipeline is added to the application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ tkn pipeline list</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output verifies that the <code>build-and-deploy</code> pipeline was created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">NAME               AGE            LAST RUN   STARTED   DURATION   STATUS
+build-and-deploy   1 minute ago   ---        ---       ---        ---</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-mirroring-images-to-run-pipelines-in-restricted-environment_creating-applications-with-cicd-pipelines"><a class="anchor" href="#op-mirroring-images-to-run-pipelines-in-restricted-environment_creating-applications-with-cicd-pipelines"></a>Mirroring images to run pipelines in a restricted environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To run OpenShift Pipelines in a disconnected cluster or a cluster provisioned in a restricted environment, ensure that either the Samples Operator is configured for a restricted network, or a cluster administrator has created a cluster with a mirrored registry.</p>
+</div>
+<div class="paragraph">
+<p>The following procedure uses the <code>pipelines-tutorial</code> example to create a pipeline for an application in a restricted environment using a cluster with a mirrored registry. To ensure that the <code>pipelines-tutorial</code> example works in a restricted environment, you must mirror the respective builder images from the mirror registry for the front-end interface, <code>pipelines-vote-ui</code>; back-end interface, <code>pipelines-vote-api</code>; and the <code>cli</code>.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Mirror the builder image from the mirror registry for the front-end interface, <code>pipelines-vote-ui</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Verify that the required images tag is not imported:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe imagestream python <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">Name:			python
+Namespace:		openshift
+[...]
+
+3.8-ubi9 (latest)
+  tagged from registry.redhat.io/ubi9/python-38:latest
+    prefer registry pullthrough when referencing this tag
+
+  Build and run Python 3.8 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-python-container/blob/master/3.8/README.md.
+  Tags: builder, python
+  Supports: python:3.8, python
+  Example Repo: https://github.com/sclorg/django-ex.git
+
+[...]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Mirror the supported image tag to the private registry:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc image mirror registry.redhat.io/ubi9/python-39:latest &lt;mirror-registry&gt;:&lt;port&gt;/ubi9/python-39</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Import the image:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc tag &lt;mirror-registry&gt;:&lt;port&gt;/ubi9/python-39 python:latest <span class="nt">--scheduled</span> <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must periodically re-import the image. The <code>--scheduled</code> flag enables automatic re-import of the image.</p>
+</div>
+</li>
+<li>
+<p>Verify that the images with the given tag have been imported:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe imagestream python <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">Name:			python
+Namespace:		openshift
+[...]
+
+latest
+</span><span class="gp">  updates automatically from registry  &lt;mirror-registry&gt;</span>:&lt;port&gt;/ubi9/python-39
+<span class="go">
+</span><span class="gp">  *  &lt;mirror-registry&gt;</span>:&lt;port&gt;/ubi9/python-39@sha256:3ee...
+<span class="go">
+[...]</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Mirror the builder image from the mirror registry for the back-end interface, <code>pipelines-vote-api</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Verify that the required images tag is not imported:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe imagestream golang <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">Name:			golang
+Namespace:		openshift
+[...]
+
+1.14.7-ubi8 (latest)
+  tagged from registry.redhat.io/ubi8/go-toolset:1.14.7
+    prefer registry pullthrough when referencing this tag
+
+  Build and run Go applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/golang-container/blob/master/README.md.
+  Tags: builder, golang, go
+  Supports: golang
+  Example Repo: https://github.com/sclorg/golang-ex.git
+
+[...]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Mirror the supported image tag to the private registry:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc image mirror registry.redhat.io/ubi9/go-toolset:latest &lt;mirror-registry&gt;:&lt;port&gt;/ubi9/go-toolset</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Import the image:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc tag &lt;mirror-registry&gt;:&lt;port&gt;/ubi9/go-toolset golang:latest <span class="nt">--scheduled</span> <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must periodically re-import the image. The <code>--scheduled</code> flag enables automatic re-import of the image.</p>
+</div>
+</li>
+<li>
+<p>Verify that the images with the given tag have been imported:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe imagestream golang <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">Name:			golang
+Namespace:		openshift
+[...]
+
+latest
+</span><span class="gp">  updates automatically from registry &lt;mirror-registry&gt;</span>:&lt;port&gt;/ubi9/go-toolset
+<span class="go">
+</span><span class="gp">  * &lt;mirror-registry&gt;</span>:&lt;port&gt;/ubi9/go-toolset@sha256:59a74d581df3a2bd63ab55f7ac106677694bf612a1fe9e7e3e1487f55c421b37
+<span class="go">
+[...]</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Mirror the builder image from the mirror registry for the <code>cli</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Verify that the required images tag is not imported:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe imagestream cli <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">Name:                   cli
+Namespace:              openshift
+[...]
+
+latest
+  updates automatically from registry quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:65c68e8c22487375c4c6ce6f18ed5485915f2bf612e41fef6d41cbfcdb143551
+
+  * quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:65c68e8c22487375c4c6ce6f18ed5485915f2bf612e41fef6d41cbfcdb143551
+
+[...]</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Mirror the supported image tag to the private registry:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc image mirror quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:65c68e8c22487375c4c6ce6f18ed5485915f2bf612e41fef6d41cbfcdb143551 &lt;mirror-registry&gt;:&lt;port&gt;/openshift-release-dev/ocp-v4.0-art-dev:latest</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Import the image:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc tag &lt;mirror-registry&gt;:&lt;port&gt;/openshift-release-dev/ocp-v4.0-art-dev cli:latest <span class="nt">--scheduled</span> <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must periodically re-import the image. The <code>--scheduled</code> flag enables automatic re-import of the image.</p>
+</div>
+</li>
+<li>
+<p>Verify that the images with the given tag have been imported:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe imagestream cli <span class="nt">-n</span> openshift</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example output</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="go">Name:                   cli
+Namespace:              openshift
+[...]
+
+latest
+</span><span class="gp">  updates automatically from registry &lt;mirror-registry&gt;</span>:&lt;port&gt;/openshift-release-dev/ocp-v4.0-art-dev
+<span class="go">
+</span><span class="gp">  * &lt;mirror-registry&gt;</span>:&lt;port&gt;/openshift-release-dev/ocp-v4.0-art-dev@sha256:65c68e8c22487375c4c6ce6f18ed5485915f2bf612e41fef6d41cbfcdb143551
+<span class="go">
+[...]</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/openshift_images/configuring-samples-operator.html#samples-operator-restricted-network-install">Configuring Samples Operator for a restricted cluster</a></p>
+</li>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/installing/disconnected_install/installing-mirroring-installation-images.html#installation-about-mirror-registry_installing-mirroring-installation-images">Creating a cluster with a mirrored registry</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="running-a-pipeline_creating-applications-with-cicd-pipelines"><a class="anchor" href="#running-a-pipeline_creating-applications-with-cicd-pipelines"></a>Running a pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <code>PipelineRun</code> resource starts a pipeline and ties it to the Git and image resources that should be used for the specific invocation. It automatically creates and starts the <code>TaskRun</code> resources for each task in the pipeline.</p>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Start the pipeline for the back-end application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="s">$ tkn pipeline start build-and-deploy \</span>
+    <span class="s">-w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/01_pipeline/03_persistent_volume_claim.yaml \</span>
+    <span class="s">-p deployment-name=pipelines-vote-api \</span>
+    <span class="s">-p git-url=https://github.com/openshift/pipelines-vote-api.git \</span>
+    <span class="s">-p IMAGE='image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/pipelines-vote-api' \</span>
+    <span class="s">--use-param-defaults</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous command uses a volume claim template, which creates a persistent volume claim for the pipeline execution.</p>
+</div>
+</li>
+<li>
+<p>To track the progress of the pipeline run, enter the following command::</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="s">$ tkn pipelinerun logs &lt;pipelinerun_id&gt; -f</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The &lt;pipelinerun_id&gt; in the above command is the ID for the <code>PipelineRun</code> that was returned in the output of the previous command.</p>
+</div>
+</li>
+<li>
+<p>Start the pipeline for the front-end application:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="s">$ tkn pipeline start build-and-deploy \</span>
+    <span class="s">-w name=shared-workspace,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/01_pipeline/03_persistent_volume_claim.yaml \</span>
+    <span class="s">-p deployment-name=pipelines-vote-ui \</span>
+    <span class="s">-p git-url=https://github.com/openshift/pipelines-vote-ui.git \</span>
+    <span class="s">-p IMAGE='image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/pipelines-vote-ui' \</span>
+    <span class="s">--use-param-defaults</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>To track the progress of the pipeline run, enter the following command:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="s">$ tkn pipelinerun logs &lt;pipelinerun_id&gt; -f</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The &lt;pipelinerun_id&gt; in the above command is the ID for the <code>PipelineRun</code> that was returned in the output of the previous command.</p>
+</div>
+</li>
+<li>
+<p>After a few minutes, use <code>tkn pipelinerun list</code> command to verify that the pipeline ran successfully by listing all the pipeline runs:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="s">$ tkn pipelinerun list</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output lists the pipeline runs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"> <span class="s">NAME                         STARTED      DURATION     STATUS</span>
+ <span class="s">build-and-deploy-run-xy7rw   1 hour ago   2 minutes    Succeeded</span>
+ <span class="s">build-and-deploy-run-z2rz8   1 hour ago   19 minutes   Succeeded</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Get the application route:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="s">$ oc get route pipelines-vote-ui --template='http://{{.spec.host}}'</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the output of the previous command. You can access the application using this route.</p>
+</div>
+</li>
+<li>
+<p>To rerun the last pipeline run, using the pipeline resources and service account of the previous pipeline, run:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="s">$ tkn pipeline start build-and-deploy --last</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="../secure/authenticating-pipelines-using-git-secret.html#authenticating-pipelines-using-git-secret">Authenticating pipelines using git secret</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="adding-triggers_creating-applications-with-cicd-pipelines"><a class="anchor" href="#adding-triggers_creating-applications-with-cicd-pipelines"></a>Adding triggers to a pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Triggers enable pipelines to respond to external GitHub events, such as push events and pull requests. After you assemble and start a pipeline for the application, add the <code>TriggerBinding</code>, <code>TriggerTemplate</code>, <code>Trigger</code>, and <code>EventListener</code> resources to capture the GitHub events.</p>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Copy the content of the following sample <code>TriggerBinding</code> YAML file and save it:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TriggerBinding</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-url</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">$(body.repository.url)</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-name</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">$(body.repository.name)</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">$(body.head_commit.id)</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the <code>TriggerBinding</code> resource:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> &lt;triggerbinding-yaml-file-name.yaml&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can create the <code>TriggerBinding</code> resource directly from the <code>pipelines-tutorial</code> Git repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/03_triggers/01_binding.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Copy the content of the following sample <code>TriggerTemplate</code> YAML file and save it:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TriggerTemplate</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">params</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-url</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The git repository url</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The git revision</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="s">pipelines-1.13</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-repo-name</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">The name of the deployment to be created / patched</span>
+
+  <span class="na">resourcetemplates</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1beta1</span>
+    <span class="na">kind</span><span class="pi">:</span> <span class="s">PipelineRun</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">generateName</span><span class="pi">:</span> <span class="s">build-deploy-$(tt.params.git-repo-name)-</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+      <span class="na">pipelineRef</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span>
+      <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">deployment-name</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">$(tt.params.git-repo-name)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-url</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">$(tt.params.git-repo-url)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">git-revision</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">$(tt.params.git-revision)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">IMAGE</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/$(tt.params.git-repo-name)</span>
+      <span class="na">workspaces</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">shared-workspace</span>
+        <span class="na">volumeClaimTemplate</span><span class="pi">:</span>
+          <span class="na">spec</span><span class="pi">:</span>
+            <span class="na">accessModes</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+            <span class="na">resources</span><span class="pi">:</span>
+              <span class="na">requests</span><span class="pi">:</span>
+                <span class="na">storage</span><span class="pi">:</span> <span class="s">500Mi</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The template specifies a volume claim template to create a persistent volume claim for defining the storage volume for the workspace. Therefore, you do not need to create a persistent volume claim to provide data storage.</p>
+</div>
+</li>
+<li>
+<p>Create the <code>TriggerTemplate</code> resource:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> &lt;triggertemplate-yaml-file-name.yaml&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can create the <code>TriggerTemplate</code> resource directly from the <code>pipelines-tutorial</code> Git repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/03_triggers/02_template.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Copy the contents of the following sample <code>Trigger</code> YAML file and save it:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Trigger</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-trigger</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">bindings</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the <code>Trigger</code> resource:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> &lt;trigger-yaml-file-name.yaml&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can create the <code>Trigger</code> resource directly from the <code>pipelines-tutorial</code> Git repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/03_triggers/03_trigger.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Copy the contents of the following sample <code>EventListener</code> YAML file and save it:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">triggers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">triggerRef</span><span class="pi">:</span> <span class="s">vote-trigger</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, if you have not defined a trigger custom resource, add the binding and template spec to the <code>EventListener</code> YAML file, instead of referring to the name of the trigger:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">triggers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">bindings</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span>
+    <span class="na">template</span><span class="pi">:</span>
+      <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the <code>EventListener</code> resource by performing the following steps:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>To create an <code>EventListener</code> resource using a secure HTTPS connection:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Add a label to enable the secure HTTPS connection to the <code>Eventlistener</code> resource:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc label namespace &lt;ns-name&gt; operator.tekton.dev/enable-annotation<span class="o">=</span>enabled</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create the <code>EventListener</code> resource:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> &lt;eventlistener-yaml-file-name.yaml&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can create the <code>EvenListener</code> resource directly from the <code>pipelines-tutorial</code> Git repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create <span class="nt">-f</span> https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.13/03_triggers/04_event_listener.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a route with the re-encrypt TLS termination:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc create route reencrypt <span class="nt">--service</span><span class="o">=</span>&lt;svc-name&gt; <span class="nt">--cert</span><span class="o">=</span>tls.crt <span class="nt">--key</span><span class="o">=</span>tls.key <span class="nt">--ca-cert</span><span class="o">=</span>ca.crt <span class="nt">--hostname</span><span class="o">=</span>&lt;<span class="nb">hostname</span><span class="o">&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can create a re-encrypt TLS termination YAML file to create a secured route.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example Re-encrypt TLS Termination YAML of the Secured Route</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">route.openshift.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Route</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">route-passthrough-secured</span> <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">host</span><span class="pi">:</span> <span class="s">&lt;hostname&gt;</span>
+  <span class="na">to</span><span class="pi">:</span>
+    <span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">frontend</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="na">tls</span><span class="pi">:</span>
+    <span class="na">termination</span><span class="pi">:</span> <span class="s">reencrypt</span>         <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="na">key</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">as in edge termination</span><span class="pi">]</span>
+    <span class="na">certificate</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">as in edge termination</span><span class="pi">]</span>
+    <span class="na">caCertificate</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">as in edge termination</span><span class="pi">]</span>
+    <span class="na">destinationCACertificate</span><span class="pi">:</span> <span class="pi">|-</span>   <i class="conum" data-value="3"></i><b>(3)</b>
+      <span class="s">-----BEGIN CERTIFICATE-----</span>
+      <span class="s">[...]</span>
+      <span class="s">-----END CERTIFICATE-----</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the object, which is limited to 63 characters.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code><strong>termination</strong></code> field is set to <code>reencrypt</code>. This is the only required <code>tls</code> field.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Required for re-encryption. <code><strong>destinationCACertificate</strong></code> specifies a CA certificate to validate the endpoint certificate, securing the connection from the router to the destination pods. If the service is using a service signing certificate, or the administrator has specified a default CA certificate for the router and the service has a certificate signed by that CA, this field can be omitted.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See <code>oc create route reencrypt --help</code> for more options.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>To create an <code>EventListener</code> resource using an insecure HTTP connection:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create the <code>EventListener</code> resource.</p>
+</li>
+<li>
+<p>Expose the <code>EventListener</code> service as an OpenShift Container Platform route to make it publicly accessible:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc expose svc el-vote-app</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-eventlisteners-to-serve-multiple-namespaces_creating-applications-with-cicd-pipelines"><a class="anchor" href="#configuring-eventlisteners-to-serve-multiple-namespaces_creating-applications-with-cicd-pipelines"></a>Configuring event listeners to serve multiple namespaces</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can skip this section if you want to create a basic CI/CD pipeline. However, if your deployment strategy involves multiple namespaces, you can configure event listeners to serve multiple namespaces.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To increase reusability of <code>EvenListener</code> objects, cluster administrators can configure and deploy them as multi-tenant event listeners that serve multiple namespaces.</p>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Configure cluster-wide fetch permission for the event listener.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Set a service account name to be used in the <code>ClusterRoleBinding</code> and <code>EventListener</code> objects. For example, <code>el-sa</code>.</p>
+<div class="listingblock">
+<div class="title">Example <code>ServiceAccount.yaml</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">el-sa</span>
+<span class="nn">---</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the <code>rules</code> section of the <code>ClusterRole.yaml</code> file, set appropriate permissions for every event listener deployment to function cluster-wide.</p>
+<div class="listingblock">
+<div class="title">Example <code>ClusterRole.yaml</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">el-sel-clusterrole</span>
+<span class="na">rules</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">triggers.tekton.dev"</span><span class="pi">]</span>
+  <span class="na">resources</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">eventlisteners"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">clustertriggerbindings"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">clusterinterceptors"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">triggerbindings"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">triggertemplates"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">triggers"</span><span class="pi">]</span>
+  <span class="na">verbs</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">get"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">list"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">watch"</span><span class="pi">]</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">resources</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">configmaps"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">secrets"</span><span class="pi">]</span>
+  <span class="na">verbs</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">get"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">list"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">watch"</span><span class="pi">]</span>
+<span class="pi">-</span> <span class="na">apiGroups</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">resources</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">serviceaccounts"</span><span class="pi">]</span>
+  <span class="na">verbs</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">impersonate"</span><span class="pi">]</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Configure cluster role binding with the appropriate service account name and cluster role name.</p>
+<div class="listingblock">
+<div class="title">Example <code>ClusterRoleBinding.yaml</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRoleBinding</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">el-mul-clusterrolebinding</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">el-sa</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">el-sel-clusterrole</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>In the <code>spec</code> parameter of the event listener, add the service account name, for example <code>el-sa</code>. Fill the <code>namespaceSelector</code> parameter with names of namespaces where event listener is intended to serve.</p>
+<div class="listingblock">
+<div class="title">Example <code>EventListener.yaml</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">namespace-selector-listener</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">el-sa</span>
+  <span class="na">namespaceSelector</span><span class="pi">:</span>
+    <span class="na">matchNames</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">default</span>
+    <span class="pi">-</span> <span class="s">foo</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a service account with the necessary permissions, for example <code>foo-trigger-sa</code>. Use it for role binding the triggers.</p>
+<div class="listingblock">
+<div class="title">Example <code>ServiceAccount.yaml</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">foo-trigger-sa</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">foo</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example <code>RoleBinding.yaml</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">RoleBinding</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">triggercr-rolebinding</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">foo</span>
+<span class="na">subjects</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceAccount</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">foo-trigger-sa</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">foo</span>
+<span class="na">roleRef</span><span class="pi">:</span>
+  <span class="na">apiGroup</span><span class="pi">:</span> <span class="s">rbac.authorization.k8s.io</span>
+  <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterRole</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">tekton-triggers-eventlistener-roles</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a trigger with the appropriate trigger template, trigger binding, and service account name.</p>
+<div class="listingblock">
+<div class="title">Example <code>Trigger.yaml</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Trigger</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">trigger</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">foo</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">foo-trigger-sa</span>
+  <span class="na">interceptors</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">github"</span>
+      <span class="na">params</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">secretRef"</span>
+          <span class="na">value</span><span class="pi">:</span>
+            <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-secret</span>
+            <span class="na">secretKey</span><span class="pi">:</span> <span class="s">secretToken</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eventTypes"</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">push"</span><span class="pi">]</span>
+  <span class="na">bindings</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-webhooks_creating-applications-with-cicd-pipelines"><a class="anchor" href="#creating-webhooks_creating-applications-with-cicd-pipelines"></a>Creating webhooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Webhooks</em> are HTTP POST messages that are received by the event listeners whenever a configured event occurs in your repository. The event payload is then mapped to trigger bindings, and processed by trigger templates. The trigger templates eventually start one or more pipeline runs, leading to the creation and deployment of Kubernetes resources.</p>
+</div>
+<div class="paragraph">
+<p>In this section, you will configure a webhook URL on your forked Git repositories <code>pipelines-vote-ui</code> and <code>pipelines-vote-api</code>. This URL points to the publicly accessible <code>EventListener</code> service route.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Adding webhooks requires administrative privileges to the repository. If you do not have administrative access to your repository, contact your system administrator for adding webhooks.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>Get the webhook URL:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For a secure HTTPS connection:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ echo "URL: $(oc  get route el-vote-app --template='https://{{.spec.host}}')"</pre>
+</div>
+</div>
+</li>
+<li>
+<p>For an HTTP (insecure) connection:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ echo "URL: $(oc  get route el-vote-app --template='http://{{.spec.host}}')"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the URL obtained in the output.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configure webhooks manually on the front-end repository:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Open the front-end Git repository <code>pipelines-vote-ui</code> in your browser.</p>
+</li>
+<li>
+<p>Click <strong>Settings</strong> &#8594; <strong>Webhooks</strong> &#8594; <strong>Add Webhook</strong></p>
+</li>
+<li>
+<p>On the <strong>Webhooks/Add Webhook</strong> page:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Enter the webhook URL from step 1 in <strong>Payload URL</strong> field</p>
+</li>
+<li>
+<p>Select <strong>application/json</strong> for the <strong>Content type</strong></p>
+</li>
+<li>
+<p>Specify the secret in the <strong>Secret</strong> field</p>
+</li>
+<li>
+<p>Ensure that the <strong>Just the push event</strong> is selected</p>
+</li>
+<li>
+<p>Select <strong>Active</strong></p>
+</li>
+<li>
+<p>Click <strong>Add Webhook</strong></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Repeat step 2 for the back-end repository <code>pipelines-vote-api</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="triggering-a-pipeline_creating-applications-with-cicd-pipelines"><a class="anchor" href="#triggering-a-pipeline_creating-applications-with-cicd-pipelines"></a>Triggering a pipeline run</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Whenever a <code>push</code> event occurs in the Git repository, the configured webhook sends an event payload to the publicly exposed <code>EventListener</code> service route. The <code>EventListener</code> service of the application processes the payload, and passes it to the relevant <code>TriggerBinding</code> and <code>TriggerTemplate</code> resource pairs. The <code>TriggerBinding</code> resource extracts the parameters, and the <code>TriggerTemplate</code> resource uses these parameters and specifies the way the resources must be created. This may rebuild and redeploy the application.</p>
+</div>
+<div class="paragraph">
+<p>In this section, you push an empty commit to the front-end <code>pipelines-vote-ui</code> repository, which then triggers the pipeline run.</p>
+</div>
+<div class="olist discrete">
+<div class="title">Procedure</div>
+<ol class="discrete">
+<li>
+<p>From the terminal, clone your forked Git repository <code>pipelines-vote-ui</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>git clone git@github.com:&lt;your GitHub ID&gt;/pipelines-vote-ui.git <span class="nt">-b</span> pipelines-1.13</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Push an empty commit:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>git commit <span class="nt">-m</span> <span class="s2">"empty-commit"</span> <span class="nt">--allow-empty</span> <span class="o">&amp;&amp;</span> git push origin pipelines-1.13</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check if the pipeline run was triggered:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ tkn pipelinerun list</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that a new pipeline run was initiated.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-monitoring-of-event-listeners-for-triggers-for-user-defined-projects_creating-applications-with-cicd-pipelines"><a class="anchor" href="#enabling-monitoring-of-event-listeners-for-triggers-for-user-defined-projects_creating-applications-with-cicd-pipelines"></a>Enabling monitoring of event listeners for Triggers for user-defined projects</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As a cluster administrator, to gather event listener metrics for the <code>Triggers</code> service in a user-defined project and display them in the OpenShift Container Platform web console, you can create a service monitor for each event listener. On receiving an HTTP request, event listeners for the <code>Triggers</code> service return three metrics&#8201;&#8212;&#8201;<code>eventlistener_http_duration_seconds</code>, <code>eventlistener_event_count</code>, and <code>eventlistener_triggered_resources</code>.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have logged in to the OpenShift Container Platform web console.</p>
+</li>
+<li>
+<p>You have installed the Red Hat OpenShift Pipelines Operator.</p>
+</li>
+<li>
+<p>You have enabled monitoring for user-defined projects.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>For each event listener, create a service monitor. For example, to view the metrics for the <code>github-listener</code> event listener in the <code>test</code> namespace, create the following service monitor:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">monitoring.coreos.com/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ServiceMonitor</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="s">app.kubernetes.io/managed-by</span><span class="pi">:</span> <span class="s">EventListener</span>
+    <span class="s">app.kubernetes.io/part-of</span><span class="pi">:</span> <span class="s">Triggers</span>
+    <span class="na">eventlistener</span><span class="pi">:</span> <span class="s">github-listener</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="s">networkoperator.openshift.io/ignore-errors</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">el-monitor</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">test</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">endpoints</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">interval</span><span class="pi">:</span> <span class="s">10s</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="s">http-metrics</span>
+  <span class="na">jobLabel</span><span class="pi">:</span> <span class="s">name</span>
+  <span class="na">namespaceSelector</span><span class="pi">:</span>
+    <span class="na">matchNames</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">test</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="s">app.kubernetes.io/managed-by</span><span class="pi">:</span> <span class="s">EventListener</span>
+      <span class="s">app.kubernetes.io/part-of</span><span class="pi">:</span> <span class="s">Triggers</span>
+      <span class="na">eventlistener</span><span class="pi">:</span> <span class="s">github-listener</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Test the service monitor by sending a request to the event listener. For example, push an empty commit:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>git commit <span class="nt">-m</span> <span class="s2">"empty-commit"</span> <span class="nt">--allow-empty</span> <span class="o">&amp;&amp;</span> git push origin main</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the OpenShift Container Platform web console, navigate to <strong>Administrator</strong> &#8594; <strong>Observe</strong> &#8594; <strong>Metrics</strong>.</p>
+</li>
+<li>
+<p>To view a metric, search by its name. For example, to view the details of the <code>eventlistener_http_resources</code> metric for the <code>github-listener</code> event listener, search using the <code>eventlistener_http_resources</code> keyword.</p>
+</li>
+</ol>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/monitoring/enabling-monitoring-for-user-defined-projects.html">Enabling monitoring for user-defined projects</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="op-configuring-pull-request-capabilities-in-GitHub-interceptor_creating-applications-with-cicd-pipelines"><a class="anchor" href="#op-configuring-pull-request-capabilities-in-GitHub-interceptor_creating-applications-with-cicd-pipelines"></a>Configuring pull request capabilities in GitHub Interceptor</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With GitHub Interceptor, you can create logic that validates and filters GitHub webhooks. For example, you can validate the webhook’s origin and filter incoming events based on specified criteria. When you use GitHub Interceptor to filter event data, you can specify the event types that Interceptor can accept in a field.
+In Red Hat OpenShift Pipelines, you can use the following capabilities of GitHub Interceptor:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Filter pull request events based on the files that have been changed</p>
+</li>
+<li>
+<p>Validate pull requests based on configured GitHub owners</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="op-filtering-pull-requests-using-GitHub-interceptor_creating-applications-with-cicd-pipelines"><a class="anchor" href="#op-filtering-pull-requests-using-GitHub-interceptor_creating-applications-with-cicd-pipelines"></a>Filtering pull requests using GitHub Interceptor</h3>
+<div class="paragraph">
+<p>You can filter GitHub events based on the files that have been changed for push and pull events. This helps you to execute a pipeline for only relevant changes in your Git repository.
+GitHub Interceptor adds a comma delimited list of all files that have been changed and uses the CEL Interceptor to filter incoming events based on the changed files. The list of changed files is added to the <code>changed_files</code> property of the event payload in the top-level  <code>extensions</code> field.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have installed the Red Hat OpenShift Pipelines Operator.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Perform one of the following steps:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For a public GitHub repository, set the value of the <code>addChangedFiles</code> parameter to <code>true</code> in the YAML configuration file shown below:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">github-add-changed-files-pr-listener</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">triggers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">github-listener</span>
+      <span class="na">interceptors</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">github"</span>
+            <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterInterceptor</span>
+            <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev</span>
+          <span class="na">params</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">secretRef"</span>
+            <span class="na">value</span><span class="pi">:</span>
+              <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-secret</span>
+              <span class="na">secretKey</span><span class="pi">:</span> <span class="s">secretToken</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eventTypes"</span>
+            <span class="na">value</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">pull_request"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">push"</span><span class="pi">]</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">addChangedFiles"</span>
+            <span class="na">value</span><span class="pi">:</span>
+              <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s">cel</span>
+          <span class="na">params</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">filter</span>
+            <span class="na">value</span><span class="pi">:</span> <span class="s">extensions.changed_files.matches('controllers/')</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>For a private GitHub repository, set the value of the <code>addChangedFiles</code> parameter to <code>true</code> and provide the access token details, <code>secretName</code> and <code>secretKey</code> in the YAML configuration file shown below:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">github-add-changed-files-pr-listener</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">triggers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">github-listener</span>
+      <span class="na">interceptors</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">github"</span>
+            <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterInterceptor</span>
+            <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev</span>
+          <span class="na">params</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">secretRef"</span>
+            <span class="na">value</span><span class="pi">:</span>
+              <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-secret</span>
+              <span class="na">secretKey</span><span class="pi">:</span> <span class="s">secretToken</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eventTypes"</span>
+            <span class="na">value</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">pull_request"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">push"</span><span class="pi">]</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">addChangedFiles"</span>
+            <span class="na">value</span><span class="pi">:</span>
+              <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+              <span class="na">personalAccessToken</span><span class="pi">:</span>
+                <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-pat</span>
+                <span class="na">secretKey</span><span class="pi">:</span> <span class="s">token</span>
+        <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s">cel</span>
+          <span class="na">params</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">filter</span>
+            <span class="na">value</span><span class="pi">:</span> <span class="s">extensions.changed_files.matches('controllers/')</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Save the configuration file.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="op-validating-pull-requests-using-GitHub-interceptors_creating-applications-with-cicd-pipelines"><a class="anchor" href="#op-validating-pull-requests-using-GitHub-interceptors_creating-applications-with-cicd-pipelines"></a>Validating pull requests using GitHub Interceptors</h3>
+<div class="paragraph">
+<p>You can use GitHub Interceptor to validate the processing of pull requests based on the GitHub owners configured for a repository. This validation helps you to prevent unnecessary execution of a <code>PipelineRun</code> or <code>TaskRun</code> object.
+GitHub Interceptor processes a pull request only if the user name is listed as an owner or if a configurable comment is issued by an owner of the repository. For example, when you comment <code>/ok-to-test</code> on a pull request as an owner, a <code>PipelineRun</code> or <code>TaskRun</code> is triggered.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Owners are configured in an <code>OWNERS</code> file at the root of the repository.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have installed the Red Hat OpenShift Pipelines Operator.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a secret string value.</p>
+</li>
+<li>
+<p>Configure the GitHub webhook with that value.</p>
+</li>
+<li>
+<p>Create a Kubernetes secret named <code>secretRef</code> that contains your secret value.</p>
+</li>
+<li>
+<p>Pass the Kubernetes secret as a reference to your GitHub Interceptor.</p>
+</li>
+<li>
+<p>Create an <code>owners</code> file and add the list of approvers into the <code>approvers</code> section.</p>
+</li>
+<li>
+<p>Perform one of the following steps:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For a public GitHub repository, set the value of the <code>githubOwners</code> parameter to <code>true</code> in the YAML configuration file shown below:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">github-owners-listener</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">triggers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">github-listener</span>
+      <span class="na">interceptors</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">github"</span>
+            <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterInterceptor</span>
+            <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev</span>
+          <span class="na">params</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">secretRef"</span>
+              <span class="na">value</span><span class="pi">:</span>
+                <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-secret</span>
+                <span class="na">secretKey</span><span class="pi">:</span> <span class="s">secretToken</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eventTypes"</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">pull_request"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">issue_comment"</span><span class="pi">]</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">githubOwners"</span>
+              <span class="na">value</span><span class="pi">:</span>
+                <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+                <span class="na">checkType</span><span class="pi">:</span> <span class="s">none</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>For a private GitHub repository, set the value of the <code>githubOwners</code> parameter to <code>true</code> and provide the access token details, <code>secretName</code> and <code>secretKey</code> in the YAML configuration file shown below:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">EventListener</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">github-owners-listener</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">triggers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">github-listener</span>
+      <span class="na">interceptors</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">github"</span>
+            <span class="na">kind</span><span class="pi">:</span> <span class="s">ClusterInterceptor</span>
+            <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">triggers.tekton.dev</span>
+          <span class="na">params</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">secretRef"</span>
+              <span class="na">value</span><span class="pi">:</span>
+                <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-secret</span>
+                <span class="na">secretKey</span><span class="pi">:</span> <span class="s">secretToken</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">eventTypes"</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">pull_request"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">issue_comment"</span><span class="pi">]</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">githubOwners"</span>
+              <span class="na">value</span><span class="pi">:</span>
+                <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+                <span class="na">personalAccessToken</span><span class="pi">:</span>
+                  <span class="na">secretName</span><span class="pi">:</span> <span class="s">github-token</span>
+                  <span class="na">secretKey</span><span class="pi">:</span> <span class="s">secretToken</span>
+                <span class="na">checkType</span><span class="pi">:</span> <span class="s">all</span>
+<span class="nn">...</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>checkType</code> parameter is used to specify the GitHub owners who need authentication. You can set its value to <code>orgMembers</code>, <code>repoMembers</code>, or <code>all</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Save the configuration file.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="pipeline-addtl-resources"><a class="anchor" href="#pipeline-addtl-resources"></a>Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>To include Pipelines as Code along with the application source code in the same repository, see <a href="../pac/about-pipelines-as-code.html#about-pipelines-as-code">About Pipelines as Code</a>.</p>
+</li>
+<li>
+<p>For more details on pipelines in the <strong>Developer</strong> perspective, see the <a href="../create/working-with-pipelines-web-console.html#working-with-pipelines-web-console">Working with OpenShift Pipelines in the web console</a> section.</p>
+</li>
+<li>
+<p>To learn more about Security Context Constraints (SCCs), see the <a href="https://docs.openshift.com/container-platform/latest/authentication/managing-security-context-constraints.html">Managing Security Context Constraints</a> section.</p>
+</li>
+<li>
+<p>For more examples of reusable tasks, see the <a href="https://github.com/openshift/pipelines-catalog">OpenShift Catalog</a> repository. Additionally, you can also see the Tekton Catalog in the Tekton project.</p>
+</li>
+<li>
+<p>To install and deploy a custom instance of Tekton Hub for reusable tasks and pipelines, see <a href="../hub/using-tekton-hub-with-openshift-pipelines.html#using-tekton-hub-with-openshift-pipelines">Using Tekton Hub with Red Hat OpenShift Pipelines</a>.</p>
+</li>
+<li>
+<p>For more details on re-encrypt TLS termination, see <a href="https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html#re-encryption-termination">Re-encryption Termination</a>.</p>
+</li>
+<li>
+<p>For more details on secured routes, see the <a href="https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html">Secured routes</a> section.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-pipelines';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

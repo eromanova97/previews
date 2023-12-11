@@ -1,0 +1,1110 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>Pipelines as Code command reference | Pipelines as Code | Red Hat OpenShift Pipelines Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../about/op-release-notes.html">Red Hat OpenShift Pipelines Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../pac/about-pipelines-as-code.html">Pipelines as Code</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        Pipelines as Code command reference
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/pac/pac-command-reference.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+pac/pac-command-reference.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-right"></span>About OpenShift Pipelines</a>
+      <ul id="topicGroup0" class="collapse  list-unstyled">
+            <li><a class="" href="../about/op-release-notes.html">OpenShift Pipelines release notes</a></li>
+            <li><a class="" href="../about/about-pipelines.html">About OpenShift Pipelines</a></li>
+            <li><a class="" href="../about/understanding-openshift-pipelines.html">Understanding OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-right"></span>Installing and configuring</a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../install_config/installing-pipelines.html">Installing OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/uninstalling-pipelines.html">Uninstalling OpenShift Pipelines</a></li>
+            <li><a class="" href="../install_config/customizing-configurations-in-the-tektonconfig-cr.html">Customizing configurations in the TektonConfig custom resource</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../resource/reducing-pipelines-resource-consumption.html">Reducing resource consumption of OpenShift Pipelines</a></li>
+            <li><a class="" href="../resource/setting-compute-resource-quota-for-openshift-pipelines.html">Setting compute resource quota for OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-right"></span>Creating CI/CD pipelines</a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../create/creating-applications-with-cicd-pipelines.html">Creating CI/CD solutions for applications using OpenShift Pipelines</a></li>
+            <li><a class="" href="../create/working-with-pipelines-web-console.html">Working with OpenShift Pipelines in the web console</a></li>
+            <li><a class="" href="../create/remote-pipelines-tasks-resolvers.html">Specifying remote pipelines and tasks using resolvers</a></li>
+            <li><a class="" href="../create/managing-nonversioned-and-versioned-cluster-tasks.html">Managing non-versioned and versioned cluster tasks</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-right"></span>Observability in OpenShift Pipelines</a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../records/using-tekton-results-for-openshift-pipelines-observability.html">Using Tekton Results for OpenShift Pipelines observability</a></li>
+            <li><a class="" href="../records/viewing-pipeline-logs-using-the-openshift-logging-operator.html">Viewing pipeline logs using the OpenShift Logging Operator</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-down"></span>Pipelines as Code</a>
+      <ul id="topicGroup5" class="collapse in list-unstyled">
+            <li><a class="" href="../pac/about-pipelines-as-code.html">About Pipelines as Code</a></li>
+            <li><a class="" href="../pac/install-config-pipelines-as-code.html">Installing and configuring Pipelines as Code</a></li>
+            <li><a class="" href="../pac/using-pipelines-as-code-repos.html">Using Pipelines as Code with a Git repository hosting service provider</a></li>
+            <li><a class="" href="../pac/using-repository-crd.html">Using the Repository custom resource</a></li>
+            <li><a class="" href="../pac/using-pac-resolver.html">Using the Pipelines as Code resolver</a></li>
+            <li><a class="" href="../pac/managing-pipeline-runs-pac.html">Managing pipeline runs</a></li>
+            <li><a class=" active" href="../pac/pac-command-reference.html">Pipelines as Code command reference</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-right"></span>Securing OpenShift Pipelines</a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../secure/using-tekton-chains-for-openshift-pipelines-supply-chain-security.html">Using Tekton Chains for OpenShift Pipelines supply chain security</a></li>
+            <li><a class="" href="../secure/configuring-security-context-for-pods.html">Configuring the security context for pods</a></li>
+            <li><a class="" href="../secure/securing-webhooks-with-event-listeners.html">Securing webhooks with event listeners</a></li>
+            <li><a class="" href="../secure/authenticating-pipelines-using-git-secret.html">Authenticating pipelines using git secret</a></li>
+            <li><a class="" href="../secure/unprivileged-building-of-container-images-using-buildah.html">Unprivileged building of container images using Buildah</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Custom Tekton Hub instance</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../hub/using-tekton-hub-with-openshift-pipelines.html">Using Tekton Hub with OpenShift Pipelines</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Pipelines CLI (tkn) reference</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../tkn_cli/installing-tkn.html">Installing tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-configuring-tkn.html">Configuring tkn</a></li>
+            <li><a class="" href="../tkn_cli/op-tkn-reference.html">Basic tkn commands</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Pipelines as Code command reference
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#pipelines-as-code-command-reference_pac-command-reference">Pipelines as Code command reference</a>
+<ul class="sectlevel2">
+<li><a href="#basic-syntax">Basic syntax</a></li>
+<li><a href="#global-options">Global options</a></li>
+<li><a href="#utility-commands">Utility commands</a></li>
+</ul>
+</li>
+<li><a href="#configuring-pipelines-as-code-logging_pac-command-reference">Configuring Pipelines as Code logging</a></li>
+<li><a href="#splitting-pipelines-as-code-logs-by-namespace_pac-command-reference">Splitting Pipelines as Code logs by namespace</a></li>
+<li><a href="#additional-resources-pac-command">Additional resources</a></li>
+</ul>
+</div>
+<div class="paragraph _abstract">
+<p>You can use the <code>tkn pac</code> CLI tool to control Pipelines as Code. You can also configure Pipelines as Code logging with the <code>TektonConfig</code> custom resource and use the <code>oc</code> command to view Pipelines as Code logs.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pipelines-as-code-command-reference_pac-command-reference"><a class="anchor" href="#pipelines-as-code-command-reference_pac-command-reference"></a>Pipelines as Code command reference</h2>
+<div class="sectionbody">
+<div class="paragraph _abstract">
+<p>The <code>tkn pac</code> CLI tool offers the following capabilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Bootstrap Pipelines as Code installation and configuration.</p>
+</li>
+<li>
+<p>Create a new Pipelines as Code repository.</p>
+</li>
+<li>
+<p>List all Pipelines as Code repositories.</p>
+</li>
+<li>
+<p>Describe a Pipelines as Code repository and the associated runs.</p>
+</li>
+<li>
+<p>Generate a simple pipeline run to get started.</p>
+</li>
+<li>
+<p>Resolve a pipeline run as if it was executed by Pipelines as Code.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can use the commands corresponding to the capabilities for testing and experimentation, so that you don&#8217;t have to make changes to the Git repository containing the application source code.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="basic-syntax"><a class="anchor" href="#basic-syntax"></a>Basic syntax</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>tkn pac <span class="o">[</span><span class="nb">command </span>or options] <span class="o">[</span>arguments]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="global-options"><a class="anchor" href="#global-options"></a>Global options</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>tkn pac <span class="nt">--help</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="utility-commands"><a class="anchor" href="#utility-commands"></a>Utility commands</h3>
+<div class="sect3">
+<h4 id="bootstrap"><a class="anchor" href="#bootstrap"></a>bootstrap</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Bootstrapping Pipelines as Code installation and configuration</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac bootstrap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Installs and configures Pipelines as Code for Git repository hosting service providers, such as GitHub and GitHub Enterprise.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac bootstrap --nightly</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Installs the nightly build of Pipelines as Code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac bootstrap --route-url &lt;public_url_to_ingress_spec&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overrides the OpenShift route URL.</p>
+<p class="tableblock">By default, <code>tkn pac bootstrap</code> detects the OpenShift route, which is automatically associated with the Pipelines as Code controller service.</p>
+<p class="tableblock">If you do not have an OpenShift Container Platform cluster, it asks you for the public URL that points to the ingress endpoint.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac bootstrap github-app</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a GitHub application and secrets in the <code>openshift-pipelines</code> namespace.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="repository"><a class="anchor" href="#repository"></a>repository</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Managing Pipelines as Code repositories</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac create repository</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates a new Pipelines as Code repository and a namespace based on the pipeline run template.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac list</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all the Pipelines as Code repositories and displays the last status of the associated runs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac repo describe</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Describes a Pipelines as Code repository and the associated runs.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="generate"><a class="anchor" href="#generate"></a>generate</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Generating pipeline runs using Pipelines as Code</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac generate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generates a simple pipeline run.</p>
+<p class="tableblock">When executed from the directory containing the source code, it automatically detects current Git information.</p>
+<p class="tableblock">In addition, it uses basic language detection capability and adds extra tasks depending on the language.</p>
+<p class="tableblock">For example, if it detects a <code>setup.py</code> file at the repository root, the <a href="https://hub.tekton.dev/tekton/task/pylint">pylint task</a> is automatically added to the generated pipeline run.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="resolve"><a class="anchor" href="#resolve"></a>resolve</h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Resolving and executing pipeline runs using Pipelines as Code</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac resolve</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executes a pipeline run as if it is owned by the Pipelines as Code on service.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac resolve -f .tekton/pull-request.yaml | oc apply -f -</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays the status of a live pipeline run that uses the template in <code>.tekton/pull-request.yaml</code>.</p>
+<p class="tableblock">Combined with a Kubernetes installation running on your local machine, you can observe the pipeline run without generating a new commit.</p>
+<p class="tableblock">If you run the command from a source code repository, it attempts to detect the current Git information and automatically resolve parameters such as current revision or branch.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tkn pac resolve -f .tekton/pr.yaml -p revision=main -p repo_name=&lt;repository_name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executes a pipeline run by overriding default parameter values derived from the Git repository.</p>
+<p class="tableblock">The <code>-f</code> option can also accept a directory path and apply the <code>tkn pac resolve</code> command on all <code>.yaml</code> or <code>.yml</code> files in that directory. You can also use the <code>-f</code> flag multiple times in the same command.</p>
+<p class="tableblock">You can override the default information gathered from the Git repository by specifying parameter values using the <code>-p</code> option. For example, you can use a Git branch as a revision and a different repository name.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring-pipelines-as-code-logging_pac-command-reference"><a class="anchor" href="#configuring-pipelines-as-code-logging_pac-command-reference"></a>Configuring Pipelines as Code logging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure Pipelines as Code logging by editing the <code>pac-config-logging</code> config map in the <code>TektonConfig</code> custom resource (CR).</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have Pipelines as Code installed on your cluster.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>In the <strong>Administrator</strong> perspective of the web console, go to <strong>Administration</strong> → <strong>CustomResourceDefinitions</strong>.</p>
+</li>
+<li>
+<p>Use the <strong>Search by name</strong> field to search for the <code>tektonconfigs.operator.tekton.dev</code> custom resource definition (CRD) and click <strong>TektonConfig</strong> to view the CRD <strong>Details</strong> page.</p>
+</li>
+<li>
+<p>Click the <strong>Instances</strong> tab.</p>
+</li>
+<li>
+<p>Click the <strong>config</strong> instance to view the <code>TektonConfig</code> CR details.</p>
+</li>
+<li>
+<p>Click the <strong>YAML</strong> tab.</p>
+</li>
+<li>
+<p>Edit the <code>loglevel.</code> fields under the <code>.options.configMaps.pac-config-logging.data</code> parameter based on your requirements.</p>
+<div class="listingblock">
+<div class="title">Example <code>TektonConfig</code> CR with the Pipelines as Code log level fields set to <code>warn</code></div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">platforms</span><span class="pi">:</span>
+    <span class="na">openshift</span><span class="pi">:</span>
+      <span class="na">pipelinesAsCode</span><span class="pi">:</span>
+        <span class="na">options</span><span class="pi">:</span>
+          <span class="na">configMaps</span><span class="pi">:</span>
+            <span class="na">pac-config-logging</span><span class="pi">:</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="s">loglevel.pac-watcher</span><span class="pi">:</span> <span class="s">warn</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                <span class="s">loglevel.pipelines-as-code-webhook</span><span class="pi">:</span> <span class="s">warn</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                <span class="s">loglevel.pipelinesascode</span><span class="pi">:</span> <span class="s">warn</span> <i class="conum" data-value="3"></i><b>(3)</b>
+                <span class="na">zap-logger-config</span><span class="pi">:</span> <span class="pi">|</span>
+                  <span class="s">{</span>
+                    <span class="s">"level": "info",</span>
+                    <span class="s">"development": false,</span>
+                    <span class="s">"sampling": {</span>
+                      <span class="s">"initial": 100,</span>
+                      <span class="s">"thereafter": 100</span>
+                    <span class="s">},</span>
+                    <span class="s">"outputPaths": ["stdout"],</span>
+                    <span class="s">"errorOutputPaths": ["stderr"],</span>
+                    <span class="s">"encoding": "json",</span>
+                    <span class="s">"encoderConfig": {</span>
+                      <span class="s">"timeKey": "ts",</span>
+                      <span class="s">"levelKey": "level",</span>
+                      <span class="s">"nameKey": "logger",</span>
+                      <span class="s">"callerKey": "caller",</span>
+                      <span class="s">"messageKey": "msg",</span>
+                      <span class="s">"stacktraceKey": "stacktrace",</span>
+                      <span class="s">"lineEnding": "",</span>
+                      <span class="s">"levelEncoder": "",</span>
+                      <span class="s">"timeEncoder": "iso8601",</span>
+                      <span class="s">"durationEncoder": "",</span>
+                      <span class="s">"callerEncoder": ""</span>
+                    <span class="s">}</span>
+                  <span class="s">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The log level for the <code>pipelines-as-code-watcher</code> component.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The log level for the <code>pipelines-as-code-webhook</code> component.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The log level for the <code>pipelines-as-code-controller</code> component.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Optional: Create a custom logging config map for the Pipelines as Code components by changing the <code>.env.value</code> for each component under the <code>.options.deployments</code> field. The example below shows the configuration with the custom config map called <code>custom-pac-config-logging</code>.</p>
+<div class="listingblock">
+<div class="title">Example <code>TektonConfig</code> CR with the Pipelines as Code custom logging config map</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">operator.tekton.dev/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">TektonConfig</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">config</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">platforms</span><span class="pi">:</span>
+    <span class="na">openshift</span><span class="pi">:</span>
+      <span class="na">pipelinesAsCode</span><span class="pi">:</span>
+        <span class="na">enable</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">options</span><span class="pi">:</span>
+          <span class="na">configMaps</span><span class="pi">:</span>
+            <span class="na">custom-pac-config-logging</span><span class="pi">:</span>
+              <span class="na">data</span><span class="pi">:</span>
+                <span class="s">loglevel.pac-watcher</span><span class="pi">:</span> <span class="s">warn</span>
+                <span class="s">loglevel.pipelines-as-code-webhook</span><span class="pi">:</span> <span class="s">warn</span>
+                <span class="s">loglevel.pipelinesascode</span><span class="pi">:</span> <span class="s">warn</span>
+                <span class="na">zap-logger-config</span><span class="pi">:</span> <span class="pi">|</span>
+                  <span class="s">{</span>
+                    <span class="s">"level": "info",</span>
+                    <span class="s">"development": false,</span>
+                    <span class="s">"sampling": {</span>
+                      <span class="s">"initial": 100,</span>
+                      <span class="s">"thereafter": 100</span>
+                    <span class="s">},</span>
+                    <span class="s">"outputPaths": ["stdout"],</span>
+                    <span class="s">"errorOutputPaths": ["stderr"],</span>
+                    <span class="s">"encoding": "json",</span>
+                    <span class="s">"encoderConfig": {</span>
+                      <span class="s">"timeKey": "ts",</span>
+                      <span class="s">"levelKey": "level",</span>
+                      <span class="s">"nameKey": "logger",</span>
+                      <span class="s">"callerKey": "caller",</span>
+                      <span class="s">"messageKey": "msg",</span>
+                      <span class="s">"stacktraceKey": "stacktrace",</span>
+                      <span class="s">"lineEnding": "",</span>
+                      <span class="s">"levelEncoder": "",</span>
+                      <span class="s">"timeEncoder": "iso8601",</span>
+                      <span class="s">"durationEncoder": "",</span>
+                      <span class="s">"callerEncoder": ""</span>
+                    <span class="s">}</span>
+                  <span class="s">}</span>
+          <span class="na">deployments</span><span class="pi">:</span>
+            <span class="na">pipelines-as-code-controller</span><span class="pi">:</span>
+              <span class="na">spec</span><span class="pi">:</span>
+                <span class="na">template</span><span class="pi">:</span>
+                  <span class="na">spec</span><span class="pi">:</span>
+                    <span class="na">containers</span><span class="pi">:</span>
+                    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pac-controller</span>
+                      <span class="na">env</span><span class="pi">:</span>
+                      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">CONFIG_LOGGING_NAME</span>
+                        <span class="na">value</span><span class="pi">:</span> <span class="s">custom-pac-config-logging</span>
+            <span class="na">pipelines-as-code-watcher</span><span class="pi">:</span>
+              <span class="na">spec</span><span class="pi">:</span>
+                <span class="na">template</span><span class="pi">:</span>
+                  <span class="na">spec</span><span class="pi">:</span>
+                    <span class="na">containers</span><span class="pi">:</span>
+                    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pac-watcher</span>
+                      <span class="na">env</span><span class="pi">:</span>
+                      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">CONFIG_LOGGING_NAME</span>
+                        <span class="na">value</span><span class="pi">:</span> <span class="s">custom-pac-config-logging</span>
+            <span class="na">pipelines-as-code-webhook</span><span class="pi">:</span>
+              <span class="na">spec</span><span class="pi">:</span>
+                <span class="na">template</span><span class="pi">:</span>
+                  <span class="na">spec</span><span class="pi">:</span>
+                    <span class="na">containers</span><span class="pi">:</span>
+                    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pac-webhook</span>
+                      <span class="na">env</span><span class="pi">:</span>
+                      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">CONFIG_LOGGING_NAME</span>
+                        <span class="na">value</span><span class="pi">:</span> <span class="s">custom-pac-config-logging</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="splitting-pipelines-as-code-logs-by-namespace_pac-command-reference"><a class="anchor" href="#splitting-pipelines-as-code-logs-by-namespace_pac-command-reference"></a>Splitting Pipelines as Code logs by namespace</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pipelines as Code logs contain the namespace information to make it possible to filter logs or split the logs by a particular namespace. For example, to view the Pipelines as Code logs related to the <code>mynamespace</code> namespace, enter the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc logs pipelines-as-code-controller-&lt;unique-id&gt; <span class="nt">-n</span> openshift-pipelines | <span class="nb">grep </span>mynamespace <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace <code>pipelines-as-code-controller-&lt;unique-id&gt;</code> with the Pipelines as Code controller name.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="additional-resources-pac-command"><a class="anchor" href="#additional-resources-pac-command"></a>Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../install_config/installing-pipelines.html#installing-pipelines">Installing OpenShift Pipelines</a></p>
+</li>
+<li>
+<p><a href="../tkn_cli/installing-tkn.html#installing-tkn">Installing tkn</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-pipelines';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
