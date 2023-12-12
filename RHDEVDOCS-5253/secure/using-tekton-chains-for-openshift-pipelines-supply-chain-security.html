@@ -1145,11 +1145,12 @@ If you set <code>transparency.enabled</code> to <code>manual</code>, only task r
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">tekton.dev/v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">TaskRun</span>
 <span class="na">metadata</span><span class="pi">:</span>
-<span class="na">name</span><span class="pi">:</span> <span class="s">build-push-task-run-2</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">build-push-task-run-2</span>
 <span class="na">spec</span><span class="pi">:</span>
-<span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">build-bot</span> <i class="conum" data-value="1"></i><b>(1)</b>
-<span class="na">taskRef</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">build-push</span>
+  <span class="na">taskRunTemplate</span><span class="pi">:</span>
+    <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">build-bot</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="na">taskRef</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">build-push</span>
 <span class="nn">...</span></code></pre>
 </div>
 </div>

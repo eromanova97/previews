@@ -1129,7 +1129,8 @@ latest
     <span class="na">metadata</span><span class="pi">:</span>
       <span class="na">generateName</span><span class="pi">:</span> <span class="s">build-deploy-$(tt.params.git-repo-name)-</span>
     <span class="na">spec</span><span class="pi">:</span>
-      <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+      <span class="na">taskRunTemplate</span><span class="pi">:</span>
+        <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
       <span class="na">pipelineRef</span><span class="pi">:</span>
         <span class="na">name</span><span class="pi">:</span> <span class="s">build-and-deploy</span>
       <span class="na">params</span><span class="pi">:</span>
@@ -1181,7 +1182,8 @@ latest
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">vote-trigger</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">taskRunTemplate</span><span class="pi">:</span>
+    <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
   <span class="na">bindings</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span>
   <span class="na">template</span><span class="pi">:</span>
@@ -1214,7 +1216,8 @@ latest
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">taskRunTemplate</span><span class="pi">:</span>
+    <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
   <span class="na">triggers</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">triggerRef</span><span class="pi">:</span> <span class="s">vote-trigger</span></code></pre>
 </div>
@@ -1229,7 +1232,8 @@ latest
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">vote-app</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
+  <span class="na">taskRunTemplate</span><span class="pi">:</span>
+    <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">pipeline</span>
   <span class="na">triggers</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">bindings</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span> <span class="s">vote-app</span>
@@ -1448,7 +1452,8 @@ latest
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">namespace-selector-listener</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">el-sa</span>
+  <span class="na">taskRunTemplate</span><span class="pi">:</span>
+    <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">el-sa</span>
   <span class="na">namespaceSelector</span><span class="pi">:</span>
     <span class="na">matchNames</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">default</span>
@@ -1501,7 +1506,8 @@ latest
   <span class="na">name</span><span class="pi">:</span> <span class="s">trigger</span>
   <span class="na">namespace</span><span class="pi">:</span> <span class="s">foo</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">foo-trigger-sa</span>
+  <span class="na">taskRunTemplate</span><span class="pi">:</span>
+    <span class="na">serviceAccountName</span><span class="pi">:</span> <span class="s">foo-trigger-sa</span>
   <span class="na">interceptors</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">ref</span><span class="pi">:</span>
         <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">github"</span>
