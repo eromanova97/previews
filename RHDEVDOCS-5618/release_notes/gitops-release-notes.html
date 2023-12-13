@@ -1,0 +1,2338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  
+  <title>OpenShift GitOps release notes | Release notes | Red Hat OpenShift GitOps Branch Build</title>
+  <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" type="text/css"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/search.css" rel="stylesheet" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/autumn.css" rel="stylesheet"  media="screen"/>
+  <link href="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" rel="apple-touch-icon-precomposed" type="image/png"/>
+  <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css"/>
+  <link href="https://assets.openshift.net/content/osh-nav-footer.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/docs.css" rel="stylesheet"  media="screen"/>
+  <link href="https://docs.openshift.com/container-platform/4.1/_stylesheets/print.css" rel="stylesheet" type="text/css" media="print"/>
+  <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
+  <!-- or, set /favicon.ico for IE10 win -->
+  <meta content="OpenShift" name="application-name">
+  <meta content="#000000" name="msapplication-TileColor">
+  <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
+
+  <!-- Adobe DTM -->
+  <script src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+  <!-- End Adobe DTM -->
+
+  <script id="trustarc" src="https://static.redhat.com/libs/redhat/marketing/latest/trustarc/trustarc.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+
+</head>
+
+<body onload="selectVersion('Branch Build');">
+  
+<nav id="main">
+  <div class="container">
+    <div class="row">
+      <div class="navbar navbar-default navbar-openshift" role="navigation">
+        <div class="navbar-header">
+            <a href="#nav-main" class="dropdown-toggle navbar-menu-toggle hidden visible-xs" data-toggle="collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+          <a class="navbar-brand" href="/"></a>
+        </div>
+        <div id="nav-main" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="products" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                Products <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-column flex-md-row">
+                  <div class="col-xs-12 col-sm-3">
+                    <h3>Overview</h3>
+                    <ul class="nav flex-column">
+                      <li><a target="_blank" href="https://www.openshift.com/products/features/">Features</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/products/pricing/">Pricing</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-9">
+                    <h3>Featured Products</h3>
+                    <ul class="nav">
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/container-platform/">Red Hat OpenShift Container&nbsp;Platform</a>
+                        <p class="d-none d-md-block">Build, deploy and manage your applications across cloud- and on-premise infrastructure</p>
+                      </li>
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/dedicated/">Red Hat OpenShift Dedicated</a>
+                        <p class="d-none d-md-block">Single-tenant, high-availability Kubernetes clusters in the public cloud</p>
+                      </li>
+
+                      <li>
+                        <a target="_blank" href="https://www.openshift.com/products/online/">Red Hat OpenShift Online</a>
+                        <p class="d-none d-md-block">The fastest way for developers to build, host and scale applications in the public cloud</p>
+                      </li>
+
+                      <li class="nav-item">
+                        <a target="_blank" href="https://www.openshift.com/products/">All products <span class="fa fa-angle-right"></span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li id="learn" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Learn <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu">
+                <div class="row flex-md-nowrap">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Learn</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/what-is-openshift/">What is OpenShift</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/get-started/">Get started</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/partners/">Partners</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/success-stories/">Customer success stories</a></li>
+                      <li><a target="_blank" href="https://blog.openshift.com">Blog</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/resources/">Resources</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Technology Topics</h3>
+                    <ul class="nav">
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/knative/">Knative</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/security/">Security</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/kubernetes/">Kubernetes</a></li>
+                      <li><a target="_blank" href="https://www.openshift.com/learn/topics/service-brokers/">Service Brokers</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Community <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://commons.openshift.org">OpenShift Commons</a></li>
+                <li><a target="_blank" href="https://www.okd.io">Open Source (OKD)</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/startups/">Startups</a></li>
+                <li><a target="_blank" href="https://www.openshift.com/community/programs/grants/">Grants</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Support <span class="fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a target="_blank" href="https://help.openshift.com">Help Center</a></li>
+                <li><a href="https://docs.openshift.com">OpenShift Docs</a></li>
+              </ul>
+            </li>
+
+            <li><a target="_blank" class="nav-sign-up" href="https://www.openshift.com/trial/">Free Trial</a></li>
+
+            <li><a target="_blank" href="https://console.redhat.com/openshift" class="nav-sign-in">Log In <span class="fa fa-angle-right"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container">
+    <button id="hc-open-btn" class="open-btn-sm" onclick="openNav()" aria-label="Open"><span class="fa fa-bars" /></button>
+    <ol class="breadcrumb hide-for-print">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="sitename">
+        <a href="/">
+          Documentation</a>
+      </li>
+      <li class="hidden-xs active">
+        
+          <a href="../release_notes/gitops-release-notes.html">Red Hat OpenShift GitOps Branch Build</a>
+        
+      </li>
+      <li class="hidden-xs active">
+        <a href="../release_notes/gitops-release-notes.html">Release notes</a>
+      </li>
+      
+      
+      <li class="hidden-xs active">
+        OpenShift GitOps release notes
+      </li>
+      
+      <span text-align="right" style="float: right !important">
+        <a href="https://github.com/openshift/openshift-docs/commits/main/release_notes/gitops-release-notes.adoc"><span class="material-icons-outlined" title="Page history">history</span></a>
+        
+        <a href="https://issues.redhat.com/secure/CreateIssueDetails!init.jspa?pid=12332330&issuetype=1&components=12367614&priority=4&summary=Issue+in+file+release_notes/gitops-release-notes.adoc">
+          <span class="material-icons-outlined" title="Open an issue">bug_report</span>
+        </a>
+        <a href="javascript: void(0);" onclick="window.print()"><span class="material-icons-outlined" title="Print page (Save as PDF)">picture_as_pdf</span></a>
+        
+        
+      </span>
+      
+    </ol>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-xs-8 col-sm-3 col-md-3 sidebar sidebar-offcanvas hide-for-print">
+        <div class="row-fluid">
+          <div id="btn-close">
+            <button id="hc-close-btn" onclick="closeNav()" class="close-btn-sm" aria-label="close"><span class="fa fa-times" /></button>
+          </div>
+          <div id="hc-search">
+            <input id="hc-search-input" type="text" aria-label="search">
+            <button id="hc-search-btn" aria-label="search"><span class="fa fa-search" /></button>
+          </div>
+        </div>
+        <ul class="nav nav-sidebar">
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup0"><span id="tgSpan0" class="fa fa-angle-down"></span>Release notes</a>
+      <ul id="topicGroup0" class="collapse in list-unstyled">
+            <li><a class=" active" href="../release_notes/gitops-release-notes.html">OpenShift GitOps release notes</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup1"><span id="tgSpan1" class="fa fa-angle-right"></span>Understanding OpenShift GitOps</a>
+      <ul id="topicGroup1" class="collapse  list-unstyled">
+            <li><a class="" href="../understanding_openshift_gitops/what-is-gitops.html">What is GitOps?</a></li>
+            <li><a class="" href="../understanding_openshift_gitops/about-redhat-openshift-gitops.html">About OpenShift GitOps</a></li>
+            <li><a class="" href="../understanding_openshift_gitops/gathering-gitops-diagnostic-information-for-support.html">Gathering diagnostic information for support</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup2"><span id="tgSpan2" class="fa fa-angle-right"></span>Installing GitOps</a>
+      <ul id="topicGroup2" class="collapse  list-unstyled">
+            <li><a class="" href="../installing_gitops/preparing-gitops-install.html">Preparing to install OpenShift GitOps</a></li>
+            <li><a class="" href="../installing_gitops/installing-openshift-gitops.html">Installing OpenShift GitOps</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup3"><span id="tgSpan3" class="fa fa-angle-right"></span>Argo CD instance</a>
+      <ul id="topicGroup3" class="collapse  list-unstyled">
+            <li><a class="" href="../argocd_instance/setting-up-argocd-instance.html">Setting up a new Argo CD instance</a></li>
+            <li><a class="" href="../argocd_instance/argo-cd-cr-component-properties.html">Argo CD custom resource and component properties</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup4"><span id="tgSpan4" class="fa fa-angle-right"></span>Access control and user management</a>
+      <ul id="topicGroup4" class="collapse  list-unstyled">
+            <li><a class="" href="../accesscontrol_usermanagement/configuring-argo-cd-rbac.html">Configuring Argo CD RBAC</a></li>
+            <li><a class="" href="../accesscontrol_usermanagement/configuring-sso-on-argo-cd-using-dex.html">Configuring SSO for Argo CD using Dex</a></li>
+            <li><a class="" href="../accesscontrol_usermanagement/configuring-sso-for-argo-cd-using-keycloak.html">Configuring SSO for Argo CD using Keycloak</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup5"><span id="tgSpan5" class="fa fa-angle-right"></span>Managing resource use</a>
+      <ul id="topicGroup5" class="collapse  list-unstyled">
+            <li><a class="" href="../managing_resource/configuring-resource-quota.html">Configuring Resource Quota</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup6"><span id="tgSpan6" class="fa fa-angle-right"></span>Argo CD applications</a>
+      <ul id="topicGroup6" class="collapse  list-unstyled">
+            <li><a class="" href="../argocd_applications/deploying-a-spring-boot-application-with-argo-cd.html">Deploying a Spring Boot application with Argo CD</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup7"><span id="tgSpan7" class="fa fa-angle-right"></span>Declarative cluster configuration</a>
+      <ul id="topicGroup7" class="collapse  list-unstyled">
+            <li><a class="" href="../declarative_clusterconfig/configuring-an-openshift-cluster-by-deploying-an-application-with-cluster-configurations.html">Configuring an OpenShift cluster by deploying an application with cluster configurations</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup8"><span id="tgSpan8" class="fa fa-angle-right"></span>Argo Rollouts</a>
+      <ul id="topicGroup8" class="collapse  list-unstyled">
+            <li><a class="" href="../argo_rollouts/using-argo-rollouts-for-progressive-deployment-delivery.html">Using Argo Rollouts for progressive deployment delivery</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup9"><span id="tgSpan9" class="fa fa-angle-right"></span>Security</a>
+      <ul id="topicGroup9" class="collapse  list-unstyled">
+            <li><a class="" href="../securing_openshift_gitops/configuring-secure-communication-with-redis.html">Configuring secure communication with Redis</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup10"><span id="tgSpan10" class="fa fa-angle-right"></span>Observability</a>
+      <ul id="topicGroup10" class="collapse  list-unstyled">
+            <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-0"><span id="sgSpan-10-0" class="fa fa-caret-right"></span>&nbsp;Logging</a>
+              <ul id="topicSubGroup-10-0" class="nav-tertiary list-unstyled collapse">
+
+                  <li><a class="" href="../observability/logging/viewing-argo-cd-logs.html">Viewing Argo CD logs</a></li>              </ul>
+            </li>
+            <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicSubGroup-10-1"><span id="sgSpan-10-1" class="fa fa-caret-right"></span>&nbsp;Monitoring</a>
+              <ul id="topicSubGroup-10-1" class="nav-tertiary list-unstyled collapse">
+
+                  <li><a class="" href="../observability/monitoring/monitoring-with-gitops-dashboards.html">Monitoring with GitOps dashboards</a></li>
+                  <li><a class="" href="../observability/monitoring/monitoring-argo-cd-instances.html">Monitoring Argo CD instances</a></li>
+                  <li><a class="" href="../observability/monitoring/monitoring-the-gitops-operator-performance.html">Monitoring the GitOps Operator performance</a></li>
+                  <li><a class="" href="../observability/monitoring/health-information-for-resources-deployment.html">Monitoring application health status</a></li>
+                  <li><a class="" href="../observability/monitoring/monitoring-argo-cd-custom-resource-workloads.html">Monitoring Argo CD custom resource workloads</a></li>              </ul>
+            </li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup11"><span id="tgSpan11" class="fa fa-angle-right"></span>GitOps workloads on infrastructure nodes</a>
+      <ul id="topicGroup11" class="collapse  list-unstyled">
+            <li><a class="" href="../gitops_workloads_infranodes/run-gitops-control-plane-workload-on-infra-nodes.html">Running Control Plane Workloads on Infra nodes</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup12"><span id="tgSpan12" class="fa fa-angle-right"></span>Troubleshooting issues</a>
+      <ul id="topicGroup12" class="collapse  list-unstyled">
+            <li><a class="" href="../troubleshooting_gitops_issues/auto-reboot-during-argo-cd-sync-with-machine-configurations.html">Auto-reboot during Argo CD sync with machine configurations</a></li>
+      </ul>
+    </li>
+    <li class="nav-header"><a class="" href="javascript:void(0);" data-toggle="collapse" data-target="#topicGroup13"><span id="tgSpan13" class="fa fa-angle-right"></span>Removing GitOps</a>
+      <ul id="topicGroup13" class="collapse  list-unstyled">
+            <li><a class="" href="../removing_gitops/uninstalling-openshift-gitops.html">Uninstalling OpenShift GitOps</a></li>
+      </ul>
+    </li>
+</ul>
+      </div>
+      <div id="hc-search-modal">
+        <div id="hc-modal-content">
+          <span id="hc-modal-close">&times;</span>
+          <div id="hc-search-results-wrapper">
+            <div id="hc-search-results"></div>
+            <div id="hc-search-progress-indicator" class="text-center search-progress-indicator"><i class="fa fa-circle-o-notch fa-spin" style="font-size:42px"></i></div>
+            <div class="text-center">
+              <button id="hc-search-more-btn">Show more results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="print-logo" style="display:none;">
+        <img src="https://www.redhat.com/cms/managed-files/Logo-Red_Hat-OpenShift-A-Standard-RGB_0_0.svg" alt="print logo"/>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-9 main">
+        <div class="page-header">
+          <h1>
+            Red Hat OpenShift GitOps release notes
+          </h1>
+        </div>
+        
+        
+        <div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#GitOps-compatibility-support-matrix_gitops-release-notes">Compatibility and support matrix</a>
+<ul class="sectlevel2">
+<li><a href="#GitOps-technology-preview_gitops-release-notes">Technology Preview features</a></li>
+</ul>
+</li>
+<li><a href="#making-open-source-more-inclusive_gitops-release-notes">Making open source more inclusive</a></li>
+<li><a href="#gitops-release-notes-1-10-1_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.10.1</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-10.1_gitops-release-notes">Errata updates</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-10-0_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.10.0</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-10.0_gitops-release-notes">Errata updates</a></li>
+<li><a href="#new-features-1-10-0_gitops-release-notes">New features</a></li>
+<li><a href="#deprecated-features-1-10-0_gitops-release-notes">Deprecated and removed features</a></li>
+<li><a href="#fixed-issues-1-10-0_gitops-release-notes">Fixed issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-9-3_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.9.3</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-9-3_gitops-release-notes">Errata updates</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-9-2_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.9.2</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-9-2_gitops-release-notes">Errata updates</a></li>
+<li><a href="#fixed-issues-1-9-2_gitops-release-notes">Fixed issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-9-1_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.9.1</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-9-1_gitops-release-notes">Errata updates</a></li>
+<li><a href="#new-features-1-9-1_gitops-release-notes">New features</a></li>
+<li><a href="#fixed-issues-1-9-1_gitops-release-notes">Fixed issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-9-0_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.9.0</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-9-0_gitops-release-notes">Errata updates</a></li>
+<li><a href="#new-features-1-9-0_gitops-release-notes">New features</a></li>
+<li><a href="#deprecated-features-1-9-0_gitops-release-notes">Deprecated and removed features</a></li>
+<li><a href="#fixed-issues-1-9-0_gitops-release-notes">Fixed issues</a></li>
+<li><a href="#known-issues-1-10_gitops-release-notes">Known issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-8-6_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.8.6</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-8-6_gitops-release-notes">Errata updates</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-8-5_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.8.5</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-8-5_gitops-release-notes">Errata updates</a></li>
+<li><a href="#fixed-issues-1-8-5_gitops-release-notes">Fixed issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-8-4_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.8.4</a>
+<ul class="sectlevel2">
+<li><a href="#new-features-1-8-4_gitops-release-notes">New features</a></li>
+<li><a href="#fixed-issues-1-8-4_gitops-release-notes">Fixed issues</a></li>
+<li><a href="#known-issues-1-8-4_gitops-release-notes">Known issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-8-3_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.8.3</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-8-3_gitops-release-notes">Errata updates</a></li>
+<li><a href="#fixed-issues-1-8-3_gitops-release-notes">Fixed issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-8-2_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.8.2</a>
+<ul class="sectlevel2">
+<li><a href="#fixed-issues-1-8-2_gitops-release-notes">Fixed issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-8-1_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.8.1</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-8-1_gitops-release-notes">Errata updates</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-8-0_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.8.0</a>
+<ul class="sectlevel2">
+<li><a href="#new-features-1-8-0_gitops-release-notes">New features</a></li>
+<li><a href="#fixed-issues-1-8-0_gitops-release-notes">Fixed issues</a></li>
+<li><a href="#known-issues-1-8-0_gitops-release-notes">Known issues</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-7-4_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.7.4</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-7-4_gitops-release-notes">Errata updates</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-7-3_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.7.3</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-7-3_gitops-release-notes">Errata updates</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-7-1_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.7.1</a>
+<ul class="sectlevel2">
+<li><a href="#errata-updates-1-7-1_gitops-release-notes">Errata updates</a></li>
+</ul>
+</li>
+<li><a href="#gitops-release-notes-1-7-0_gitops-release-notes">Release notes for Red Hat OpenShift GitOps 1.7.0</a>
+<ul class="sectlevel2">
+<li><a href="#new-features-1-7-0_gitops-release-notes">New features</a></li>
+<li><a href="#fixed-issues-1-7-0_gitops-release-notes">Fixed issues</a></li>
+<li><a href="#known-issues-1-7-0_gitops-release-notes">Known issues</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps is a declarative way to implement continuous deployment for cloud native applications. Red Hat OpenShift GitOps ensures consistency in applications when you deploy them to different clusters in different environments, such as: development, staging, and production. Red Hat OpenShift GitOps helps you automate the following tasks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure that the clusters have similar states for configuration, monitoring, and storage</p>
+</li>
+<li>
+<p>Recover or recreate clusters from a known state</p>
+</li>
+<li>
+<p>Apply or revert configuration changes to multiple OpenShift Container Platform clusters</p>
+</li>
+<li>
+<p>Associate templated configuration with different environments</p>
+</li>
+<li>
+<p>Promote applications across clusters, from staging to production</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For an overview of Red Hat OpenShift GitOps, see <a href="../understanding_openshift_gitops/about-redhat-openshift-gitops.html#about-redhat-openshift-gitops">About Red Hat OpenShift GitOps</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="GitOps-compatibility-support-matrix_gitops-release-notes"><a class="anchor" href="#GitOps-compatibility-support-matrix_gitops-release-notes"></a>Compatibility and support matrix</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some features in this release are currently in <a href="https://access.redhat.com/support/offerings/techpreview">Technology Preview</a>. These experimental features are not intended for production use.</p>
+</div>
+<div class="paragraph">
+<p>In the table, features are marked with the following statuses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>TP</strong>: <em>Technology Preview</em></p>
+</li>
+<li>
+<p><strong>GA</strong>: <em>General Availability</em></p>
+</li>
+<li>
+<p><strong>NA</strong>: <em>Not Applicable</em></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In OpenShift Container Platform 4.13, the <code>stable</code> channel has been removed. Before upgrading to OpenShift Container Platform 4.13, if you are already on the <code>stable</code> channel, choose the appropriate channel and switch to it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>OpenShift GitOps</strong></th>
+<th class="tableblock halign-left valign-top" colspan="8"><strong>Component Versions</strong></th>
+<th class="tableblock halign-left valign-top"><strong>OpenShift Versions</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Version</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><code>kam</code></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Helm</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Kustomize</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Argo CD</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Argo Rollouts</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ApplicationSet</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dex</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>RH SSO</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.10.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.0.50 TP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.12.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5.1.0 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.8.3 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.5.0 TP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.35.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7.5.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.12-4.14</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.9.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.0.49 TP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.11.2 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5.0.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.7.2 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.5.0 TP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.35.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7.5.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.12-4.14</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.8.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.0.47 TP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.10.0 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.5.7 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.6.3 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.35.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7.5.1 GA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.10-4.13</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>kam</code> is the Red Hat OpenShift GitOps Application Manager command-line interface (CLI).</p>
+</li>
+<li>
+<p>RH SSO is an abbreviation for Red Hat SSO.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="GitOps-technology-preview_gitops-release-notes"><a class="anchor" href="#GitOps-technology-preview_gitops-release-notes"></a>Technology Preview features</h3>
+<div class="paragraph">
+<p>The features mentioned in the following table are currently in Technology Preview (TP). These experimental features are not intended for production use.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Technology Preview tracker</caption>
+<colgroup>
+<col style="width: 66.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Feature</th>
+<th class="tableblock halign-left valign-top">TP in Red Hat OpenShift GitOps versions</th>
+<th class="tableblock halign-left valign-top">GA in Red Hat OpenShift GitOps versions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The custom <code>must-gather</code> tool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.9.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argo Rollouts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.9.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ApplicationSet Progressive Rollout Strategy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.8.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple sources for an application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.8.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argo CD applications in non-control plane namespaces</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.7.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argo CD Notifications controller</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.6.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Red Hat OpenShift GitOps <strong>Environments</strong> page in the <strong>Developer</strong> perspective of the OpenShift Container Platform web console </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="making-open-source-more-inclusive_gitops-release-notes"><a class="anchor" href="#making-open-source-more-inclusive_gitops-release-notes"></a>Making open source more inclusive</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat is committed to replacing problematic language in our code, documentation, and web properties. We are beginning with these four terms: master, slave, blacklist, and whitelist. Because of the enormity of this endeavor, these changes will be implemented gradually over several upcoming releases. For more details, see <a href="https://www.redhat.com/en/blog/making-open-source-more-inclusive-eradicating-problematic-language">our CTO Chris Wright&#8217;s message</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-10-1_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-10-1_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.10.1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.10.1 is now available on OpenShift Container Platform 4.12, 4.13, and 4.14.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-10.1_gitops-release-notes"><a class="anchor" href="#errata-updates-1-10.1_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="gitops-1-10-1-security-update-advisory_gitops-release-notes"><a class="anchor" href="#gitops-1-10-1-security-update-advisory_gitops-release-notes"></a>RHSA-2023:6220 - Red Hat OpenShift GitOps 1.10.1 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-10-31</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:6220">RHSA-2023:6220</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator in the default namespace, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-gitops-operator</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-10-0_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-10-0_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.10.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.10.0 is now available on OpenShift Container Platform 4.12, 4.13, and 4.14.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-10.0_gitops-release-notes"><a class="anchor" href="#errata-updates-1-10.0_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="gitops-1-10-0-security-update-advisory_gitops-release-notes"><a class="anchor" href="#gitops-1-10-0-security-update-advisory_gitops-release-notes"></a>RHSA-2023:5407 and RHEA-2023:5408 - Red Hat OpenShift GitOps 1.10.0 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-09-29</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes and enhancements that are included in this release is documented in the following advisories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:5407">RHSA-2023:5407</a></p>
+</li>
+<li>
+<p><a href="https://access.redhat.com/errata/RHEA-2023:5408">RHEA-2023:5408</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator in the default namespace, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-gitops-operator</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="new-features-1-10-0_gitops-release-notes"><a class="anchor" href="#new-features-1-10-0_gitops-release-notes"></a>New features</h3>
+<div class="paragraph">
+<p>The current release adds the following improvements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With this update, the Argo CD CRD API version is upgraded from <code>v1alpha1</code> to <code>v1beta1</code> to accomodate the breaking changes resulting from the deprecation of <code>.spec.dex</code> and certain <code>.spec.sso</code> fields. To streamline the automatic migration of existing <code>v1alpha1</code> Argo CD CRs to <code>v1beta1</code>, conversion webhook support is implemented. <a href="https://issues.redhat.com/browse/GITOPS-3040">GITOPS-3040</a></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>By default, the conversion webhook is enabled only for OLM-installed Operators. For non-OLM installations of the Operator, enabling the webhook is optional. However, without conversion webhook support, you have to manually migrate any existing Argo CD <code>v1alpha1</code> CRs to <code>v1beta1</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this update, the Red Hat OpenShift GitOps Operator deploys three monitoring dashboards in the Administrator perspective of the web console. The three dashboards are <strong>GitOps Overview</strong>, <strong>GitOps Components</strong>, and <strong>GitOps gRPC</strong>. To access these dashboards, go to <strong>Observe</strong> → <strong>Monitoring</strong>. <a href="https:https://issues.redhat.com/browse/GITOPS-1767">GITOPS-1767</a></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Disabling or changing the content of the dashboards is not supported.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Previously, timestamps were presented in a Unix epoch format. With this update, the timestamps are changed to RFC3339 format, for example: 2023-06-27T07:12:48-04:00, to improve overall readability. <a href="https://issues.redhat.com/browse/GITOPS-2898">GITOPS-2898</a></p>
+</li>
+<li>
+<p>With this update, the default Argo CD instance in the <code>openshift-gitops</code> namespace has restricted permissions for non-admin users by default. This improves security because non-admin users no longer have access to sensitive information. However, as an administrator, you can set permissions and grant non-admin users access to the resources managed by the default <code>openshift-gitops</code> Argo CD instance by configuring your Argo CD RBAC. This change only applies to the default <code>openshift-gitops</code> Argo CD instance. <a href="https://issues.redhat.com/browse/GITOPS-3032">GITOPS-3032</a></p>
+</li>
+<li>
+<p>With this update, the default installation namespace for Red Hat OpenShift GitOps Operator is changed to its own namespace called <code>openshift-gitops-operator</code>. You can still choose the old default installation namespace, <code>openshift-operators</code>, through a drop-down menu available in the OperatorHub UI at installation time. You can also enable cluster monitoring on the new namespace by selecting the check box, which makes the Operator&#8217;s performance metrics accessible within the OpenShift Container Platform web console. <a href="https://issues.redhat.com/browse/GITOPS-3073">GITOPS-3073</a></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Red Hat OpenShift GitOps Operator&#8217;s metrics are only available when the Operator is installed in the default namespace, <code>openshift-gitops-operator</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this update, the Red Hat OpenShift GitOps Operator exports custom metrics that allow you to track the performance of the Operator. The following are the exported metrics:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>active_argocd_instances_total</code>: This shows the number of Argo CD instances currently managed across the cluster.</p>
+</li>
+<li>
+<p><code>active_argocd_instances_by_phase{phase="&lt;_PHASE&gt;"}</code>: This shows the number of Argo CD instances in a given phase, such as pending, available, among others.</p>
+</li>
+<li>
+<p><code>active_argocd_instance_reconciliation_count{namespace="&lt;_YOUR-DEFINED-NAMESPACE&gt;"}</code>: This shows the number of times the instance in a given namespace is reconciled.</p>
+</li>
+<li>
+<p><code>controller_runtime_reconcile_time_seconds_per_instance{namespace="&lt;_YOUR-DEFINED-NAMESPACE&gt;"}</code>: This metric displays the distribution of reconciliation cycles by their duration for the instance in a given namespace.</p>
+<div class="paragraph">
+<p>To access these metrics, go to the <strong>Observe</strong> tab on the web console, and run queries against the monitoring stack. <a href="https://issues.redhat.com/browse/GITOPS-2645">GITOPS-2645</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You need to install the Red Hat OpenShift GitOps Operator in the default <code>openshift-gitops-operator</code> namespace with monitoring enabled to have these metrics automatically available.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Before this update, there was no option for choosing an algorithm for distributing the destination clusters equally across the different application controller shards. Now, you can set the sharding algorithm to the <code>round-robin</code> parameter, which distributes clusters equally across the different application controller shards so that the synchronization load is spread equally among the shards. <a href="https://issues.redhat.com/browse/GITOPS-3288">GITOPS-3288</a></p>
+</li>
+<li>
+<p>Before this update, there was no option for scaling the application controller replicas dynamically. Now, you can dynamically scale the number of application controllers based on the number of clusters managed by each application controller. <a href="https://issues.redhat.com/browse/GITOPS-3287">GITOPS-3287</a></p>
+</li>
+</ul>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="https://developers.redhat.com/articles/2023/09/26/dynamically-scale-argo-cd-application-controller-openshift-gitops-110">Dynamically scale the Argo CD application controller with Red Hat OpenShift GitOps 1.10.0</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deprecated-features-1-10-0_gitops-release-notes"><a class="anchor" href="#deprecated-features-1-10-0_gitops-release-notes"></a>Deprecated and removed features</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>With this release, the following deprecated <code>sso</code> and <code>dex</code> fields are removed from Argo CD CR:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>.spec.sso.image</code>, <code>.spec.sso.version</code>, <code>.spec.sso.resources</code>, and <code>.spec.sso.verifyTLS</code> fields for keycloak SSO configurations</p>
+</li>
+<li>
+<p>The <code>.spec.dex</code> fields, along with <code>DISABLE_DEX</code> environment variable</p>
+<div class="paragraph">
+<p>Additionally, the <code>.status.dex</code> and <code>.status.ssoConfig</code> fields are also removed, and a new status field, <code>.status.sso</code>, is introduced. The new field reflects the workload status of the SSO provider (dex or keycloak) configured through the <code>.spec.sso.provider</code> field. <a href="https://issues.redhat.com/browse/GITOPS-2473">GITOPS-2473</a></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To configure dex or keycloak SSO, use the equivalent fields under <code>.spec.sso</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>With this update, the deprecated <code>.spec.resourceCustomizations</code> field is removed from Argo CD CR. Bug fixes and support are only provided through the end of the Red Hat OpenShift GitOps v1.9 lifecycle.
+As an alternative to <code>.spec.resourceCustomizations</code>, you can use <code>.spec.resourceHealthChecks</code>, <code>.spec.resourceIgnoreDifferences</code>, and <code>.spec.resourceActions</code> fields instead. <a href="https://issues.redhat.com/browse/GITOPS-3041">GITOPS-3041</a></p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To prevent data loss during upgrade to Red Hat OpenShift GitOps Operator v1.10.0, ensure that you backup <code>.spec.resourceCustomization</code> value if it is used in your Argo CD CRs.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this update, the deprecated legacy Configuration Management Plugins (CMPs) feature, specified in the <code>argocd-cm</code> config map or the Operator through the <code>.spec.configManagementPlugins</code> field in Argo CD CR, has been removed in Argo CD v2.8. To continue using your legacy plugins, consider migrating them to the new sidecar available in the Operator through the <code>.spec.repo.sidecarContainers</code> field in Argo CD CR. <a href="https://issues.redhat.com/browse/GITOPS-3462">GITOPS-3462</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-10-0_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-10-0_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issues have been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, there were vulnerabilities on Redis. This update fixes the issue by upgrading Redis to the latest version of <code>registry.redhat.io/rhel-8/redis-6</code>. <a href="https://issues.redhat.com/browse/GITOPS-3069">GITOPS-3069</a></p>
+</li>
+<li>
+<p>Before this update, users were facing an "x509: certificate signed by unknown authority" error when using scmProvider with GitLab. This update fixes the issue by adding support for the <code>Insecure</code> flag for scmProvider with GitLab, and an option for mounting TLS certificate on the applicationSet controller.
+This certificate can then be utilized for scmProvider interactions with GitLab. <a href="https://issues.redhat.com/browse/GITOPS-3107">GITOPS-3107</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-9-3_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-9-3_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.9.3</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.9.3 is now available on OpenShift Container Platform 4.12, 4.13, and 4.14.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-9-3_gitops-release-notes"><a class="anchor" href="#errata-updates-1-9-3_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="gitops-1-9-3-security-update-advisory_gitops-release-notes"><a class="anchor" href="#gitops-1-9-3-security-update-advisory_gitops-release-notes"></a>RHSA-2023:7345 - Red Hat OpenShift GitOps 1.9.3 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-11-20</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:7345">RHSA-2023:7345</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator in the default namespace, to view the container images in this release, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-gitops-operator</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-9-2_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-9-2_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.9.2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.9.2 is now available on OpenShift Container Platform 4.12 and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-9-2_gitops-release-notes"><a class="anchor" href="#errata-updates-1-9-2_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-2023-5029-gitops-1-9-2-security-update-advisory_gitops-release-notes"><a class="anchor" href="#rhsa-2023-5029-gitops-1-9-2-security-update-advisory_gitops-release-notes"></a>RHSA-2023:5029 - Red Hat OpenShift GitOps 1.9.2 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-09-08</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:5029">RHSA-2023:5029</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-9-2_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-9-2_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issue has been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, an old Redis image version was used when deploying the Red Hat OpenShift GitOps Operator, which resulted in vulnerabilities. This update fixes the vulnerabilities on Redis by upgrading it to the latest version of the <code>registry.redhat.io/rhel-8/redis-6</code> image. <a href="https://issues.redhat.com/browse/GITOPS-3069">GITOPS-3069</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-9-1_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-9-1_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.9.1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.9.1 is now available on OpenShift Container Platform 4.12 and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-9-1_gitops-release-notes"><a class="anchor" href="#errata-updates-1-9-1_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-20233591-and-rhba-20234117-red-hat-openshift-gitops-1-9-1-security-update-advisory"><a class="anchor" href="#rhsa-20233591-and-rhba-20234117-red-hat-openshift-gitops-1-9-1-security-update-advisory"></a>RHSA-2023:3591 and RHBA-2023:4117 - Red Hat OpenShift GitOps 1.9.1 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-07-17</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:3591">RHSA-2023:3591</a></p>
+</li>
+<li>
+<p><a href="https://access.redhat.com/errata/RHBA-2023:4117">RHBA-2023:4117</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="new-features-1-9-1_gitops-release-notes"><a class="anchor" href="#new-features-1-9-1_gitops-release-notes"></a>New features</h3>
+<div class="paragraph">
+<p>The current release adds the following improvements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With this update, the bundled Argo CD has been updated to version 2.7.6.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-9-1_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-9-1_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issues have been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, Argo CD was becoming unresponsive when there was an increase in namespaces and applications. This update fixes the issue by removing a deadlock. Deadlock occurs when two functions are competing for resources. Now, you should not experience crashes or unresponsiveness when there is an increase in namespaces or applications. <a href="https://issues.redhat.com/browse/GITOPS-2782">GITOPS-2782</a></p>
+</li>
+<li>
+<p>Before this update, the Argo CD application controller resource could suddenly stop working when resynchronizing applications. This update fixes the issue by adding logic to prevent a cluster cache deadlock. Now, you should not experience the deadlock situation, and applications should resynchronize successfully. <a href="https://issues.redhat.com/browse/GITOPS-2880">GITOPS-2880</a></p>
+</li>
+<li>
+<p>Before this update, there was a mismatch in the RSA key for known hosts in the <code>argocd-ssh-known-hosts-cm</code> config map. This update fixes the issue by matching the RSA key with the upstream project. Now, you can use the default RSA keys on default deployments. <a href="https://issues.redhat.com/browse/GITOPS-3042">GITOPS-3042</a></p>
+</li>
+<li>
+<p>Before this update, the reconciliation timeout setting in the <code>argocd-cm</code> config map was not being correctly applied to the Argo CD application controller resource. This update fixes the issue by correctly reading and applying the reconciliation timeout setting from the <code>argocd-cm</code> config map. Now, you can modify the reconciliation timeout value from the <code>AppSync</code> setting without a problem. <a href="https://issues.redhat.com/browse/GITOPS-2810">GITOPS-2810</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-9-0_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-9-0_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.9.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.9.0 is now available on OpenShift Container Platform 4.12 and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-9-0_gitops-release-notes"><a class="anchor" href="#errata-updates-1-9-0_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-20233557-red-hat-openshift-gitops-1-9-0-security-update-advisory"><a class="anchor" href="#rhsa-20233557-red-hat-openshift-gitops-1-9-0-security-update-advisory"></a>RHSA-2023:3557 - Red Hat OpenShift GitOps 1.9.0 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-06-09</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:3557">RHSA-2023:3557</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="new-features-1-9-0_gitops-release-notes"><a class="anchor" href="#new-features-1-9-0_gitops-release-notes"></a>New features</h3>
+<div class="paragraph">
+<p>The current release adds the following improvements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With this update, you can use a custom <code>must-gather</code> tool to collect diagnostic information for project-level resources, cluster-level resources, and Red Hat OpenShift GitOps components. This tool provides the debugging information about the cluster associated with Red Hat OpenShift GitOps, which you can share with the Red Hat Support team for analysis. <a href="https://issues.redhat.com/browse/GITOPS-2797">GITOPS-2797</a></p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The custom <code>must-gather</code> tool is a Technology Preview feature.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this update, you can add support to progressive delivery using Argo Rollouts. Currently, the supported traffic manager is only Red Hat OpenShift Service Mesh. <a href="https://issues.redhat.com/browse/GITOPS-959">GITOPS-959</a></p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Argo Rollouts is a Technology Preview feature.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="https://argo-rollouts-manager.readthedocs.io/en/latest/crd_reference/">Using Argo Rollouts</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deprecated-features-1-9-0_gitops-release-notes"><a class="anchor" href="#deprecated-features-1-9-0_gitops-release-notes"></a>Deprecated and removed features</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>In Red Hat OpenShift GitOps 1.7.0,  the <code>.spec.resourceCustomizations</code> parameter was deprecated. The deprecated <code>.spec.resourceCustomizations</code> parameter is planned to be removed in the upcoming Red Hat OpenShift GitOps GA v1.10.0 release. You can use the new formats <code>spec.ResourceHealthChecks</code>, <code>spec.ResourceIgnoreDifferences</code>, and <code>spec.ResourceActions</code> instead. <a href="https://issues.redhat.com/browse/GITOPS-2890">GITOPS-2890</a></p>
+</li>
+<li>
+<p>With this update, the support for the following deprecated <code>sso</code> and <code>dex</code> fields extends until the upcoming Red Hat OpenShift GitOps GA v1.10.0 release:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>.spec.sso.image</code>, <code>.spec.sso.version</code>, <code>.spec.sso.resources</code>, and <code>.spec.sso.verifyTLS</code> fields.</p>
+</li>
+<li>
+<p>The <code>.spec.dex</code> parameter along with <code>DISABLE_DEX</code>.</p>
+<div class="paragraph">
+<p>The deprecated previous <code>sso</code> and <code>dex</code> fields were earlier scheduled for removal in the Red Hat OpenShift GitOps v1.9.0 release but are now planned to be removed in the upcoming Red Hat OpenShift GitOps GA v1.10.0 release.
+<a href="https://issues.redhat.com/browse/GITOPS-2904">GITOPS-2904</a></p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-9-0_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-9-0_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issues have been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, when the <code>argocd-server-tls</code> secret was updated with a new certificate Argo CD was not always picking up this secret. As a result, the old expired certificate was presented. This update fixes the issue with a new <code>GetCertificate</code> function and ensures that the latest version of certificates is in use. When adding new certificates, now Argo CD picks them up automatically without the user having to restart the <code>argocd-server</code> pod. <a href="https://issues.redhat.com/browse/GITOPS-2375">GITOPS-2375</a></p>
+</li>
+<li>
+<p>Before this update, when enforcing GPG signature verification against a <code>targetRevision</code> integer pointing to a signed Git tag, users got a <code>Target revision in Git is not signed</code> error. This update fixes the issue and lets users enforce GPG signature verification against signed Git tags. <a href="https://issues.redhat.com/browse/GITOPS-2418">GITOPS-2418</a></p>
+</li>
+<li>
+<p>Before this update, users could not connect to Microsoft Team Foundation Server (TFS) type Git repositories through Argo CD deployed by the Operator. This update fixes the issue by updating the Git version to
+2.39.3 in the Operator. <a href="https://issues.redhat.com/browse/GITOPS-2768">GITOPS-2768</a></p>
+</li>
+<li>
+<p>Before this update, when the Operator was deployed and running with the High availability (HA) feature enabled, setting resource limits under the <code>.spec.ha.resources</code> field did not affect Redis HA pods. This update fixes the reconciliation by adding checks in the Redis reconciliation code. These checks ensure whether the <code>spec.ha.resources</code> field in the Argo CD custom resource (CR) is updated. When the Argo CD CR is updated with new CPU and memory requests or limit values for HA, now these changes are applied to the Redis HA pods. <a href="https://issues.redhat.com/browse/GITOPS-2404">GITOPS-2404</a></p>
+</li>
+<li>
+<p>Before this update, if a namespace-scoped Argo CD instance was managing multiple namespaces by using the <code>managed-by</code> label and one of those managed namespaces was in a <strong>Terminating</strong> state, the Argo CD instance could not deploy resources to all other managed namespaces. This update fixes the issue by enabling the Operator to remove the <code>managed-by</code> label from any previously managed now terminating namespace. Now, a terminating namespace managed by a namespace-scoped Argo CD instance does not block the deployment of resources to other managed namespaces. <a href="https://issues.redhat.com/browse/GITOPS-2627">GITOPS-2627</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="known-issues-1-10_gitops-release-notes"><a class="anchor" href="#known-issues-1-10_gitops-release-notes"></a>Known issues</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Currently, the Argo CD does not read the Transport Layer Security (TLS) certificates from the path specified in the <code>argocd-tls-certs-cm</code> config map resulting in the <code>x509: certificate signed by unknown authority</code> error.</p>
+<div class="paragraph">
+<p>Workaround: Perform the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add the <code>SSL_CERT_DIR</code> environment variable:</p>
+<div class="listingblock">
+<div class="title">Example Argo CD custom resource</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">argoproj.io/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ArgoCD</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">example-argocd</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">example</span><span class="pi">:</span> <span class="s">repo</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+  <span class="na">repo</span><span class="pi">:</span>
+    <span class="na">env</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">SSL_CERT_DIR</span>
+        <span class="na">value</span><span class="pi">:</span> <span class="s">/tmp/sslcertdir</span>
+    <span class="na">volumeMounts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ssl</span>
+        <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/tmp/sslcertdir</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ssl</span>
+        <span class="na">configMap</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">user-ca-bundle</span>
+  <span class="c1"># ...</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create an empty config map in the namespace where the subscription for your Operator exists and include the following label:</p>
+<div class="listingblock">
+<div class="title">Example config map</div>
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">user-ca-bundle</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="s">config.openshift.io/inject-trusted-cabundle</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span> <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the config map.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Requests the Cluster Network Operator to inject the merged bundle.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After creating this config map, the <code>user-ca-bundle</code> content from the <code>openshift-config</code> namespace automatically gets injected into this config map, even merged with the system ca-bundle. <a href="https://issues.redhat.com/browse/GITOPS-1482">GITOPS-1482</a></p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist _additional-resources">
+<div class="title">Additional resources</div>
+<ul>
+<li>
+<p><a href="https://docs.openshift.com/container-platform/latest/operators/admin/olm-configuring-proxy-support.html#olm-inject-custom-ca_olm-configuring-proxy-support">Injecting a custom CA certificate</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-8-6_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-8-6_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.8.6</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.8.6 is now available on OpenShift Container Platform 4.10, 4.11, 4.12, and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-8-6_gitops-release-notes"><a class="anchor" href="#errata-updates-1-8-6_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="gitops-1-8-6-security-update-advisory_gitops-release-notes"><a class="anchor" href="#gitops-1-8-6-security-update-advisory_gitops-release-notes"></a>RHSA-2023:6788 - Red Hat OpenShift GitOps 1.8.6 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-11-08</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:6788">RHSA-2023:6788</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator in the default namespace, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-gitops-operator</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-8-5_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-8-5_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.8.5</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.8.5 is now available on OpenShift Container Platform 4.10, 4.11, 4.12, and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-8-5_gitops-release-notes"><a class="anchor" href="#errata-updates-1-8-5_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-2023-5030-gitops-1-8-5-security-update-advisory_gitops-release-notes"><a class="anchor" href="#rhsa-2023-5030-gitops-1-8-5-security-update-advisory_gitops-release-notes"></a>RHSA-2023:5030 - Red Hat OpenShift GitOps 1.8.5 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-09-08</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:5030">RHSA-2023:5030</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-8-5_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-8-5_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issue has been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, there was a mismatch in the RSA key for known hosts in the <code>argocd-ssh-known-hosts-cm</code> config map. This update fixes the issue by matching the RSA key with the upstream project. Now, you can use the default RSA keys on default deployments. <a href="https://issues.redhat.com/browse/GITOPS-3248">GITOPS-3248</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-8-4_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-8-4_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.8.4</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.8.4 is now available on OpenShift Container Platform 4.10, 4.11, 4.12, and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="new-features-1-8-4_gitops-release-notes"><a class="anchor" href="#new-features-1-8-4_gitops-release-notes"></a>New features</h3>
+<div class="paragraph">
+<p>The current release adds the following improvements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With this update, the bundled Argo CD has been updated to version 2.6.13.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-8-4_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-8-4_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issues have been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, Argo CD was becoming unresponsive when there was an increase in namespaces and applications. The functions competing for resources caused a deadlock. This update fixes the issue by removing the deadlock. Now, you should not experience crashes or unresponsiveness when there is an increase in namespaces or applications. <a href="https://issues.redhat.com/browse/GITOPS-3192">GITOPS-3192</a></p>
+</li>
+<li>
+<p>Before this update, the Argo CD application controller resource could suddenly stop working when resynchronizing applications. This update fixes the issue by adding logic to prevent a cluster cache deadlock. Now, applications should resynchronize successfully. <a href="https://issues.redhat.com/browse/GITOPS-3052">GITOPS-3052</a></p>
+</li>
+<li>
+<p>Before this update, there was a mismatch in the RSA key for known hosts in the <code>argocd-ssh-known-hosts-cm</code> config map. This update fixes the issue by matching the RSA key with the upstream project. Now, you can use the default RSA keys on default deployments. <a href="https://issues.redhat.com/browse/GITOPS-3144">GITOPS-3144</a></p>
+</li>
+<li>
+<p>Before this update, an old Redis image version was used when deploying the Red Hat OpenShift GitOps Operator, which resulted in vulnerabilities. This update fixes the vulnerabilities on Redis by upgrading it to the latest version of the <code>registry.redhat.io/rhel-8/redis-6</code> image. <a href="https://issues.redhat.com/browse/GITOPS-3069">GITOPS-3069</a></p>
+</li>
+<li>
+<p>Before this update, users could not connect to Microsoft Team Foundation Server (TFS) type Git repositories through Argo CD deployed by the Operator. This update fixes the issue by updating the Git version to 2.39.3 in the Operator. Now, you can set the <code>Force HTTP basic auth</code> flag during repository configurations to connect with the TFS type Git repositories. <a href="https://issues.redhat.com/browse/GITOPS-1315">GITOPS-1315</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="known-issues-1-8-4_gitops-release-notes"><a class="anchor" href="#known-issues-1-8-4_gitops-release-notes"></a>Known issues</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Currently, Red Hat OpenShift GitOps 1.8.4 is not available in the <code>latest</code> channel of OpenShift Container Platform 4.10 and 4.11. The <code>latest</code> channel is taken by GitOps 1.9.z, which is only released on OpenShift Container Platform 4.12 and later versions.</p>
+<div class="paragraph">
+<p>As a workaround, switch to the <code>gitops-1.8</code> channel to get the new update. <a href="https://issues.redhat.com/browse/GITOPS-3158">GITOPS-3158</a></p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-8-3_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-8-3_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.8.3</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.8.3 is now available on OpenShift Container Platform 4.10, 4.11, 4.12, and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-8-3_gitops-release-notes"><a class="anchor" href="#errata-updates-1-8-3_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhba-20233206-and-rhsa-20233229-red-hat-openshift-gitops-1-8-3-security-update-advisory"><a class="anchor" href="#rhba-20233206-and-rhsa-20233229-red-hat-openshift-gitops-1-8-3-security-update-advisory"></a>RHBA-2023:3206 and RHSA-2023:3229 - Red Hat OpenShift GitOps 1.8.3 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-05-18</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the following advisories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/errata/RHBA-2023:3206">RHBA-2023:3206</a></p>
+</li>
+<li>
+<p><a href="https://access.redhat.com/errata/RHSA-2023:3229">RHSA-2023:3229</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-8-3_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-8-3_gitops-release-notes"></a>Fixed issues</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, when <code>Autoscale</code> was enabled and the horizontal pod autoscaler (HPA) controller tried to edit the replica settings in server deployment, the Operator overwrote it. In addition, any changes specified to the autoscaler parameters were not propagated correctly to the HPA on the cluster. This update fixes the issue. Now the Operator reconciles on replica drift only if <code>Autoscale</code> is disabled and the HPA parameters are updated correctly. <a href="https://issues.redhat.com/browse/GITOPS-2629">GITOPS-2629</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-8-2_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-8-2_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.8.2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.8.2 is now available on OpenShift Container Platform 4.10, 4.11, 4.12, and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-8-2_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-8-2_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issues have been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, when you configured Dex using the <code>.spec.dex</code> parameter and tried to log in to the Argo CD UI by using the <strong>LOG IN VIA OPENSHIFT</strong> option, you were not able to log in. This update fixes the issue.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>spec.dex</code> parameter in the ArgoCD CR is deprecated. In a future release of Red Hat OpenShift GitOps v1.9, configuring Dex using the <code>spec.dex</code> parameter in the ArgoCD CR is planned to be removed. Consider using the <code>.spec.sso</code> parameter instead. See "Enabling or disabling Dex using .spec.sso".  <a href="https://issues.redhat.com/browse/GITOPS-2761">GITOPS-2761</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Before this update, the cluster and <code>kam</code> CLI pods failed to start with a new installation of Red Hat OpenShift GitOps v1.8.0 on the OpenShift Container Platform 4.10 cluster. This update fixes the issue and now all pods run as expected. <a href="https://issues.redhat.com/browse/GITOPS-2762">GITOPS-2762</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-8-1_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-8-1_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.8.1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.8.1 is now available on OpenShift Container Platform 4.10, 4.11, 4.12, and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-8-1_gitops-release-notes"><a class="anchor" href="#errata-updates-1-8-1_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-20231452-red-hat-openshift-gitops-1-8-1-security-update-advisory"><a class="anchor" href="#rhsa-20231452-red-hat-openshift-gitops-1-8-1-security-update-advisory"></a>RHSA-2023:1452 - Red Hat OpenShift GitOps 1.8.1 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-03-23</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the <a href="https://access.redhat.com/errata/RHSA-2023:1452">RHSA-2023:1452</a> advisory.</p>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-8-0_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-8-0_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.8.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.8.0 is now available on OpenShift Container Platform 4.10, 4.11, 4.12, and 4.13.</p>
+</div>
+<div class="sect2">
+<h3 id="new-features-1-8-0_gitops-release-notes"><a class="anchor" href="#new-features-1-8-0_gitops-release-notes"></a>New features</h3>
+<div class="paragraph">
+<p>The current release adds the following improvements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With this update,  you can add support for the ApplicationSet Progressive Rollout Strategy feature. Using this feature, you can enhance the ArgoCD ApplicationSet resource to embed a rollout strategy for a progressive application resource update after you modify the ApplicationSet spec or Application templates. When you enable this feature, applications are updated in a declarative order instead of simultaneously. <a href="https://issues.redhat.com/browse/GITOPS-956">GITOPS-956</a></p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>ApplicationSet Progressive Rollout Strategy is a Technology Preview feature.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this update, the <strong>Application environments</strong> page in the <strong>Developer</strong> perspective of the OpenShift Container Platform web console is decoupled from the Red Hat OpenShift GitOps Application Manager command-line interface (CLI), <code>kam</code>. You do not have to use the <code>kam</code> CLI to generate Application Environment manifests for the environments to show up in the <strong>Developer</strong> perspective of the OpenShift Container Platform web console. You can use your own manifests, but the environments must still be represented by namespaces. In addition, specific labels and annotations are still needed. <a href="https://issues.redhat.com/browse/GITOPS-1785">GITOPS-1785</a></p>
+</li>
+<li>
+<p>With this update, the Red Hat OpenShift GitOps Operator and the <code>kam</code> CLI are now available to use on ARM architecture on OpenShift Container Platform. <a href="https://issues.redhat.com/browse/GITOPS-1688">GITOPS-1688</a></p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>spec.sso.provider: keycloak</code> is not yet supported on ARM.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this update, you can enable workload monitoring for specific Argo CD instances by setting the <code>.spec.monitoring.enabled</code> flag value to <code>true</code>. As a result, the Operator creates a <code>PrometheusRule</code> object that contains alert rules for each Argo CD component. These alert rules trigger an alert when the replica count of the corresponding component has drifted from the desired state for a certain amount of time. The Operator will not overwrite the changes made to the <code>PrometheusRule</code> object by the users. <a href="https://issues.redhat.com/browse/GITOPS-2459">GITOPS-2459</a></p>
+</li>
+<li>
+<p>With this update, you can pass command arguments to the repo server deployment using the Argo CD CR. <a href="https://issues.redhat.com/browse/GITOPS-2445">GITOPS-2445</a></p>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">argoproj.io/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ArgoCD</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">example-argocd</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">repo</span><span class="pi">:</span>
+    <span class="na">extraRepoCommandArgs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">--max.combined.directory.manifests.size</span>
+      <span class="pi">-</span> <span class="s">10M</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-8-0_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-8-0_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issues have been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, you could set the <code>ARGOCD_GIT_MODULES_ENABLED</code> environment variable only on the <code>openshift-gitops-repo-server</code> pod and not on the <code>ApplicationSet Controller</code> pod. As a result, when using the Git generator, Git submodules were cloned during the generation of child applications because the variable was missing from the <code>ApplicationSet Controller</code> environment. In addition, if the credentials required to clone these submodules were not configured in ArgoCD, the application generation failed. This update fixes the issue; you can now add any environment variables such as <code>ArgoCD_GIT_MODULES_ENABLED</code> to the <code>ApplicationSet Controller</code> pod using the Argo CD CR. The <code>ApplicationSet Controller</code> pod then successfully generates child applications from the cloned repository and no submodule is cloned in the process. <a href="https://issues.redhat.com/browse/GITOPS-2399">GITOPS-2399</a></p>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">argoproj.io/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ArgoCD</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">example-argocd</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">example</span><span class="pi">:</span> <span class="s">basic</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">applicationSet</span><span class="pi">:</span>
+    <span class="na">env</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ARGOCD_GIT_MODULES_ENABLED</span>
+       <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Before this update, while installing the Red Hat OpenShift GitOps Operator v1.7.0, the default <code>argocd-cm.yml</code> config map file created for authenticating Dex contained the base64-encoded client secret in the format of a <code>key:value</code> pair. This update fixes this issue by not storing the client secret in the default <code>argocd-cm.yml</code> config map file. Instead, the client secret is inside an <code>argocd-secret</code> object now, and you can reference it inside the configuration map as a secret name. <a href="https://issues.redhat.com/browse/GITOPS-2570">GITOPS-2570</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="known-issues-1-8-0_gitops-release-notes"><a class="anchor" href="#known-issues-1-8-0_gitops-release-notes"></a>Known issues</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>When you deploy applications using your manifests without using the <code>kam</code> CLI and view the applications in the <strong>Application environments</strong> page in the <strong>Developer</strong> perspective of the OpenShift Container Platform web console, the Argo CD URL to the corresponding application does not load the page as expected from the Argo CD icon in the card. <a href="https://issues.redhat.com/browse/GITOPS-2736">GITOPS-2736</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-7-4_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-7-4_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.7.4</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.7.4 is now available on OpenShift Container Platform 4.10, 4.11, and 4.12.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-7-4_gitops-release-notes"><a class="anchor" href="#errata-updates-1-7-4_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-20231454-red-hat-openshift-gitops-1-7-4-security-update-advisory"><a class="anchor" href="#rhsa-20231454-red-hat-openshift-gitops-1-7-4-security-update-advisory"></a>RHSA-2023:1454 - Red Hat OpenShift GitOps 1.7.4 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-03-23</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the <a href="https://access.redhat.com/errata/RHSA-2023:1454">RHSA-2023:1454</a> advisory.</p>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-7-3_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-7-3_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.7.3</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.7.3 is now available on OpenShift Container Platform 4.10, 4.11, and 4.12.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-7-3_gitops-release-notes"><a class="anchor" href="#errata-updates-1-7-3_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-20231454-red-hat-openshift-gitops-1-7-3-security-update-advisory"><a class="anchor" href="#rhsa-20231454-red-hat-openshift-gitops-1-7-3-security-update-advisory"></a>RHSA-2023:1454 - Red Hat OpenShift GitOps 1.7.3 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-03-23</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the <a href="https://access.redhat.com/errata/RHSA-2023:1454">RHSA-2023:1454</a> advisory.</p>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-7-1_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-7-1_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.7.1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.7.1 is now available on OpenShift Container Platform 4.10, 4.11, and 4.12.</p>
+</div>
+<div class="sect2">
+<h3 id="errata-updates-1-7-1_gitops-release-notes"><a class="anchor" href="#errata-updates-1-7-1_gitops-release-notes"></a>Errata updates</h3>
+<div class="sect3">
+<h4 id="rhsa-20230467-red-hat-openshift-gitops-1-7-1-security-update-advisory"><a class="anchor" href="#rhsa-20230467-red-hat-openshift-gitops-1-7-1-security-update-advisory"></a>RHSA-2023:0467 - Red Hat OpenShift GitOps 1.7.1 security update advisory</h4>
+<div class="paragraph">
+<p>Issued: 2023-01-25</p>
+</div>
+<div class="paragraph">
+<p>The list of security fixes that are included in this release is documented in the <a href="https://access.redhat.com/errata/RHSA-2023:0467">RHSA-2023:0467</a> advisory.</p>
+</div>
+<div class="paragraph">
+<p>If you have installed the Red Hat OpenShift GitOps Operator, run the following command to view the container images in this release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc describe deployment gitops-operator-controller-manager <span class="nt">-n</span> openshift-operators</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gitops-release-notes-1-7-0_gitops-release-notes"><a class="anchor" href="#gitops-release-notes-1-7-0_gitops-release-notes"></a>Release notes for Red Hat OpenShift GitOps 1.7.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps 1.7.0 is now available on OpenShift Container Platform 4.10, 4.11, and 4.12.</p>
+</div>
+<div class="sect2">
+<h3 id="new-features-1-7-0_gitops-release-notes"><a class="anchor" href="#new-features-1-7-0_gitops-release-notes"></a>New features</h3>
+<div class="paragraph">
+<p>The current release adds the following improvements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With this update, you can add environment variables to the Notifications controller. <a href="https://issues.redhat.com/browse/GITOPS-2313">GITOPS-2313</a></p>
+</li>
+<li>
+<p>With this update, the default nodeSelector <code>"kubernetes.io/os": "linux"</code> key-value pair is added to all workloads such that they only schedule on Linux nodes. In addition, any custom node selectors are added to the default and take precedence if they have the same key. <a href="https://issues.redhat.com/browse/GITOPS-2215">GITOPS-2215</a></p>
+</li>
+<li>
+<p>With this update, you can set custom node selectors in the Operator workloads by editing their <code>GitopsService</code> custom resource. <a href="https://issues.redhat.com/browse/GITOPS-2164">GITOPS-2164</a></p>
+</li>
+<li>
+<p>With this update, you can use the RBAC policy matcher mode to select from the following options: <code>glob</code> (default) and <code>regex</code>.<a href="https://issues.redhat.com/browse/GITOPS-1975">GITOPS-1975</a></p>
+</li>
+<li>
+<p>With this update, you can customize resource behavior using the following additional subkeys:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Subkey</th>
+<th class="tableblock halign-left valign-top">Key form</th>
+<th class="tableblock halign-left valign-top">Mapped field in argocd-cm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceHealthChecks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resource.customizations.health.&lt;group_kind&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resource.customizations.health</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceIgnoreDifferences</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resource.customizations.ignoreDifferences.&lt;group_kind&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resource.customizations.ignoreDifferences</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resourceActions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resource.customizations.actions.&lt;group_kind&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resource.customizations.actions</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="https://issues.redhat.com/browse/GITOPS-1561">GITOPS-1561</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In future releases, there is a possibility to deprecate the old method of customizing resource behavior by using only resourceCustomization and not subkeys.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this update, to use the <strong>Environments</strong> page in the <strong>Developer</strong> perspective, you must upgrade if you are using a Red Hat OpenShift GitOps version prior to 1.7 and OpenShift Container Platform 4.15 or above. <a href="https://issues.redhat.com/browse/GITOPS-2415">GITOPS-2415</a></p>
+</li>
+<li>
+<p>With this update, you can create applications, which are managed by the same control plane Argo CD instance, in any namespace in the same cluster. As an administrator, perform the following actions to enable this update:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add the namespace to the <code>.spec.sourceNamespaces</code> attribute for a cluster-scoped Argo CD instance that manages the application.</p>
+</li>
+<li>
+<p>Add the namespace to the <code>.spec.sourceNamespaces</code> attribute in the <code>AppProject</code> custom resource that is associated with the application. </p>
+<div class="paragraph">
+<p><a href="https://issues.redhat.com/browse/GITOPS-2341">GITOPS-2341</a></p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Argo CD applications in non-control plane namespaces is a Technology Preview feature only. Technology Preview features
+are not supported with Red Hat production service level agreements (SLAs) and
+might not be functionally complete. Red Hat does not recommend using them
+in production. These features provide early access to upcoming product
+features, enabling customers to test functionality and provide feedback during
+the development process.</p>
+</div>
+<div class="paragraph">
+<p>For more information about the support scope of Red Hat Technology Preview features, see <a href="https://access.redhat.com/support/offerings/techpreview/">Technology Preview Features Support Scope</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With this update, Argo CD supports the Server-Side Apply feature, which helps users to perform the following tasks:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Manage large resources which are too big for the allowed annotation size of 262144 bytes.</p>
+</li>
+<li>
+<p>Patch an existing resource that is not managed or deployed by Argo CD.</p>
+<div class="paragraph">
+<p>You can configure this feature at application or resource level. <a href="https://issues.redhat.com/browse/GITOPS-2340">GITOPS-2340</a></p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fixed-issues-1-7-0_gitops-release-notes"><a class="anchor" href="#fixed-issues-1-7-0_gitops-release-notes"></a>Fixed issues</h3>
+<div class="paragraph">
+<p>The following issues have been resolved in the current release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, Red Hat OpenShift GitOps releases were affected by an issue of Dex pods failing with <code>CreateContainerConfigError</code> error when the <code>anyuid</code> SCC was assigned to the Dex service account. This update fixes the issue by assigning a default user id to the Dex container. <a href="https://issues.redhat.com/browse/GITOPS-2235">GITOPS-2235</a></p>
+</li>
+<li>
+<p>Before this update, Red Hat OpenShift GitOps used the RHSSO (Keycloak) through OIDC in addition to Dex. However, with a recent security fix, the certificate of RHSSO could not be validated when configured with a certificate not signed by one of the well-known certificate authorities. This update fixes the issue; you can now provide a custom certificate to verify the KeyCloak&#8217;s TLS certificate while communicating with it. In addition, you can add <code>rootCA</code> to the Argo CD custom resource <code>.spec.keycloak.rootCA</code> field. The Operator reconciles such changes and updates the <code>oidc.config in argocd-cm</code> config map with the PEM encoded root certificate. <a href="https://issues.redhat.com/browse/GITOPS-2214">GITOPS-2214</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example Argo CD with Keycloak configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">argoproj.io/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ArgoCD</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">example-argocd</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">sso</span><span class="pi">:</span>
+    <span class="na">keycloak</span><span class="pi">:</span>
+      <span class="na">rootCA</span><span class="pi">:</span> <span class="s1">'</span><span class="s">&lt;PEM</span><span class="nv"> </span><span class="s">encoded</span><span class="nv"> </span><span class="s">root</span><span class="nv"> </span><span class="s">certificate&gt;'</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">keycloak</span>
+<span class="s">.......</span>
+<span class="s">.......</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, the application controllers restarted multiple times due to the unresponsiveness of liveness probes. This update fixes the issue by removing the liveness probe in the <code>statefulset</code> application controller. <a href="https://issues.redhat.com/browse/GITOPS-2153">GITOPS-2153</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="known-issues-1-7-0_gitops-release-notes"><a class="anchor" href="#known-issues-1-7-0_gitops-release-notes"></a>Known issues</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Before this update, the Operator did not reconcile the <code>mountsatoken</code> and <code>ServiceAccount</code> settings for the repository server. While this has been fixed, deletion of the service account does not revert to the default. <a href="https://issues.redhat.com/browse/GITOPS-1873">GITOPS-1873</a></p>
+</li>
+<li>
+<p>Workaround: Manually set the <code>spec.repo.serviceaccountfield to thedefault</code> service account. <a href="https://issues.redhat.com/browse/GITOPS-2452">GITOPS-2452</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://assets.openshift.net/content/modernizr.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/subdomain.js" type="text/javascript"></script>
+  <script src="https://assets.openshift.net/content/nav-tertiary.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/bootstrap-offcanvas.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/reformat-html.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/hc-search.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/page-loader.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/clipboard.js" type="text/javascript"></script>
+  <script src="https://docs.openshift.com/container-platform/4.1/_javascripts/collapsible.js" type="text/javascript"></script>
+  <script>
+  var dk = 'openshift-gitops';
+  var version = 'Branch Build';
+
+  var distros = {
+    'openshift-origin': ['docs_origin', version],
+    // specific labels are used for OSD instead of the URL filter, due to its unusual URL structure; assume v4
+    'openshift-dedicated': ['docs_dedicated_v4'],
+    'openshift-online': ['docs_online', version],
+    'openshift-enterprise': ['docs_cp', version],
+    'openshift-aro' : ['docs_aro', version],
+    'openshift-rosa' : ['docs_rosa'],
+    'openshift-acs' : ['docs_acs', version],
+    'openshift-serverless' : ['docs_serverless', version]
+  };
+
+  // only OSD v3 docs have the version variable specified
+  if (dk == "openshift-dedicated" && version == "3") {
+    distros['openshift-dedicated'] = ['docs_dedicated_v3']
+  }
+
+  distros[dk] ? hcSearchCategory.apply(null, distros[dk]) : hcSearchCategory("docs");
+  </script>
+  <script type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function() {
+    $("[id^='topicGroup']").on('show.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicGroup']").on('hide.bs.collapse', function(event) {
+      if (!($(event.target).attr('id').match(/^topicSubGroup/))) {
+        $(this).parent().find("[id^='tgSpan']").toggleClass("fa-angle-right fa-angle-down");
+      }
+    });
+    $("[id^='topicSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='sgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('show.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+    $("[id^='topicSubSubGroup']").on('hide.bs.collapse', function() {
+      $(this).parent().find("[id^='ssgSpan']").toggleClass("fa-caret-right fa-caret-down");
+    });
+
+    const collapsibleContent = document.getElementsByTagName("details");
+    for (var i = 0; i < collapsibleContent.length; i++) {
+      collapsibleContent[i].setAttribute("open", "");
+    }
+
+  });
+  /*]]>*/
+  </script>
+
+  <footer id="rh">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-2">
+                <img src="https://assets.openshift.com/hubfs/images/logos/Logo-RedHat-A-Reverse-RGB.svg" class="img-fluid" alt="Red Hat" style="height: 30px;">
+            </div>
+
+            <div class="col-sm-3">
+              <p class="text-nowrap">Copyright © 2023 Red Hat, Inc.</p>
+            </div>
+
+
+
+            <div class="col">
+                <nav class="nav">
+                    <a target="_blank" href="https://www.redhat.com/en/about/privacy-policy" class="nav-link">Privacy statement</a>
+                    <a target="_blank" href="https://www.openshift.com/legal/terms/" class="nav-link">Terms of use</a>
+                    <a target="_blank" href="https://www.redhat.com/en/about/all-policies-guidelines" class="nav-link">All policies and guidelines</a>
+                    <a id="teconsent"></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="consent_blackbar" style="z-index: 100; position: fixed"></div>
+
+
+
+<!-- Adobe DTM -->
+<script type="text/javascript">
+if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+   _satellite.pageBottom();
+}
+</script>
+<!-- End Adobe DTM -->
+
+  <!-- adjust page css based on breadcrumb and/or resize -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        adjustSide();
+        adjustToc();
+        adjustMain();
+      } else if ($(window).width() < 1008) {
+        sidebar.classList.remove('wide');
+        document.querySelector('#hc-search').classList.remove('wide');
+        if (sidebar.classList.contains('open')) {
+          sidebar.style.display = 'block';
+        } else {
+          sidebar.style.display = 'none';
+        }
+        document.querySelector('.main').style.paddingTop = '0px';
+      }
+    });
+
+    function adjustSide() {
+      sidebar.classList.add('wide');
+      document.querySelector('#hc-search').classList.add('wide');
+      sidebar.style.display = 'block';
+      document.querySelector('.sidebar').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 125), 10) + "px";
+      document.querySelector('#hc-search').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 95), 10) + "px";
+    }
+
+    function adjustToc() {
+      if (document.querySelector('#toc') !== null) {
+        document.querySelector('#toc').style.top = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      }
+    }
+
+    function adjustMain() {
+      document.querySelector('html').style.scrollPaddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight + 90), 10) + "px";
+      document.querySelector('.main').style.paddingTop = parseInt((document.querySelector('.breadcrumb').offsetHeight - 70), 10) + "px";
+    }
+
+  </script>
+
+  <!-- remove toc active class when page is loaded -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      var tocItems = $("#toc a");
+
+      for (let i = 0; i < tocItems.length; i++) {
+        tocItems[i].classList.remove("toc-active");
+      }
+    })
+  </script>
+
+  <!-- maintain sidebar scroll position between page loads -->
+  <script type="text/javascript">
+    let sidebar = document.querySelector(".sidebar");
+    let scrolltop = localStorage.getItem("sidebar-scroll");
+
+    if (scrolltop == null) {
+      sidebar.scrollTop = parseInt(top, 10);
+    }
+
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+
+    window.addEventListener('load', () => {
+      sidebar.scrollTo(0, scrolltop)
+    })
+  </script>
+
+  <!-- open/close the nav -->
+  <script type="text/javascript">
+    function closeNav() {
+      let sidebar = document.querySelector(".sidebar");
+      sidebar.style.display = "none";
+      sidebar.classList.remove('open');
+    }
+
+    function openNav() {
+      let sidebar = document.querySelector(".sidebar");
+      let hc_search = document.querySelector('#hc-search');
+      sidebar.style.display = "block";
+      sidebar.style.top = "0px";
+      hc_search.style.top = 'unset';
+      sidebar.classList.add('open');
+    }
+  </script>
+
+  <!-- clear and add toc-active to clicked toc link -->
+  <script type="text/javascript">
+  $("#toc a").click(function() {
+    var tocItems = $("#toc a");
+    for (let i = 0; i < tocItems.length; i++) {
+      tocItems[i].classList.remove("toc-active");
+    }
+    this.classList.add("toc-active");
+  });
+  </script>
+
+  <!-- update active toc class when mouse scrolls -->
+  <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener("wheel", () => {
+
+        const ioConfiguration = {
+          "rootMargin": "-120px 0px -400px 0px",
+          "threshold": 0
+        };
+
+        const observer = new IntersectionObserver(setCurrent, ioConfiguration, entries => {
+          entries.forEach(entry => {
+            var id = entry.target.getAttribute('id');
+            //fight with js
+            document.querySelector(`#toc li a[href="#${id}"]`).classList.remove('toc-active');
+          });
+        });
+
+        //track all h1-4 headings that have an id
+        document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+          observer.observe(h);
+        });
+
+        //runs when the IntersectionObserver fires
+        function setCurrent(e) {
+          var allTocLinks = document.querySelectorAll("#toc li a");
+          if (allTocLinks !== undefined) {
+            e.map(i => {
+              if (i.isIntersecting && i.intersectionRatio >= 1) {
+                allTocLinks.forEach(link => link.classList.remove("toc-active"));
+                document.querySelector(`#toc li a[href="#${i.target.id}"]`).classList.add('toc-active')
+              }
+            })
+          }
+        };
+
+        //make clicked toc item active and stop IntersectionObserver
+        $("#toc a").click(function() {
+          //stop tracking all h1-4 headings that have an id
+          document.querySelectorAll('.main h2[id], .main h3[id]').forEach((h) => {
+            observer.unobserve(h);
+          });
+          var tocItems = $("#toc a");
+          if (tocItems !== undefined) {
+            for (let i = 0; i < tocItems.length; i++) {
+              tocItems[i].classList.remove("toc-active");
+            };
+            this.classList.add("toc-active");
+          }
+        })
+      })
+    })
+  </script>
+
+  <!--handle page scroll top and bottom, add toc-active -->
+  <script type="text/javascript">
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active")
+          };
+          tocItems[tocItems.length - 1].classList.add("toc-active");
+        };
+      //scroll to top
+      if(window.pageYOffset === 0) {
+        var tocItems = $("#toc a");
+        for (let i = 0; i < tocItems.length; i++) {
+          tocItems[i].classList.remove("toc-active");
+          };
+          tocItems[0].classList.add("toc-active");
+        };
+      })
+  </script>
+
+  <!--adjust sidebar and toc when footer is displayed -->
+  <script type="text/javascript">
+    sidebar = document.querySelector('.sidebar')
+    toc = document.querySelector('#toc')
+    main = document.querySelector('.main')
+    okd_footer = document.querySelector('.footer-origin-docs')
+
+    //handle short pages
+    if (window.innerHeight === document.documentElement.scrollHeight) {
+      //sidebar
+      if (sidebar !== null && okd_footer == null) {
+        sidebar.style.marginBottom = "38px";
+        main.style.marginBottom = "35px";
+      };
+      //okd sidebar
+      if(sidebar !== null && okd_footer !== null) {
+        sidebar.style.marginBottom = "176px";
+        main.style.marginBottom = "135px";
+      }
+    };
+
+    //handle scrolling pages
+    document.addEventListener('scroll', () => {
+      //scroll to bottom
+      if ($(window).width() >= 1008) {
+        if(sidebar !== null) {
+          //pages with multiple toc entries
+          if(document.documentElement.scrollHeight === window.pageYOffset + window.innerHeight) {
+              //sidebar
+              if (sidebar !== null && okd_footer == null){
+                sidebar.style.marginBottom = "38px";
+                main.style.marginBottom = "35px";
+              };
+              //toc
+              if (toc !== null && okd_footer == null){
+                toc.style.bottom = "35px";
+              };
+              //okd sidebar
+              if(sidebar !== null && okd_footer !== null) {
+                sidebar.style.marginBottom = "176px";
+                main.style.marginBottom = "135px";
+              };
+              //okd toc
+              if (toc !== null && okd_footer !== null){
+                toc.style.bottom = "175px";
+              };
+            };
+          if(document.documentElement.scrollHeight != window.pageYOffset + window.innerHeight) {
+            sidebar.style.marginBottom = "0px";
+            if (toc !== null) {
+              toc.style.bottom = "0px";
+            }
+          }
+        }
+      }
+    })
+  </script>
+
+  <!-- adjust alerts on mobile -->
+  <script type="text/javascript">
+    alert = document.querySelector('#support-alert')
+    window.addEventListener("wheel", () => {
+      if ($(window).width() < 1008) {
+        //adjust alert
+        if(window.pageYOffset > 0) {
+          if(alert !== null) {
+            document.querySelector('#support-alert').style.position = "fixed";
+            document.querySelector('#support-alert').style.bottom = "0px";
+            document.querySelector('#support-alert').style.margin = "5px";
+            document.querySelector('#support-alert').style.zIndex = "9999999";
+          }
+        }
+      }
+   });
+    window.addEventListener('resize', () => {
+      if ($(window).width() >= 1008) {
+        if(alert !== null) {
+          document.querySelector('#support-alert').style.removeProperty('position');
+          document.querySelector('#support-alert').style.removeProperty('bottom');
+          document.querySelector('#support-alert').style.removeProperty('margin');
+          document.querySelector('#support-alert').style.removeProperty('zIndex');
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
