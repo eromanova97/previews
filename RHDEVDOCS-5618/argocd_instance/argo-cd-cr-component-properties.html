@@ -963,8 +963,6 @@ the development process.</p>
 <div class="title">Procedure</div>
 <p>You can enable the <code>round-robin</code> sharding algorithm by either using the OpenShift Container Platform web console or the command-line interface.</p>
 </div>
-<div class="openblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -981,9 +979,9 @@ the development process.</p>
 <p>Click the Argo CD instance where you want to enable the <code>round-robin</code> sharding algorithm, for example <code>openshift-gitops</code>.</p>
 </li>
 <li>
-<p>Click the <strong>YAML</strong> tab and edit the yaml file.</p>
+<p>Click the <strong>YAML</strong> tab and edit the yaml file:</p>
 <div class="listingblock">
-<div class="title">Example openshift-gitops instance with round-robin sharding algorithm</div>
+<div class="title">Example Argo CD instance with round-robin sharding algorithm enabled</div>
 <div class="content">
 <pre class="rouge highlight nowrap"><code data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">argoproj.io/v1beta1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">ArgoCD</span>
@@ -995,7 +993,7 @@ the development process.</p>
     <span class="na">processors</span><span class="pi">:</span> <span class="pi">{}</span>
     <span class="na">sharding</span><span class="pi">:</span>
       <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span> <i class="conum" data-value="1"></i><b>(1)</b>
-      <span class="na">replicas</span><span class="pi">:</span> <span class="s">2</span> <i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="na">replicas</span><span class="pi">:</span> <span class="s">3</span> <i class="conum" data-value="2"></i><b>(2)</b>
     <span class="na">env</span><span class="pi">:</span> <i class="conum" data-value="3"></i><b>(3)</b>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ARGOCD_CONTROLLER_SHARDING_ALGORITHM</span>
         <span class="na">value</span><span class="pi">:</span> <span class="s">round-robin</span></code></pre>
@@ -1005,11 +1003,11 @@ the development process.</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Set <code>sharding.enabled</code> to `true1 to enable sharding.</td>
+<td>Set the <code>sharding.enabled</code> parameter to <code>true</code> to enable sharding.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Set the number of replicas to the desired value.</td>
+<td>Set the number of replicas to the desired value, for example <code>3</code>.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -1075,15 +1073,14 @@ the development process.</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
 <div class="olist arabic">
+<div class="title">Verification</div>
 <ol class="arabic">
 <li>
 <p>Verify that the sharding was enabled with <code>round-robin</code> as the sharding algorithm:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc logs <span class="nt">-f</span> &lt;argocd_instance&gt;-application-controller-1 <span class="nt">-n</span> &lt;namespace&gt;</code></pre>
+<pre class="rouge highlight nowrap"><code data-lang="terminal"><span class="gp">$</span><span class="w"> </span>oc logs <span class="nt">-f</span> &lt;argocd_application_controller_pod&gt; <span class="nt">-n</span> &lt;namespace&gt;</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1111,7 +1108,7 @@ time="2023-12-13T09:05:34Z" level=info msg="Starting secretInformer forcluster"<
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Look for the <code>"Using filter function:  round-robin"</code> logs.</td>
+<td>Look for the <code>"Using filter function:  round-robin"</code> message.</td>
 </tr>
 </table>
 </div>
